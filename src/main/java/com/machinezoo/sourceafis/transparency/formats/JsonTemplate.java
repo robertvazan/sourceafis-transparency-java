@@ -1,5 +1,5 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
-package com.machinezoo.sourceafis.transparency;
+package com.machinezoo.sourceafis.transparency.formats;
 
 import java.io.*;
 import java.nio.charset.*;

@@ -4,6 +4,7 @@ package com.machinezoo.sourceafis.transparency;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
+import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class DoubleMatrix {
 	public final int width;
@@ -17,11 +18,11 @@ public class DoubleMatrix {
 		ByteBuffer.wrap(buffer).asDoubleBuffer().get(array);
 		stats = Arrays.stream(array).summaryStatistics();
 	}
-	public DoubleMatrix(TransparencyArrayInfo info, byte[] data) {
+	public DoubleMatrix(JsonArrayInfo info, byte[] data) {
 		this(info.dimensions[1], info.dimensions[0], data);
 	}
 	public DoubleMatrix(Map<String,Supplier<byte[]>> bundle) {
-		this(TransparencyArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
+		this(JsonArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
 	}
 	public IntPoint size() {
 		return new IntPoint(width, height);

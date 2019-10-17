@@ -3,8 +3,11 @@ package com.machinezoo.sourceafis.transparency;
 
 import static java.util.stream.Collectors.*;
 import java.nio.*;
+import java.nio.charset.*;
 import java.util.*;
 import java.util.function.*;
+import com.google.gson.*;
+import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class SkeletonGraph {
 	public final IntPoint size;
@@ -26,7 +29,7 @@ public class SkeletonGraph {
 		this(json, null);
 	}
 	public SkeletonGraph(Map<String, Supplier<byte[]>> bundle) {
-		this(TransparencyUtils.json(bundle.get(".json").get(), JsonSkeleton.class), bundle.get(".dat").get());
+		this(new Gson().fromJson(new String(bundle.get(".json").get(), StandardCharsets.UTF_8), JsonSkeleton.class), bundle.get(".dat").get());
 	}
 	public JsonSkeleton encode() {
 		JsonSkeleton json = new JsonSkeleton();

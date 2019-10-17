@@ -3,6 +3,7 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.nio.*;
 import java.util.*;
+import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class SkeletonRidge {
 	public final SkeletonMinutia start;

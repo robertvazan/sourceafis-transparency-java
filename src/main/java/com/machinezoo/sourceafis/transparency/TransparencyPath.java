@@ -4,7 +4,7 @@ package com.machinezoo.sourceafis.transparency;
 import java.util.*;
 import java.util.regex.*;
 
-public class TransparencyDataPath {
+public class TransparencyPath {
 	private static final Pattern filenameRe = Pattern.compile("^[0-9]+-(ridges-|valleys-|)([a-z-]+)(.[a-z]+)$");
 	public static Set<String> keywords() {
 		return keywords;
@@ -69,7 +69,7 @@ public class TransparencyDataPath {
 	public String suffix() {
 		return suffix;
 	}
-	public TransparencyDataPath(String filename) {
+	public TransparencyPath(String filename) {
 		this.filename = filename;
 		Matcher matcher = filenameRe.matcher(filename);
 		if (matcher.find()) {

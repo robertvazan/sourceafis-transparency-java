@@ -6,6 +6,7 @@ import java.nio.charset.*;
 import java.util.*;
 import java.util.function.*;
 import com.google.gson.*;
+import com.machinezoo.sourceafis.transparency.formats.*;
 
 public abstract class TransparencyArchive {
 	public abstract List<String> enumerate();
@@ -16,10 +17,10 @@ public abstract class TransparencyArchive {
 	private String path(String numberless, int offset) {
 		return enumerate().stream()
 			.sorted()
-			.map(TransparencyDataPath::new)
+			.map(TransparencyPath::new)
 			.filter(p -> numberless.equals(p.typed() + p.suffix()))
 			.skip(offset)
-			.map(TransparencyDataPath::filename)
+			.map(TransparencyPath::filename)
 			.findFirst()
 			.orElse(null);
 	}
@@ -120,20 +121,20 @@ public abstract class TransparencyArchive {
 	public TransparencyArchiveSkeleton valleys() {
 		return new TransparencyArchiveSkeleton(this, "valleys-");
 	}
-	public SavedTemplate skeletonMinutiae() {
-		return new SavedTemplate(json("skeleton-minutiae"));
+	public Template skeletonMinutiae() {
+		return new Template(json("skeleton-minutiae"));
 	}
-	public SavedTemplate innerMinutiae() {
-		return new SavedTemplate(json("inner-minutiae"));
+	public Template innerMinutiae() {
+		return new Template(json("inner-minutiae"));
 	}
-	public SavedTemplate removedMinutiaClouds() {
-		return new SavedTemplate(json("removed-minutia-clouds"));
+	public Template removedMinutiaClouds() {
+		return new Template(json("removed-minutia-clouds"));
 	}
-	public SavedTemplate topMinutiae() {
-		return new SavedTemplate(json("top-minutiae"));
+	public Template topMinutiae() {
+		return new Template(json("top-minutiae"));
 	}
-	public SavedTemplate shuffledMinutiae() {
-		return new SavedTemplate(json("shuffled-minutiae"));
+	public Template shuffledMinutiae() {
+		return new Template(json("shuffled-minutiae"));
 	}
 	public NeighborEdge[][] edgeTable() {
 		return new Gson().fromJson(json("edge-table"), NeighborEdge[][].class);
@@ -146,7 +147,7 @@ public abstract class TransparencyArchive {
 	}
 	public int pairingCount() {
 		return (int)enumerate().stream()
-			.filter(n -> new TransparencyDataPath(n).keyword().equals("pairing"))
+			.filter(n -> new TransparencyPath(n).keyword().equals("pairing"))
 			.count();
 	}
 	public MatchPairing pairing(int offset) {

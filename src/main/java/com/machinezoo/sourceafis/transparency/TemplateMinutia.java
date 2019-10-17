@@ -1,6 +1,8 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
+import com.machinezoo.sourceafis.transparency.formats.*;
+
 public class TemplateMinutia {
 	public final int x;
 	public final int y;
