@@ -14,6 +14,7 @@ public abstract class TransparencyArchive {
 	}
 	private String path(String numberless, int offset) {
 		return enumerate().stream()
+			.sorted()
 			.map(TransparencyDataPath::new)
 			.filter(p -> numberless.equals(p.typed() + p.suffix()))
 			.skip(offset)
