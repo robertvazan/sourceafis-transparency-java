@@ -14,7 +14,7 @@ public class JsonBestMatch {
 	public static int parse(byte[] buffer) {
 		return parse(new String(buffer, StandardCharsets.UTF_8));
 	}
-	public static int parse(Map<String,Supplier<byte[]>> bundle) {
+	public static int parse(Map<String, Supplier<byte[]>> bundle) {
 		return parse(bundle.get(".json").get());
 	}
 }

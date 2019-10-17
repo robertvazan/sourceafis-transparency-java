@@ -21,7 +21,7 @@ public class HistogramCube {
 	public HistogramCube(JsonArrayInfo info, byte[] data) {
 		this(info.dimensions[1], info.dimensions[0], info.dimensions[2], data);
 	}
-	public HistogramCube(Map<String,Supplier<byte[]>> bundle) {
+	public HistogramCube(Map<String, Supplier<byte[]>> bundle) {
 		this(JsonArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
 	}
 	public int get(int x, int y, int z) {

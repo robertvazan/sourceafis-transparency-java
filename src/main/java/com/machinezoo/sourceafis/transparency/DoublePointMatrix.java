@@ -28,7 +28,7 @@ public class DoublePointMatrix {
 	public DoublePointMatrix(JsonArrayInfo info, byte[] data) {
 		this(info.dimensions[1], info.dimensions[0], data);
 	}
-	public DoublePointMatrix(Map<String,Supplier<byte[]>> bundle) {
+	public DoublePointMatrix(Map<String, Supplier<byte[]>> bundle) {
 		this(JsonArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
 	}
 	public IntPoint size() {

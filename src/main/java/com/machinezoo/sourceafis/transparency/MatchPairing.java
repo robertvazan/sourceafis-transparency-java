@@ -16,7 +16,7 @@ public class MatchPairing {
 	public static MatchPairing parse(byte[] buffer) {
 		return parse(new String(buffer, StandardCharsets.UTF_8));
 	}
-	public static MatchPairing parse(Map<String,Supplier<byte[]>> bundle) {
+	public static MatchPairing parse(Map<String, Supplier<byte[]>> bundle) {
 		return parse(bundle.get(".json").get());
 	}
 }

@@ -16,7 +16,7 @@ public class BlockMap {
 	public static BlockMap parse(byte[] buffer) {
 		return parse(new String(buffer, StandardCharsets.UTF_8));
 	}
-	public static BlockMap parse(Map<String,Supplier<byte[]>> bundle) {
+	public static BlockMap parse(Map<String, Supplier<byte[]>> bundle) {
 		return parse(bundle.get(".json").get());
 	}
 }

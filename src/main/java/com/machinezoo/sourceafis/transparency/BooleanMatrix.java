@@ -28,7 +28,7 @@ public class BooleanMatrix {
 	public BooleanMatrix(JsonArrayInfo info, byte[] data) {
 		this(info.dimensions[1], info.dimensions[0], data);
 	}
-	public BooleanMatrix(Map<String,Supplier<byte[]>> bundle) {
+	public BooleanMatrix(Map<String, Supplier<byte[]>> bundle) {
 		this(JsonArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
 	}
 	public IntPoint size() {
