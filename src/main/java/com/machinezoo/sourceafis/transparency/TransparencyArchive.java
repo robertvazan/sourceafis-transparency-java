@@ -54,65 +54,65 @@ public abstract class TransparencyArchive {
 			return null;
 		return read(path);
 	}
-	public DoubleMap decoded() {
-		return new DoubleMap(bundle("decoded-image"));
+	public DoubleMatrix decoded() {
+		return new DoubleMatrix(bundle("decoded-image"));
 	}
-	public DoubleMap scaled() {
-		return new DoubleMap(bundle("scaled-image"));
+	public DoubleMatrix scaled() {
+		return new DoubleMatrix(bundle("scaled-image"));
 	}
 	public BlockMap blocks() {
 		return BlockMap.parse(json("block-map"));
 	}
-	public HistogramVolume histogram() {
-		return new HistogramVolume(bundle("histogram"));
+	public HistogramCube histogram() {
+		return new HistogramCube(bundle("histogram"));
 	}
-	public HistogramVolume smoothedHistogram() {
-		return new HistogramVolume(bundle("smoothed-histogram"));
+	public HistogramCube smoothedHistogram() {
+		return new HistogramCube(bundle("smoothed-histogram"));
 	}
-	public DoubleMap contrast() {
-		return new DoubleMap(bundle("clipped-contrast"));
+	public DoubleMatrix contrast() {
+		return new DoubleMatrix(bundle("clipped-contrast"));
 	}
-	public BooleanMap absoluteMask() {
-		return new BooleanMap(bundle("absolute-contrast-mask"));
+	public BooleanMatrix absoluteMask() {
+		return new BooleanMatrix(bundle("absolute-contrast-mask"));
 	}
-	public BooleanMap relativeMask() {
-		return new BooleanMap(bundle("relative-contrast-mask"));
+	public BooleanMatrix relativeMask() {
+		return new BooleanMatrix(bundle("relative-contrast-mask"));
 	}
-	public BooleanMap combinedMask() {
-		return new BooleanMap(bundle("combined-mask"));
+	public BooleanMatrix combinedMask() {
+		return new BooleanMatrix(bundle("combined-mask"));
 	}
-	public BooleanMap filteredMask() {
-		return new BooleanMap(bundle("filtered-mask"));
+	public BooleanMatrix filteredMask() {
+		return new BooleanMatrix(bundle("filtered-mask"));
 	}
-	public DoubleMap equalized() {
-		return new DoubleMap(bundle("equalized-image"));
+	public DoubleMatrix equalized() {
+		return new DoubleMatrix(bundle("equalized-image"));
 	}
-	public PointMap pixelwiseOrientation() {
-		return new PointMap(bundle("pixelwise-orientation"));
+	public DoublePointMatrix pixelwiseOrientation() {
+		return new DoublePointMatrix(bundle("pixelwise-orientation"));
 	}
-	public PointMap blockOrientation() {
-		return new PointMap(bundle("block-orientation"));
+	public DoublePointMatrix blockOrientation() {
+		return new DoublePointMatrix(bundle("block-orientation"));
 	}
-	public PointMap smoothedOrientation() {
-		return new PointMap(bundle("smoothed-orientation"));
+	public DoublePointMatrix smoothedOrientation() {
+		return new DoublePointMatrix(bundle("smoothed-orientation"));
 	}
-	public DoubleMap parallelSmoothing() {
-		return new DoubleMap(bundle("parallel-smoothing"));
+	public DoubleMatrix parallelSmoothing() {
+		return new DoubleMatrix(bundle("parallel-smoothing"));
 	}
-	public DoubleMap orthogonalSmoothing() {
-		return new DoubleMap(bundle("orthogonal-smoothing"));
+	public DoubleMatrix orthogonalSmoothing() {
+		return new DoubleMatrix(bundle("orthogonal-smoothing"));
 	}
-	public BooleanMap binarized() {
-		return new BooleanMap(bundle("binarized-image"));
+	public BooleanMatrix binarized() {
+		return new BooleanMatrix(bundle("binarized-image"));
 	}
-	public BooleanMap filteredBinary() {
-		return new BooleanMap(bundle("filtered-binary-image"));
+	public BooleanMatrix filteredBinary() {
+		return new BooleanMatrix(bundle("filtered-binary-image"));
 	}
-	public BooleanMap pixelMask() {
-		return new BooleanMap(bundle("pixel-mask"));
+	public BooleanMatrix pixelMask() {
+		return new BooleanMatrix(bundle("pixel-mask"));
 	}
-	public BooleanMap innerMask() {
-		return new BooleanMap(bundle("inner-mask"));
+	public BooleanMatrix innerMask() {
+		return new BooleanMatrix(bundle("inner-mask"));
 	}
 	public TransparencyArchiveSkeleton ridges() {
 		return new TransparencyArchiveSkeleton(this, "ridges-");

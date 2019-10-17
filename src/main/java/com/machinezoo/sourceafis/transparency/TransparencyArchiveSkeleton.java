@@ -8,11 +8,11 @@ public class TransparencyArchiveSkeleton {
 		this.archive = archive;
 		this.prefix = prefix;
 	}
-	public BooleanMap binarized() {
-		return new BooleanMap(archive.bundle(prefix + "binarized-skeleton"));
+	public BooleanMatrix binarized() {
+		return new BooleanMatrix(archive.bundle(prefix + "binarized-skeleton"));
 	}
-	public BooleanMap thinned() {
-		return new BooleanMap(archive.bundle(prefix + "thinned-skeleton"));
+	public BooleanMatrix thinned() {
+		return new BooleanMatrix(archive.bundle(prefix + "thinned-skeleton"));
 	}
 	public SkeletonGraph traced() {
 		return new SkeletonGraph(archive.bundle(prefix + "traced-skeleton"));

@@ -36,8 +36,8 @@ public class SkeletonGraph {
 		json.ridges = ridges.stream().map(SkeletonRidge::encode).collect(toList());
 		return json;
 	}
-	public BooleanMap shadow() {
-		BooleanMap map = new BooleanMap(size);
+	public BooleanMatrix shadow() {
+		BooleanMatrix map = new BooleanMatrix(size);
 		for (SkeletonRidge ridge : ridges)
 			for (IntPoint point : ridge.points)
 				map.set(point, true);

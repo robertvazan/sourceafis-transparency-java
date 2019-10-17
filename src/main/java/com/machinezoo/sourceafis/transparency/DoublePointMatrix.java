@@ -5,29 +5,29 @@ import java.nio.*;
 import java.util.*;
 import java.util.function.*;
 
-public class PointMap {
+public class DoublePointMatrix {
 	public final int width;
 	public final int height;
 	private final double[] array;
-	public PointMap() {
+	public DoublePointMatrix() {
 		this(0, 0);
 	}
-	public PointMap(int width, int height) {
+	public DoublePointMatrix(int width, int height) {
 		this.width = width;
 		this.height = height;
 		array = new double[2 * width * height];
 	}
-	public PointMap(IntPoint size) {
+	public DoublePointMatrix(IntPoint size) {
 		this(size.x, size.y);
 	}
-	public PointMap(int width, int height, byte[] buffer) {
+	public DoublePointMatrix(int width, int height, byte[] buffer) {
 		this(width, height);
 		ByteBuffer.wrap(buffer).asDoubleBuffer().get(array);
 	}
-	public PointMap(TransparencyArrayInfo info, byte[] data) {
+	public DoublePointMatrix(TransparencyArrayInfo info, byte[] data) {
 		this(info.dimensions[1], info.dimensions[0], data);
 	}
-	public PointMap(Map<String,Supplier<byte[]>> bundle) {
+	public DoublePointMatrix(Map<String,Supplier<byte[]>> bundle) {
 		this(TransparencyArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
 	}
 	public IntPoint size() {
