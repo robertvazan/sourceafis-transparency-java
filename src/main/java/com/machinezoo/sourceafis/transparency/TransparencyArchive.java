@@ -153,8 +153,14 @@ public abstract class TransparencyArchive {
 	public MatchPairing pairing(int offset) {
 		return MatchPairing.parse(json("pairing", offset));
 	}
+	public MatchPairing pairing() {
+		return pairing(bestMatch());
+	}
 	public MatchScoring score(int offset) {
 		return new Gson().fromJson(json("score", offset), MatchScoring.class);
+	}
+	public MatchScoring score() {
+		return score(bestMatch());
 	}
 	public int bestMatch() {
 		return JsonBestMatch.parse(json("best-match"));
