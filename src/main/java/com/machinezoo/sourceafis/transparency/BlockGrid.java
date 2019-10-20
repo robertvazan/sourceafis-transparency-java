@@ -12,10 +12,10 @@ public class BlockGrid {
 	public IntPoint point(IntPoint at) {
 		return point(at.x, at.y);
 	}
-	public IntBlock block(int x, int y) {
-		return IntBlock.between(point(x, y), point(x + 1, y + 1));
+	public IntRect block(int x, int y) {
+		return IntRect.between(point(x, y), point(x + 1, y + 1));
 	}
-	public IntBlock block(IntPoint at) {
+	public IntRect block(IntPoint at) {
 		return block(at.x, at.y);
 	}
 }

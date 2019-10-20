@@ -3,18 +3,18 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
 
-public class IntBlock implements Iterable<IntPoint> {
+public class IntRect implements Iterable<IntPoint> {
 	public final int x;
 	public final int y;
 	public final int width;
 	public final int height;
-	public IntBlock(int x, int y, int width, int height) {
+	public IntRect(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 	}
-	public IntBlock(IntPoint size) {
+	public IntRect(IntPoint size) {
 		this(0, 0, size.x, size.y);
 	}
 	public int left() {
@@ -35,10 +35,10 @@ public class IntBlock implements Iterable<IntPoint> {
 	public double radius() {
 		return 0.5 * Math.min(width, height);
 	}
-	public static IntBlock between(int startX, int startY, int endX, int endY) {
-		return new IntBlock(startX, startY, endX - startX, endY - startY);
+	public static IntRect between(int startX, int startY, int endX, int endY) {
+		return new IntRect(startX, startY, endX - startX, endY - startY);
 	}
-	public static IntBlock between(IntPoint start, IntPoint end) {
+	public static IntRect between(IntPoint start, IntPoint end) {
 		return between(start.x, start.y, end.x, end.y);
 	}
 	@Override public Iterator<IntPoint> iterator() {
