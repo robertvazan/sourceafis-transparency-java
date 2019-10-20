@@ -1,55 +1,10 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import java.util.*;
 import java.util.regex.*;
 
 public class TransparencyPath {
 	private static final Pattern filenameRe = Pattern.compile("^[0-9]+-(ridges-|valleys-|)([a-z-]+)(.[a-z]+)$");
-	public static Set<String> keywords() {
-		return keywords;
-	}
-	private static final Set<String> keywords = new HashSet<>(Arrays.asList(
-		"version",
-		"decoded-image",
-		"scaled-image",
-		"block-map",
-		"histogram",
-		"smoothed-histogram",
-		"clipped-contrast",
-		"absolute-contrast-mask",
-		"relative-contrast-mask",
-		"combined-mask",
-		"filtered-mask",
-		"equalized-image",
-		"pixelwise-orientation",
-		"block-orientation",
-		"smoothed-orientation",
-		"parallel-smoothing",
-		"orthogonal-smoothing",
-		"binarized-image",
-		"filtered-binary-image",
-		"pixel-mask",
-		"inner-mask",
-		"binarized-skeleton",
-		"thinned-skeleton",
-		"traced-skeleton",
-		"removed-dots",
-		"removed-pores",
-		"removed-gaps",
-		"removed-tails",
-		"removed-fragments",
-		"skeleton-minutiae",
-		"inner-minutiae",
-		"removed-minutia-clouds",
-		"top-minutiae",
-		"shuffled-minutiae",
-		"edge-table",
-		"edge-hash",
-		"root-pairs",
-		"pairing",
-		"score",
-		"best-match"));
 	private final String filename;
 	public String filename() {
 		return filename;
