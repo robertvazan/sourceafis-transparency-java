@@ -10,6 +10,7 @@ public class TransparencyPath {
 		return keywords;
 	}
 	private static final Set<String> keywords = new HashSet<>(Arrays.asList(
+		"version",
 		"decoded-image",
 		"scaled-image",
 		"block-map",

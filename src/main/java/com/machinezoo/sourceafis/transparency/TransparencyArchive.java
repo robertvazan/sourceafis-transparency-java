@@ -55,6 +55,9 @@ public abstract class TransparencyArchive {
 			return null;
 		return read(path);
 	}
+	public String version() {
+		return JsonVersion.parse(json("version"));
+	}
 	public DoubleMatrix decoded() {
 		return new DoubleMatrix(bundle("decoded-image"));
 	}
