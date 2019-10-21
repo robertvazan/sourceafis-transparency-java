@@ -37,14 +37,16 @@ public class TransparencyArchiveTest {
 			Files.write(temporary, buffer.toByteArray());
 			try (ZipFile zip = new ZipFile(temporary.toFile())) {
 				TransparencyArchive archive = new TransparencyZip(zip);
-				int count = 0;
-				for (Method method : archive.getClass().getMethods()) {
-					if (method.getParameterCount() == 0 && method.getDeclaringClass() != Object.class) {
-						++count;
-						assertNotNull(Exceptions.sneak().get(() -> method.invoke(archive)));
+				for (Object object : new Object[] { archive, archive.ridges(), archive.valleys() }) {
+					int count = 0;
+					for (Method method : object.getClass().getMethods()) {
+						if (method.getParameterCount() == 0 && method.getDeclaringClass() != Object.class) {
+							++count;
+							assertNotNull(Exceptions.sneak().get(() -> method.invoke(object)));
+						}
 					}
+					assertThat(count, greaterThan(5));
 				}
-				assertThat(count, greaterThan(10));
 			}
 		} finally {
 			Files.delete(temporary);
