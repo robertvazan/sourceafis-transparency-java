@@ -9,27 +9,27 @@ public class TransparencyArchiveSkeleton {
 		this.prefix = prefix;
 	}
 	public BooleanMatrix binarized() {
-		return new BooleanMatrix(archive.bundle(prefix + "binarized-skeleton"));
+		return TransparencyArchive.decode(archive.bundle(prefix + "binarized-skeleton"), BooleanMatrix::new);
 	}
 	public BooleanMatrix thinned() {
-		return new BooleanMatrix(archive.bundle(prefix + "thinned-skeleton"));
+		return TransparencyArchive.decode(archive.bundle(prefix + "thinned-skeleton"), BooleanMatrix::new);
 	}
 	public SkeletonGraph traced() {
-		return new SkeletonGraph(archive.bundle(prefix + "traced-skeleton"));
+		return TransparencyArchive.decode(archive.bundle(prefix + "traced-skeleton"), SkeletonGraph::new);
 	}
 	public SkeletonGraph removedDots() {
-		return new SkeletonGraph(archive.bundle(prefix + "removed-dots"));
+		return TransparencyArchive.decode(archive.bundle(prefix + "removed-dots"), SkeletonGraph::new);
 	}
 	public SkeletonGraph removedPores() {
-		return new SkeletonGraph(archive.bundle(prefix + "removed-pores"));
+		return TransparencyArchive.decode(archive.bundle(prefix + "removed-pores"), SkeletonGraph::new);
 	}
 	public SkeletonGraph removedGaps() {
-		return new SkeletonGraph(archive.bundle(prefix + "removed-gaps"));
+		return TransparencyArchive.decode(archive.bundle(prefix + "removed-gaps"), SkeletonGraph::new);
 	}
 	public SkeletonGraph removedTails() {
-		return new SkeletonGraph(archive.bundle(prefix + "removed-tails"));
+		return TransparencyArchive.decode(archive.bundle(prefix + "removed-tails"), SkeletonGraph::new);
 	}
 	public SkeletonGraph removedFragments() {
-		return new SkeletonGraph(archive.bundle(prefix + "removed-fragments"));
+		return TransparencyArchive.decode(archive.bundle(prefix + "removed-fragments"), SkeletonGraph::new);
 	}
 }

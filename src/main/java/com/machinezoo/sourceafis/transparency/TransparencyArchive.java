@@ -55,68 +55,73 @@ public abstract class TransparencyArchive {
 			return null;
 		return read(path);
 	}
+	static <T, R> R decode(T serialized, Function<T, R> decoder) {
+		if (serialized == null)
+			return null;
+		return decoder.apply(serialized);
+	}
 	public String version() {
-		return JsonVersion.parse(json("version"));
+		return decode(json("version"), JsonVersion::parse);
 	}
 	public DoubleMatrix decoded() {
-		return new DoubleMatrix(bundle("decoded-image"));
+		return decode(bundle("decoded-image"), DoubleMatrix::new);
 	}
 	public DoubleMatrix scaled() {
-		return new DoubleMatrix(bundle("scaled-image"));
+		return decode(bundle("scaled-image"), DoubleMatrix::new);
 	}
 	public BlockMap blocks() {
-		return BlockMap.parse(json("block-map"));
+		return decode(json("block-map"), BlockMap::parse);
 	}
 	public HistogramCube histogram() {
-		return new HistogramCube(bundle("histogram"));
+		return decode(bundle("histogram"), HistogramCube::new);
 	}
 	public HistogramCube smoothedHistogram() {
-		return new HistogramCube(bundle("smoothed-histogram"));
+		return decode(bundle("smoothed-histogram"), HistogramCube::new);
 	}
 	public DoubleMatrix contrast() {
-		return new DoubleMatrix(bundle("clipped-contrast"));
+		return decode(bundle("clipped-contrast"), DoubleMatrix::new);
 	}
 	public BooleanMatrix absoluteMask() {
-		return new BooleanMatrix(bundle("absolute-contrast-mask"));
+		return decode(bundle("absolute-contrast-mask"), BooleanMatrix::new);
 	}
 	public BooleanMatrix relativeMask() {
-		return new BooleanMatrix(bundle("relative-contrast-mask"));
+		return decode(bundle("relative-contrast-mask"), BooleanMatrix::new);
 	}
 	public BooleanMatrix combinedMask() {
-		return new BooleanMatrix(bundle("combined-mask"));
+		return decode(bundle("combined-mask"), BooleanMatrix::new);
 	}
 	public BooleanMatrix filteredMask() {
-		return new BooleanMatrix(bundle("filtered-mask"));
+		return decode(bundle("filtered-mask"), BooleanMatrix::new);
 	}
 	public DoubleMatrix equalized() {
-		return new DoubleMatrix(bundle("equalized-image"));
+		return decode(bundle("equalized-image"), DoubleMatrix::new);
 	}
 	public DoublePointMatrix pixelwiseOrientation() {
-		return new DoublePointMatrix(bundle("pixelwise-orientation"));
+		return decode(bundle("pixelwise-orientation"), DoublePointMatrix::new);
 	}
 	public DoublePointMatrix blockOrientation() {
-		return new DoublePointMatrix(bundle("block-orientation"));
+		return decode(bundle("block-orientation"), DoublePointMatrix::new);
 	}
 	public DoublePointMatrix smoothedOrientation() {
-		return new DoublePointMatrix(bundle("smoothed-orientation"));
+		return decode(bundle("smoothed-orientation"), DoublePointMatrix::new);
 	}
 	public DoubleMatrix parallelSmoothing() {
-		return new DoubleMatrix(bundle("parallel-smoothing"));
+		return decode(bundle("parallel-smoothing"), DoubleMatrix::new);
 	}
 	public DoubleMatrix orthogonalSmoothing() {
-		return new DoubleMatrix(bundle("orthogonal-smoothing"));
+		return decode(bundle("orthogonal-smoothing"), DoubleMatrix::new);
 	}
 	public BooleanMatrix binarized() {
-		return new BooleanMatrix(bundle("binarized-image"));
+		return decode(bundle("binarized-image"), BooleanMatrix::new);
 	}
 	public BooleanMatrix filteredBinary() {
-		return new BooleanMatrix(bundle("filtered-binary-image"));
+		return decode(bundle("filtered-binary-image"), BooleanMatrix::new);
 	}
 	public BooleanMatrix pixelMask() {
-		return new BooleanMatrix(bundle("pixel-mask"));
+		return decode(bundle("pixel-mask"), BooleanMatrix::new);
 	}
 	public BooleanMatrix innerMask() {
-		return new BooleanMatrix(bundle("inner-mask"));
+		return decode(bundle("inner-mask"), BooleanMatrix::new);
 	}
 	public TransparencyArchiveSkeleton ridges() {
 		return new TransparencyArchiveSkeleton(this, "ridges-");
@@ -125,28 +130,28 @@ public abstract class TransparencyArchive {
 		return new TransparencyArchiveSkeleton(this, "valleys-");
 	}
 	public Template skeletonMinutiae() {
-		return new Template(json("skeleton-minutiae"));
+		return decode(json("skeleton-minutiae"), Template::new);
 	}
 	public Template innerMinutiae() {
-		return new Template(json("inner-minutiae"));
+		return decode(json("inner-minutiae"), Template::new);
 	}
 	public Template removedMinutiaClouds() {
-		return new Template(json("removed-minutia-clouds"));
+		return decode(json("removed-minutia-clouds"), Template::new);
 	}
 	public Template topMinutiae() {
-		return new Template(json("top-minutiae"));
+		return decode(json("top-minutiae"), Template::new);
 	}
 	public Template shuffledMinutiae() {
-		return new Template(json("shuffled-minutiae"));
+		return decode(json("shuffled-minutiae"), Template::new);
 	}
 	public NeighborEdge[][] edgeTable() {
-		return new Gson().fromJson(json("edge-table"), NeighborEdge[][].class);
+		return decode(json("edge-table"), j -> new Gson().fromJson(j, NeighborEdge[][].class));
 	}
 	public EdgeHash edgeHash() {
-		return new EdgeHash(ByteBuffer.wrap(data("edge-hash")));
+		return decode(data("edge-hash"), d -> new EdgeHash(ByteBuffer.wrap(d)));
 	}
 	public MinutiaPair[] rootPairs() {
-		return new Gson().fromJson(json("root-pairs"), MinutiaPair[].class);
+		return decode(json("root-pairs"), j -> new Gson().fromJson(j, MinutiaPair[].class));
 	}
 	public int pairingCount() {
 		return (int)enumerate().stream()
@@ -154,18 +159,19 @@ public abstract class TransparencyArchive {
 			.count();
 	}
 	public MatchPairing pairing(int offset) {
-		return MatchPairing.parse(json("pairing", offset));
+		return decode(json("pairing", offset), MatchPairing::parse);
 	}
 	public MatchPairing pairing() {
-		return pairing(bestMatch());
+		return pairing(bestMatch().orElse(0));
 	}
 	public MatchScoring score(int offset) {
-		return new Gson().fromJson(json("score", offset), MatchScoring.class);
+		return decode(json("score", offset), j -> new Gson().fromJson(j, MatchScoring.class));
 	}
 	public MatchScoring score() {
-		return score(bestMatch());
+		return score(bestMatch().orElse(0));
 	}
-	public int bestMatch() {
-		return JsonBestMatch.parse(json("best-match"));
+	public OptionalInt bestMatch() {
+		String json = json("best-match");
+		return json != null ? OptionalInt.of(JsonBestMatch.parse(json)) : OptionalInt.empty();
 	}
 }
