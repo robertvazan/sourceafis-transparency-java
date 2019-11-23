@@ -28,7 +28,7 @@ public class IntPoint implements Iterable<IntPoint> {
 		return new DoublePoint(x, y);
 	}
 	public DoublePoint center() {
-		return toDouble().center();
+		return new DoublePoint(x + 0.5, y + 0.5);
 	}
 	@Override public Iterator<IntPoint> iterator() {
 		return new InteriorIterator();
