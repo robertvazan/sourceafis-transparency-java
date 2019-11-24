@@ -2,6 +2,7 @@
 package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class IntPoint implements Iterable<IntPoint> {
 	public int x;
@@ -53,5 +54,11 @@ public class IntPoint implements Iterable<IntPoint> {
 		@Override public void remove() {
 			throw new UnsupportedOperationException();
 		}
+	}
+	public Stream<IntPoint> stream() {
+		return IntStream.range(0, y)
+			.boxed()
+			.flatMap(sy -> IntStream.range(0, x)
+				.mapToObj(sx -> new IntPoint(sx, sy)));
 	}
 }

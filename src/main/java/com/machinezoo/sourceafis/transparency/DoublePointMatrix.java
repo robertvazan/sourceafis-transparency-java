@@ -4,6 +4,7 @@ package com.machinezoo.sourceafis.transparency;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class DoublePointMatrix {
@@ -45,8 +46,8 @@ public class DoublePointMatrix {
 	public void set(IntPoint at, DoublePoint value) {
 		set(at.x, at.y, value);
 	}
-	public DoubleSummaryStatistics stats() {
-		return Arrays.stream(array).summaryStatistics();
+	public DoubleStream stream() {
+		return Arrays.stream(array);
 	}
 	private int offset(int x, int y) {
 		return 2 * (y * width + x);

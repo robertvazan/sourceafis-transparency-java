@@ -4,12 +4,12 @@ package com.machinezoo.sourceafis.transparency;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class DoubleMatrix {
 	public final int width;
 	public final int height;
-	public DoubleSummaryStatistics stats;
 	private final double[] array;
 	public DoubleMatrix(int width, int height) {
 		this.width = width;
@@ -23,7 +23,6 @@ public class DoubleMatrix {
 		JsonArrayInfo info = JsonArrayInfo.parse(bundle);
 		DoubleMatrix matrix = new DoubleMatrix(info.dimensions[1], info.dimensions[0]);
 		ByteBuffer.wrap(bundle.get(".dat").get()).asDoubleBuffer().get(matrix.array);
-		matrix.stats = Arrays.stream(matrix.array).summaryStatistics();
 		return matrix;
 	}
 	public IntPoint size() {
@@ -37,5 +36,8 @@ public class DoubleMatrix {
 	}
 	private int offset(int x, int y) {
 		return y * width + x;
+	}
+	public DoubleStream stream() {
+		return Arrays.stream(array);
 	}
 }
