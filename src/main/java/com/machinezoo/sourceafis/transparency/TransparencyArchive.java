@@ -123,11 +123,59 @@ public abstract class TransparencyArchive {
 	public BooleanMatrix innerMask() {
 		return decode(bundle("inner-mask"), BooleanMatrix::new);
 	}
-	public TransparencyArchiveSkeleton ridges() {
-		return new TransparencyArchiveSkeleton(this, "ridges-");
+	private <T> T pickSkeleton(Function<SkeletonType, T> decoder) {
+		T ridges = decoder.apply(SkeletonType.RIDGES);
+		if (ridges != null)
+			return ridges;
+		return decoder.apply(SkeletonType.VALLEYS);
 	}
-	public TransparencyArchiveSkeleton valleys() {
-		return new TransparencyArchiveSkeleton(this, "valleys-");
+	public BooleanMatrix binarizedSkeleton(SkeletonType skeleton) {
+		return decode(bundle(skeleton.prefix() + "-binarized-skeleton"), BooleanMatrix::new);
+	}
+	public BooleanMatrix binarizedSkeleton() {
+		return pickSkeleton(this::binarizedSkeleton);
+	}
+	public BooleanMatrix thinned(SkeletonType skeleton) {
+		return decode(bundle(skeleton.prefix() + "-thinned-skeleton"), BooleanMatrix::new);
+	}
+	public BooleanMatrix thinned() {
+		return pickSkeleton(this::thinned);
+	}
+	public SkeletonGraph traced(SkeletonType skeleton) {
+		return decode(bundle(skeleton.prefix() + "-traced-skeleton"), SkeletonGraph::new);
+	}
+	public SkeletonGraph traced() {
+		return pickSkeleton(this::traced);
+	}
+	public SkeletonGraph removedDots(SkeletonType skeleton) {
+		return decode(bundle(skeleton.prefix() + "-removed-dots"), SkeletonGraph::new);
+	}
+	public SkeletonGraph removedDots() {
+		return pickSkeleton(this::removedDots);
+	}
+	public SkeletonGraph removedPores(SkeletonType skeleton) {
+		return decode(bundle(skeleton.prefix() + "-removed-pores"), SkeletonGraph::new);
+	}
+	public SkeletonGraph removedPores() {
+		return pickSkeleton(this::removedPores);
+	}
+	public SkeletonGraph removedGaps(SkeletonType skeleton) {
+		return decode(bundle(skeleton.prefix() + "-removed-gaps"), SkeletonGraph::new);
+	}
+	public SkeletonGraph removedGaps() {
+		return pickSkeleton(this::removedGaps);
+	}
+	public SkeletonGraph removedTails(SkeletonType skeleton) {
+		return decode(bundle(skeleton.prefix() + "-removed-tails"), SkeletonGraph::new);
+	}
+	public SkeletonGraph removedTails() {
+		return pickSkeleton(this::removedTails);
+	}
+	public SkeletonGraph removedFragments(SkeletonType skeleton) {
+		return decode(bundle(skeleton.prefix() + "-removed-fragments"), SkeletonGraph::new);
+	}
+	public SkeletonGraph removedFragments() {
+		return pickSkeleton(this::removedFragments);
 	}
 	public Template skeletonMinutiae() {
 		return decode(json("skeleton-minutiae"), Template::new);
