@@ -7,10 +7,10 @@ import java.util.function.*;
 import com.google.gson.*;
 
 public class RootPairs {
-	public MinutiaPair[] pairs;
+	public List<MinutiaPair> pairs = new ArrayList<>();
 	public static RootPairs parse(Map<String, Supplier<byte[]>> bundle) {
 		RootPairs roots = new RootPairs();
-		roots.pairs = new Gson().fromJson(new String(bundle.get(".json").get(), StandardCharsets.UTF_8), MinutiaPair[].class);
+		roots.pairs = Arrays.asList(new Gson().fromJson(new String(bundle.get(".json").get(), StandardCharsets.UTF_8), MinutiaPair[].class));
 		return roots;
 	}
 }
