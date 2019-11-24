@@ -19,7 +19,12 @@ public class EdgeHash {
 			int valueCount = buffer.getInt();
 			IndexedEdge[] list = new IndexedEdge[valueCount];
 			for (int j = 0; j < valueCount; ++j) {
-				IndexedEdge edge = new IndexedEdge(buffer);
+				IndexedEdge edge = new IndexedEdge();
+				edge.reference = buffer.getInt();
+				edge.neighbor = buffer.getInt();
+				edge.length = buffer.getInt();
+				edge.referenceAngle = buffer.getDouble();
+				edge.neighborAngle = buffer.getDouble();
 				list[j] = edge;
 			}
 			eh.table.put(key, list);
