@@ -6,29 +6,26 @@ import java.util.function.*;
 import com.machinezoo.sourceafis.transparency.formats.*;
 
 public abstract class TransparencyArchive {
-	public abstract List<String> enumerate();
-	public abstract byte[] read(String path);
-	private String path(String numberless, int offset) {
-		return enumerate().stream()
-			.sorted()
-			.map(TransparencyPath::new)
-			.filter(p -> numberless.equals(p.typed() + p.suffix()))
-			.skip(offset)
-			.map(TransparencyPath::filename)
-			.findFirst()
-			.orElse(null);
+	public abstract List<TransparencyPath> paths();
+	public abstract int count(TransparencyPath path);
+	public abstract byte[] read(TransparencyPath path, int offset);
+	private boolean exists(TransparencyPath path, int offset) {
+		return offset < count(path);
 	}
-	private Map<String, Supplier<byte[]>> bundle(String keyword, int offset) {
-		String json = path(keyword + ".json", offset);
-		String data = path(keyword + ".dat", offset);
-		if (json == null && data == null)
+	private Map<String, Supplier<byte[]>> bundle(SkeletonType skeleton, String stage, int offset) {
+		TransparencyPath json = new TransparencyPath(skeleton, stage, ".json");
+		TransparencyPath data = new TransparencyPath(skeleton, stage, ".dat");
+		if (!exists(json, offset) && !exists(data, offset))
 			return null;
 		Map<String, Supplier<byte[]>> map = new HashMap<>();
-		if (json != null)
-			map.put(".json", () -> read(json));
-		if (data != null)
-			map.put(".dat", () -> read(data));
+		if (exists(json, offset))
+			map.put(".json", () -> read(json, offset));
+		if (exists(data, offset))
+			map.put(".dat", () -> read(data, offset));
 		return map;
+	}
+	private Map<String, Supplier<byte[]>> bundle(String keyword, int offset) {
+		return bundle(null, keyword, offset);
 	}
 	private static <T> T parse(Map<String, Supplier<byte[]>> bundle, Function<Map<String, Supplier<byte[]>>, T> parser) {
 		if (bundle == null)
@@ -37,6 +34,9 @@ public abstract class TransparencyArchive {
 	}
 	private <T> T parse(String keyword, Function<Map<String, Supplier<byte[]>>, T> parser) {
 		return parse(bundle(keyword, 0), parser);
+	}
+	private <T> T parse(SkeletonType skeleton, String stage, Function<Map<String, Supplier<byte[]>>, T> parser) {
+		return parse(bundle(skeleton, stage, 0), parser);
 	}
 	public String version() {
 		return Optional.ofNullable(parse("version", JsonVersion::parse)).map(v -> v.version).orElse(null);
@@ -108,49 +108,49 @@ public abstract class TransparencyArchive {
 		return decoder.apply(SkeletonType.VALLEYS);
 	}
 	public BooleanMatrix binarizedSkeleton(SkeletonType skeleton) {
-		return parse(skeleton.prefix() + "-binarized-skeleton", BooleanMatrix::parse);
+		return parse(skeleton, "binarized-skeleton", BooleanMatrix::parse);
 	}
 	public BooleanMatrix binarizedSkeleton() {
 		return pickSkeleton(this::binarizedSkeleton);
 	}
 	public BooleanMatrix thinned(SkeletonType skeleton) {
-		return parse(skeleton.prefix() + "-thinned-skeleton", BooleanMatrix::parse);
+		return parse(skeleton, "thinned-skeleton", BooleanMatrix::parse);
 	}
 	public BooleanMatrix thinned() {
 		return pickSkeleton(this::thinned);
 	}
 	public SkeletonGraph traced(SkeletonType skeleton) {
-		return parse(skeleton.prefix() + "-traced-skeleton", SkeletonGraph::parse);
+		return parse(skeleton, "traced-skeleton", SkeletonGraph::parse);
 	}
 	public SkeletonGraph traced() {
 		return pickSkeleton(this::traced);
 	}
 	public SkeletonGraph removedDots(SkeletonType skeleton) {
-		return parse(skeleton.prefix() + "-removed-dots", SkeletonGraph::parse);
+		return parse(skeleton, "removed-dots", SkeletonGraph::parse);
 	}
 	public SkeletonGraph removedDots() {
 		return pickSkeleton(this::removedDots);
 	}
 	public SkeletonGraph removedPores(SkeletonType skeleton) {
-		return parse(skeleton.prefix() + "-removed-pores", SkeletonGraph::parse);
+		return parse(skeleton, "removed-pores", SkeletonGraph::parse);
 	}
 	public SkeletonGraph removedPores() {
 		return pickSkeleton(this::removedPores);
 	}
 	public SkeletonGraph removedGaps(SkeletonType skeleton) {
-		return parse(skeleton.prefix() + "-removed-gaps", SkeletonGraph::parse);
+		return parse(skeleton, "removed-gaps", SkeletonGraph::parse);
 	}
 	public SkeletonGraph removedGaps() {
 		return pickSkeleton(this::removedGaps);
 	}
 	public SkeletonGraph removedTails(SkeletonType skeleton) {
-		return parse(skeleton.prefix() + "-removed-tails", SkeletonGraph::parse);
+		return parse(skeleton, "removed-tails", SkeletonGraph::parse);
 	}
 	public SkeletonGraph removedTails() {
 		return pickSkeleton(this::removedTails);
 	}
 	public SkeletonGraph removedFragments(SkeletonType skeleton) {
-		return parse(skeleton.prefix() + "-removed-fragments", SkeletonGraph::parse);
+		return parse(skeleton, "removed-fragments", SkeletonGraph::parse);
 	}
 	public SkeletonGraph removedFragments() {
 		return pickSkeleton(this::removedFragments);
@@ -180,9 +180,7 @@ public abstract class TransparencyArchive {
 		return parse("root-pairs", RootPairs::parse);
 	}
 	public int pairingCount() {
-		return (int)enumerate().stream()
-			.filter(n -> new TransparencyPath(n).keyword().equals("pairing"))
-			.count();
+		return count(new TransparencyPath("pairing", ".json"));
 	}
 	public MatchPairing pairing(int offset) {
 		return parse(bundle("pairing", offset), MatchPairing::parse);

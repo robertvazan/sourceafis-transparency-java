@@ -1,53 +1,51 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import java.util.regex.*;
+import java.util.*;
 
 public class TransparencyPath {
-	private static final Pattern filenameRe = Pattern.compile("^[0-9]+-(ridges-|valleys-|)([a-z-]+)(.[a-z]+)$");
-	private final String filename;
-	public String filename() {
-		return filename;
+	private final String stage;
+	public String stage() {
+		return stage;
 	}
-	private final SkeletonType skeletonType;
-	public SkeletonType skeletonType() {
-		return skeletonType;
+	private final SkeletonType skeleton;
+	public SkeletonType skeleton() {
+		return skeleton;
 	}
-	private final String keyword;
 	public String keyword() {
-		return keyword;
-	}
-	private final String typed;
-	public String typed() {
-		return typed;
+		if (skeleton != null)
+			return skeleton.prefix() + "-" + stage;
+		return stage;
 	}
 	private final String suffix;
 	public String suffix() {
 		return suffix;
 	}
-	public TransparencyPath(String filename) {
-		this.filename = filename;
-		Matcher matcher = filenameRe.matcher(filename);
-		if (matcher.find()) {
-			switch (matcher.group(1)) {
-			case "ridges-":
-				skeletonType = SkeletonType.RIDGES;
-				break;
-			case "valleys-":
-				skeletonType = SkeletonType.VALLEYS;
-				break;
-			default:
-				skeletonType = null;
-				break;
-			}
-			keyword = matcher.group(2);
-			typed = matcher.group(1) + keyword;
-			suffix = matcher.group(3);
+	@Override public boolean equals(Object obj) {
+		if (!(obj instanceof TransparencyPath))
+			return false;
+		TransparencyPath other = (TransparencyPath)obj;
+		return Objects.equals(stage, other.stage) && skeleton == other.skeleton && Objects.equals(suffix, other.suffix);
+	}
+	@Override public int hashCode() {
+		return Objects.hash(stage, skeleton, suffix);
+	}
+	public TransparencyPath(SkeletonType skeleton, String stage, String suffix) {
+		this.skeleton = skeleton;
+		this.stage = stage;
+		this.suffix = suffix;
+	}
+	public TransparencyPath(String keyword, String suffix) {
+		if (keyword.startsWith("ridges-")) {
+			skeleton = SkeletonType.RIDGES;
+			stage = keyword.substring("ridges-".length());
+		} else if (keyword.startsWith("valleys-")) {
+			skeleton = SkeletonType.VALLEYS;
+			stage = keyword.substring("valleys-".length());
 		} else {
-			skeletonType = null;
-			keyword = filename;
-			typed = filename;
-			suffix = "";
+			skeleton = null;
+			stage = keyword;
 		}
+		this.suffix = suffix;
 	}
 }
