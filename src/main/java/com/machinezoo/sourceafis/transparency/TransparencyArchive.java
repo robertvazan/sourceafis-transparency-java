@@ -190,14 +190,14 @@ public abstract class TransparencyArchive {
 	public Template shuffledMinutiae() {
 		return decode(json("shuffled-minutiae"), Template::parse);
 	}
-	public NeighborEdge[][] edgeTable() {
-		return decode(json("edge-table"), NeighborEdge::parse);
+	public EdgeTable edgeTable() {
+		return decode(json("edge-table"), EdgeTable::parse);
 	}
 	public EdgeHash edgeHash() {
 		return decode(data("edge-hash"), EdgeHash::parse);
 	}
-	public MinutiaPair[] rootPairs() {
-		return decode(json("root-pairs"), MinutiaPair::parse);
+	public RootPairs rootPairs() {
+		return decode(json("root-pairs"), RootPairs::parse);
 	}
 	public int pairingCount() {
 		return (int)enumerate().stream()
