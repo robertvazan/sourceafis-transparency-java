@@ -41,7 +41,7 @@ public class TransparencyArchiveTest {
 				for (Method method : archive.getClass().getMethods()) {
 					if (method.getParameterCount() == 0 && method.getDeclaringClass() != Object.class) {
 						++count;
-						assertNotNull(Exceptions.sneak().get(() -> method.invoke(archive)));
+						assertNotNull(method.getName(), Exceptions.sneak().get(() -> method.invoke(archive)));
 					}
 				}
 				assertThat(count, greaterThan(5));
