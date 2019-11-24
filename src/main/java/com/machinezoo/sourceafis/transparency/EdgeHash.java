@@ -3,13 +3,16 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.nio.*;
 import java.util.*;
+import java.util.function.*;
 import gnu.trove.map.hash.*;
 import gnu.trove.set.hash.*;
 
 public class EdgeHash {
 	public final TIntObjectHashMap<IndexedEdge[]> hash = new TIntObjectHashMap<>();
 	public final List<IndexedEdge> edges = new ArrayList<>();
-	public EdgeHash(ByteBuffer buffer) {
+	public static EdgeHash parse(Map<String, Supplier<byte[]>> bundle) {
+		ByteBuffer buffer = ByteBuffer.wrap(bundle.get(".dat").get());
+		EdgeHash eh = new EdgeHash();
 		TIntHashSet seen = new TIntHashSet();
 		int keyCount = buffer.getInt();
 		for (int i = 0; i < keyCount; ++i) {
@@ -22,10 +25,11 @@ public class EdgeHash {
 				int id = (edge.reference << 16) + edge.neighbor;
 				if (!seen.contains(id)) {
 					seen.add(id);
-					edges.add(edge);
+					eh.edges.add(edge);
 				}
 			}
-			hash.put(key, list);
+			eh.hash.put(key, list);
 		}
+		return eh;
 	}
 }

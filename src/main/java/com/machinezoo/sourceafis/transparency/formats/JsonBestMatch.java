@@ -8,13 +8,7 @@ import com.google.gson.*;
 
 public class JsonBestMatch {
 	public int offset;
-	public static int parse(String json) {
-		return new Gson().fromJson(json, JsonBestMatch.class).offset;
-	}
-	public static int parse(byte[] buffer) {
-		return parse(new String(buffer, StandardCharsets.UTF_8));
-	}
 	public static int parse(Map<String, Supplier<byte[]>> bundle) {
-		return parse(bundle.get(".json").get());
+		return new Gson().fromJson(new String(bundle.get(".json").get(), StandardCharsets.UTF_8), JsonBestMatch.class).offset;
 	}
 }

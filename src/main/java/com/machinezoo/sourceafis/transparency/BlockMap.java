@@ -10,13 +10,7 @@ public class BlockMap {
 	public IntPoint pixels;
 	public BlockGrid primary;
 	public BlockGrid secondary;
-	public static BlockMap parse(String json) {
-		return new Gson().fromJson(json, BlockMap.class);
-	}
-	public static BlockMap parse(byte[] buffer) {
-		return parse(new String(buffer, StandardCharsets.UTF_8));
-	}
 	public static BlockMap parse(Map<String, Supplier<byte[]>> bundle) {
-		return parse(bundle.get(".json").get());
+		return new Gson().fromJson(new String(bundle.get(".json").get(), StandardCharsets.UTF_8), BlockMap.class);
 	}
 }

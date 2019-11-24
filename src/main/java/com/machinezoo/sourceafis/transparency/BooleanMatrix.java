@@ -20,16 +20,13 @@ public class BooleanMatrix {
 	public BooleanMatrix(IntPoint size) {
 		this(size.x, size.y);
 	}
-	public BooleanMatrix(int width, int height, byte[] buffer) {
-		this(width, height);
-		for (int i = 0; i < array.length; ++i)
-			array[i] = buffer[i] != 0;
-	}
-	public BooleanMatrix(JsonArrayInfo info, byte[] data) {
-		this(info.dimensions[1], info.dimensions[0], data);
-	}
-	public BooleanMatrix(Map<String, Supplier<byte[]>> bundle) {
-		this(JsonArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
+	public static BooleanMatrix parse(Map<String, Supplier<byte[]>> bundle) {
+		JsonArrayInfo info = JsonArrayInfo.parse(bundle);
+		BooleanMatrix matrix = new BooleanMatrix(info.dimensions[1], info.dimensions[0]);
+		byte[] bytes = bundle.get(".dat").get();
+		for (int i = 0; i < bytes.length; ++i)
+			matrix.array[i] = bytes[i] != 0;
+		return matrix;
 	}
 	public IntPoint size() {
 		return new IntPoint(width, height);

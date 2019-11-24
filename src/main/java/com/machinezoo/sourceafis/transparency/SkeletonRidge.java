@@ -1,7 +1,6 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import java.nio.*;
 import java.util.*;
 import com.machinezoo.sourceafis.transparency.formats.*;
 
@@ -11,15 +10,10 @@ public class SkeletonRidge {
 	public final List<IntPoint> points;
 	public final boolean reversed;
 	public final SkeletonRidge opposite;
-	SkeletonRidge(JsonSkeletonRidge json, List<SkeletonMinutia> minutiae, ByteBuffer buffer) {
-		start = minutiae.get(json.start);
-		end = minutiae.get(json.end);
-		if (buffer != null) {
-			points = new ArrayList<>();
-			for (int i = 0; i < json.length; ++i)
-				points.add(new IntPoint(buffer.getInt(), buffer.getInt()));
-		} else
-			points = new ArrayList<>(json.points);
+	SkeletonRidge(SkeletonMinutia start, SkeletonMinutia end, List<IntPoint> points) {
+		this.start = start;
+		this.end = end;
+		this.points = points;
 		reversed = false;
 		opposite = new SkeletonRidge(this);
 	}

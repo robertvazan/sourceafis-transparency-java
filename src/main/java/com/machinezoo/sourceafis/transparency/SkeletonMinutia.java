@@ -8,10 +8,10 @@ public class SkeletonMinutia {
 	public final int x;
 	public final int y;
 	public final List<SkeletonRidge> ridges = new ArrayList<>();
-	public SkeletonMinutia(int offset, IntPoint json) {
+	public SkeletonMinutia(int offset, IntPoint position) {
 		this.offset = offset;
-		x = json.x;
-		y = json.y;
+		x = position.x;
+		y = position.y;
 	}
 	public IntPoint position() {
 		return new IntPoint(x, y);

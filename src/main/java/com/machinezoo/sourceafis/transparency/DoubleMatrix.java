@@ -9,20 +9,22 @@ import com.machinezoo.sourceafis.transparency.formats.*;
 public class DoubleMatrix {
 	public final int width;
 	public final int height;
-	public final DoubleSummaryStatistics stats;
+	public DoubleSummaryStatistics stats;
 	private final double[] array;
-	public DoubleMatrix(int width, int height, byte[] buffer) {
+	public DoubleMatrix(int width, int height) {
 		this.width = width;
 		this.height = height;
 		array = new double[width * height];
-		ByteBuffer.wrap(buffer).asDoubleBuffer().get(array);
-		stats = Arrays.stream(array).summaryStatistics();
 	}
-	public DoubleMatrix(JsonArrayInfo info, byte[] data) {
-		this(info.dimensions[1], info.dimensions[0], data);
+	public DoubleMatrix(IntPoint size) {
+		this(size.x, size.y);
 	}
-	public DoubleMatrix(Map<String, Supplier<byte[]>> bundle) {
-		this(JsonArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
+	public static DoubleMatrix parse(Map<String, Supplier<byte[]>> bundle) {
+		JsonArrayInfo info = JsonArrayInfo.parse(bundle);
+		DoubleMatrix matrix = new DoubleMatrix(info.dimensions[1], info.dimensions[0]);
+		ByteBuffer.wrap(bundle.get(".dat").get()).asDoubleBuffer().get(matrix.array);
+		matrix.stats = Arrays.stream(matrix.array).summaryStatistics();
+		return matrix;
 	}
 	public IntPoint size() {
 		return new IntPoint(width, height);

@@ -11,18 +11,17 @@ public class HistogramCube {
 	public final int height;
 	public final int depth;
 	private final int[] array;
-	public HistogramCube(int width, int height, int depth, byte[] buffer) {
+	public HistogramCube(int width, int height, int depth) {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
 		array = new int[width * height * depth];
-		ByteBuffer.wrap(buffer).asIntBuffer().get(array);
 	}
-	public HistogramCube(JsonArrayInfo info, byte[] data) {
-		this(info.dimensions[1], info.dimensions[0], info.dimensions[2], data);
-	}
-	public HistogramCube(Map<String, Supplier<byte[]>> bundle) {
-		this(JsonArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
+	public static HistogramCube parse(Map<String, Supplier<byte[]>> bundle) {
+		JsonArrayInfo info = JsonArrayInfo.parse(bundle);
+		HistogramCube cube = new HistogramCube(info.dimensions[1], info.dimensions[0], info.dimensions[2]);
+		ByteBuffer.wrap(bundle.get(".dat").get()).asIntBuffer().get(cube.array);
+		return cube;
 	}
 	public int get(int x, int y, int z) {
 		return array[offset(x, y, z)];

@@ -21,15 +21,11 @@ public class DoublePointMatrix {
 	public DoublePointMatrix(IntPoint size) {
 		this(size.x, size.y);
 	}
-	public DoublePointMatrix(int width, int height, byte[] buffer) {
-		this(width, height);
-		ByteBuffer.wrap(buffer).asDoubleBuffer().get(array);
-	}
-	public DoublePointMatrix(JsonArrayInfo info, byte[] data) {
-		this(info.dimensions[1], info.dimensions[0], data);
-	}
-	public DoublePointMatrix(Map<String, Supplier<byte[]>> bundle) {
-		this(JsonArrayInfo.parse(bundle.get(".json").get()), bundle.get(".dat").get());
+	public static DoublePointMatrix parse(Map<String, Supplier<byte[]>> bundle) {
+		JsonArrayInfo info = JsonArrayInfo.parse(bundle);
+		DoublePointMatrix matrix = new DoublePointMatrix(info.dimensions[1], info.dimensions[0]);
+		ByteBuffer.wrap(bundle.get(".dat").get()).asDoubleBuffer().get(matrix.array);
+		return matrix;
 	}
 	public IntPoint size() {
 		return new IntPoint(width, height);

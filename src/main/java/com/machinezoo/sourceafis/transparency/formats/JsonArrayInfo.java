@@ -2,6 +2,8 @@
 package com.machinezoo.sourceafis.transparency.formats;
 
 import java.nio.charset.*;
+import java.util.*;
+import java.util.function.*;
 import com.google.gson.*;
 
 public class JsonArrayInfo {
@@ -11,10 +13,7 @@ public class JsonArrayInfo {
 	public int bitness;
 	public String endianness;
 	public String format;
-	public static JsonArrayInfo parse(String json) {
-		return new Gson().fromJson(json, JsonArrayInfo.class);
-	}
-	public static JsonArrayInfo parse(byte[] buffer) {
-		return parse(new String(buffer, StandardCharsets.UTF_8));
+	public static JsonArrayInfo parse(Map<String, Supplier<byte[]>> bundle) {
+		return new Gson().fromJson(new String(bundle.get(".json").get(), StandardCharsets.UTF_8), JsonArrayInfo.class);
 	}
 }
