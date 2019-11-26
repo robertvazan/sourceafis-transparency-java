@@ -4,12 +4,10 @@ package com.machinezoo.sourceafis.transparency;
 import java.util.*;
 
 public class SkeletonMinutia {
-	public final int offset;
 	public final int x;
 	public final int y;
 	public final List<SkeletonRidge> ridges = new ArrayList<>();
-	public SkeletonMinutia(int offset, IntPoint position) {
-		this.offset = offset;
+	public SkeletonMinutia(IntPoint position) {
 		x = position.x;
 		y = position.y;
 	}

@@ -16,8 +16,8 @@ public class SkeletonGraph {
 	public static SkeletonGraph parse(Map<String, Supplier<byte[]>> bundle) {
 		JsonSkeleton json = JsonSkeleton.parse(bundle);
 		SkeletonGraph graph = new SkeletonGraph(new IntPoint(json.width, json.height));
-		for (int i = 0; i < json.minutiae.size(); ++i)
-			graph.minutiae.add(new SkeletonMinutia(i, json.minutiae.get(i)));
+		for (IntPoint position : json.minutiae)
+			graph.minutiae.add(new SkeletonMinutia(position));
 		ByteBuffer buffer = ByteBuffer.wrap(bundle.get(".dat").get());
 		for (JsonSkeletonRidge jridge : json.ridges) {
 			List<IntPoint> points = new ArrayList<>();

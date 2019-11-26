@@ -7,21 +7,18 @@ public class SkeletonRidge {
 	public final SkeletonMinutia start;
 	public final SkeletonMinutia end;
 	public final List<IntPoint> points;
-	public final boolean reversed;
 	public final SkeletonRidge opposite;
-	SkeletonRidge(SkeletonMinutia start, SkeletonMinutia end, List<IntPoint> points) {
+	public SkeletonRidge(SkeletonMinutia start, SkeletonMinutia end, List<IntPoint> points) {
 		this.start = start;
 		this.end = end;
 		this.points = points;
-		reversed = false;
 		opposite = new SkeletonRidge(this);
 	}
-	SkeletonRidge(SkeletonRidge opposite) {
+	private SkeletonRidge(SkeletonRidge opposite) {
 		start = opposite.end;
 		end = opposite.start;
 		points = new ArrayList<>(opposite.points);
 		Collections.reverse(points);
-		reversed = true;
 		this.opposite = opposite;
 	}
 }
