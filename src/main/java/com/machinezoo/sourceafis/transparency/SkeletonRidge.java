@@ -2,7 +2,6 @@
 package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
-import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class SkeletonRidge {
 	public final SkeletonMinutia start;
@@ -24,13 +23,5 @@ public class SkeletonRidge {
 		Collections.reverse(points);
 		reversed = true;
 		this.opposite = opposite;
-	}
-	JsonSkeletonRidge encode() {
-		JsonSkeletonRidge json = new JsonSkeletonRidge();
-		json.start = start.offset;
-		json.end = end.offset;
-		json.length = points.size();
-		json.points = new ArrayList<>(points);
-		return json;
 	}
 }

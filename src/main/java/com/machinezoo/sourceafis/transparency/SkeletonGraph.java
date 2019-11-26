@@ -1,7 +1,6 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import static java.util.stream.Collectors.*;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
@@ -25,26 +24,6 @@ public class SkeletonGraph {
 			for (int i = 0; i < jridge.length; ++i)
 				points.add(new IntPoint(buffer.getInt(), buffer.getInt()));
 			SkeletonRidge ridge = new SkeletonRidge(graph.minutiae.get(jridge.start), graph.minutiae.get(jridge.end), points);
-			graph.ridges.add(ridge);
-			ridge.start.add(ridge);
-			ridge.end.add(ridge.opposite);
-		}
-		return graph;
-	}
-	public JsonSkeleton encode() {
-		JsonSkeleton json = new JsonSkeleton();
-		json.width = size.x;
-		json.height = size.y;
-		json.minutiae = minutiae.stream().map(SkeletonMinutia::position).collect(toList());
-		json.ridges = ridges.stream().map(SkeletonRidge::encode).collect(toList());
-		return json;
-	}
-	public static SkeletonGraph decode(JsonSkeleton json) {
-		SkeletonGraph graph = new SkeletonGraph(new IntPoint(json.width, json.height));
-		for (int i = 0; i < json.minutiae.size(); ++i)
-			graph.minutiae.add(new SkeletonMinutia(i, json.minutiae.get(i)));
-		for (JsonSkeletonRidge jridge : json.ridges) {
-			SkeletonRidge ridge = new SkeletonRidge(graph.minutiae.get(jridge.start), graph.minutiae.get(jridge.end), jridge.points);
 			graph.ridges.add(ridge);
 			ridge.start.add(ridge);
 			ridge.end.add(ridge.opposite);
