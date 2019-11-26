@@ -13,7 +13,7 @@ import com.machinezoo.noexception.*;
 public class JsonTemplate {
 	public int width;
 	public int height;
-	public List<JsonMinutia> minutiae;
+	public List<JsonMinutia> minutiae = new ArrayList<>();
 	public static JsonTemplate parse(byte[] serialized) {
 		return Exceptions.sneak().get(() -> {
 			try (GZIPInputStream gzip = new GZIPInputStream(new ByteArrayInputStream(serialized))) {

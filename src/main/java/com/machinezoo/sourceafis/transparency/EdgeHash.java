@@ -5,11 +5,12 @@ import java.nio.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
+import gnu.trove.map.*;
 import gnu.trove.map.hash.*;
 import gnu.trove.set.hash.*;
 
 public class EdgeHash {
-	public final TIntObjectHashMap<IndexedEdge[]> table = new TIntObjectHashMap<>();
+	public TIntObjectMap<IndexedEdge[]> table = new TIntObjectHashMap<>();
 	public static EdgeHash parse(Map<String, Supplier<byte[]>> bundle) {
 		ByteBuffer buffer = ByteBuffer.wrap(bundle.get(".dat").get());
 		EdgeHash eh = new EdgeHash();

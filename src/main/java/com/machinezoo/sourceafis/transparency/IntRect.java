@@ -5,10 +5,12 @@ import java.util.*;
 import java.util.stream.*;
 
 public class IntRect implements Iterable<IntPoint> {
-	public final int x;
-	public final int y;
-	public final int width;
-	public final int height;
+	public int x;
+	public int y;
+	public int width;
+	public int height;
+	public IntRect() {
+	}
 	public IntRect(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;

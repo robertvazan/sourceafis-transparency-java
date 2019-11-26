@@ -4,20 +4,22 @@ package com.machinezoo.sourceafis.transparency;
 import java.util.*;
 
 public class SkeletonMinutia {
-	public final int x;
-	public final int y;
-	public final List<SkeletonRidge> ridges = new ArrayList<>();
+	public int x;
+	public int y;
+	public List<SkeletonRidge> ridges = new ArrayList<>();
+	public SkeletonMinutia() {
+	}
+	public SkeletonMinutia(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 	public SkeletonMinutia(IntPoint position) {
-		x = position.x;
-		y = position.y;
+		this(position.x, position.y);
 	}
 	public IntPoint position() {
 		return new IntPoint(x, y);
 	}
 	public DoublePoint center() {
 		return position().center();
-	}
-	void add(SkeletonRidge ridge) {
-		ridges.add(ridge);
 	}
 }

@@ -10,8 +10,8 @@ import com.machinezoo.sourceafis.transparency.*;
 public class JsonSkeleton {
 	public int width;
 	public int height;
-	public List<IntPoint> minutiae;
-	public List<JsonSkeletonRidge> ridges;
+	public List<IntPoint> minutiae = new ArrayList<>();
+	public List<JsonSkeletonRidge> ridges = new ArrayList<>();
 	public static JsonSkeleton parse(Map<String, Supplier<byte[]>> bundle) {
 		return new Gson().fromJson(new String(bundle.get(".json").get(), StandardCharsets.UTF_8), JsonSkeleton.class);
 	}

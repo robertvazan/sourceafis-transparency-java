@@ -7,15 +7,13 @@ import java.util.function.*;
 import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class SkeletonGraph {
-	public final IntPoint size;
-	public final List<SkeletonMinutia> minutiae = new ArrayList<>();
-	public final List<SkeletonRidge> ridges = new ArrayList<>();
-	public SkeletonGraph(IntPoint size) {
-		this.size = size;
-	}
+	public IntPoint size = new IntPoint();
+	public List<SkeletonMinutia> minutiae = new ArrayList<>();
+	public List<SkeletonRidge> ridges = new ArrayList<>();
 	public static SkeletonGraph parse(Map<String, Supplier<byte[]>> bundle) {
 		JsonSkeleton json = JsonSkeleton.parse(bundle);
-		SkeletonGraph graph = new SkeletonGraph(new IntPoint(json.width, json.height));
+		SkeletonGraph graph = new SkeletonGraph();
+		graph.size = new IntPoint(json.width, json.height);
 		for (IntPoint position : json.minutiae)
 			graph.minutiae.add(new SkeletonMinutia(position));
 		ByteBuffer buffer = ByteBuffer.wrap(bundle.get(".dat").get());
@@ -25,8 +23,8 @@ public class SkeletonGraph {
 				points.add(new IntPoint(buffer.getInt(), buffer.getInt()));
 			SkeletonRidge ridge = new SkeletonRidge(graph.minutiae.get(jridge.start), graph.minutiae.get(jridge.end), points);
 			graph.ridges.add(ridge);
-			ridge.start.add(ridge);
-			ridge.end.add(ridge.opposite);
+			ridge.start.ridges.add(ridge);
+			ridge.end.ridges.add(ridge.opposite);
 		}
 		return graph;
 	}
