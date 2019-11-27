@@ -5,7 +5,6 @@ import java.nio.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
-import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class DoublePointMatrix {
 	public final int width;
@@ -23,7 +22,7 @@ public class DoublePointMatrix {
 		this(size.x, size.y);
 	}
 	public static DoublePointMatrix parse(Map<String, Supplier<byte[]>> bundle) {
-		JsonArrayInfo info = JsonArrayInfo.parse(bundle);
+		TransparencyArrayInfo info = TransparencyArrayInfo.parse(bundle);
 		DoublePointMatrix matrix = new DoublePointMatrix(info.dimensions[1], info.dimensions[0]);
 		ByteBuffer.wrap(bundle.get(".dat").get()).asDoubleBuffer().get(matrix.array);
 		return matrix;

@@ -1,7 +1,7 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
-package com.machinezoo.sourceafis.transparency.formats;
+package com.machinezoo.sourceafis.transparency;
 
-public class JsonMinutia {
+public class RawTemplateMinutia {
 	public int x;
 	public int y;
 	public double direction;

@@ -3,7 +3,6 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
 import java.util.function.*;
-import com.machinezoo.sourceafis.transparency.formats.*;
 
 public abstract class TransparencyArchive {
 	public abstract List<TransparencyPath> paths();
@@ -39,7 +38,7 @@ public abstract class TransparencyArchive {
 		return parse(bundle(skeleton, stage, 0), parser);
 	}
 	public String version() {
-		return Optional.ofNullable(parse("version", JsonVersion::parse)).map(v -> v.version).orElse(null);
+		return Optional.ofNullable(parse("version", VersionInfo::parse)).map(v -> v.version).orElse(null);
 	}
 	public DoubleMatrix decoded() {
 		return parse("decoded-image", DoubleMatrix::parse);
@@ -195,7 +194,7 @@ public abstract class TransparencyArchive {
 		return score(bestMatch().orElse(0));
 	}
 	public OptionalInt bestMatch() {
-		JsonBestMatch best = parse("best-match", JsonBestMatch::parse);
+		BestMatch best = parse("best-match", BestMatch::parse);
 		return best != null ? OptionalInt.of(best.offset) : OptionalInt.empty();
 	}
 }

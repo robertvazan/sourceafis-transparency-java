@@ -3,12 +3,11 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
 import java.util.function.*;
-import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class Template {
 	public IntPoint size;
 	public TemplateMinutia[] minutiae;
-	private static Template parse(JsonTemplate json) {
+	private static Template parse(RawTemplate json) {
 		Template template = new Template();
 		template.size = new IntPoint(json.width, json.height);
 		template.minutiae = json.minutiae.stream()
@@ -24,9 +23,9 @@ public class Template {
 		return template;
 	}
 	public static Template parse(byte[] serialized) {
-		return parse(JsonTemplate.parse(serialized));
+		return parse(RawTemplate.parse(serialized));
 	}
 	public static Template parse(Map<String, Supplier<byte[]>> bundle) {
-		return parse(JsonTemplate.parse(bundle));
+		return parse(RawTemplate.parse(bundle));
 	}
 }

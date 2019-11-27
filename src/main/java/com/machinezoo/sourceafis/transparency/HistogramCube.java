@@ -4,7 +4,6 @@ package com.machinezoo.sourceafis.transparency;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
-import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class HistogramCube {
 	public final int width;
@@ -18,7 +17,7 @@ public class HistogramCube {
 		array = new int[width * height * depth];
 	}
 	public static HistogramCube parse(Map<String, Supplier<byte[]>> bundle) {
-		JsonArrayInfo info = JsonArrayInfo.parse(bundle);
+		TransparencyArrayInfo info = TransparencyArrayInfo.parse(bundle);
 		HistogramCube cube = new HistogramCube(info.dimensions[1], info.dimensions[0], info.dimensions[2]);
 		ByteBuffer.wrap(bundle.get(".dat").get()).asIntBuffer().get(cube.array);
 		return cube;

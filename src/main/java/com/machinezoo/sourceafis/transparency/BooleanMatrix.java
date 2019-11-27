@@ -3,7 +3,6 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
 import java.util.function.*;
-import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class BooleanMatrix {
 	public final int width;
@@ -21,7 +20,7 @@ public class BooleanMatrix {
 		this(size.x, size.y);
 	}
 	public static BooleanMatrix parse(Map<String, Supplier<byte[]>> bundle) {
-		JsonArrayInfo info = JsonArrayInfo.parse(bundle);
+		TransparencyArrayInfo info = TransparencyArrayInfo.parse(bundle);
 		BooleanMatrix matrix = new BooleanMatrix(info.dimensions[1], info.dimensions[0]);
 		byte[] bytes = bundle.get(".dat").get();
 		for (int i = 0; i < bytes.length; ++i)

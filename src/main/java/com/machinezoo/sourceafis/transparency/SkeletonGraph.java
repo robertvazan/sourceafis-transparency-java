@@ -4,20 +4,19 @@ package com.machinezoo.sourceafis.transparency;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
-import com.machinezoo.sourceafis.transparency.formats.*;
 
 public class SkeletonGraph {
 	public IntPoint size = new IntPoint();
 	public List<SkeletonMinutia> minutiae = new ArrayList<>();
 	public List<SkeletonRidge> ridges = new ArrayList<>();
 	public static SkeletonGraph parse(Map<String, Supplier<byte[]>> bundle) {
-		JsonSkeleton json = JsonSkeleton.parse(bundle);
+		RawSkeletonGraph json = RawSkeletonGraph.parse(bundle);
 		SkeletonGraph graph = new SkeletonGraph();
 		graph.size = new IntPoint(json.width, json.height);
 		for (IntPoint position : json.minutiae)
 			graph.minutiae.add(new SkeletonMinutia(position));
 		ByteBuffer buffer = ByteBuffer.wrap(bundle.get(".dat").get());
-		for (JsonSkeletonRidge jridge : json.ridges) {
+		for (RawSkeletonRidge jridge : json.ridges) {
 			List<IntPoint> points = new ArrayList<>();
 			for (int i = 0; i < jridge.length; ++i)
 				points.add(new IntPoint(buffer.getInt(), buffer.getInt()));
