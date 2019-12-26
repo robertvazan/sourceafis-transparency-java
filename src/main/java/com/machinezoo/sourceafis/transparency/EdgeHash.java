@@ -5,12 +5,10 @@ import java.nio.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
-import gnu.trove.map.*;
-import gnu.trove.map.hash.*;
-import gnu.trove.set.hash.*;
+import it.unimi.dsi.fastutil.ints.*;
 
 public class EdgeHash {
-	public TIntObjectMap<IndexedEdge[]> table = new TIntObjectHashMap<>();
+	public Int2ObjectMap<IndexedEdge[]> table = new Int2ObjectOpenHashMap<>();
 	public static EdgeHash parse(Map<String, Supplier<byte[]>> bundle) {
 		ByteBuffer buffer = ByteBuffer.wrap(bundle.get(".dat").get());
 		EdgeHash eh = new EdgeHash();
@@ -33,8 +31,8 @@ public class EdgeHash {
 		return eh;
 	}
 	public Stream<IndexedEdge> edges() {
-		TIntHashSet seen = new TIntHashSet();
-		return table.valueCollection().stream()
+		IntSet seen = new IntOpenHashSet();
+		return table.values().stream()
 			.flatMap(Arrays::stream)
 			.filter(e -> {
 				int id = (e.reference << 16) + e.neighbor;
