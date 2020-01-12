@@ -195,6 +195,6 @@ public abstract class TransparencyArchive {
 	}
 	public OptionalInt bestMatch() {
 		BestMatch best = parse("best-match", BestMatch::parse);
-		return best != null ? OptionalInt.of(best.offset) : OptionalInt.empty();
+		return best != null && best.offset >= 0 ? OptionalInt.of(best.offset) : OptionalInt.empty();
 	}
 }
