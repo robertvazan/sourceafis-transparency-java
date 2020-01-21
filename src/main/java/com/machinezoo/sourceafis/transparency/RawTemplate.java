@@ -11,6 +11,7 @@ import com.google.gson.*;
 import com.machinezoo.noexception.*;
 
 public class RawTemplate {
+	public String version;
 	public int width;
 	public int height;
 	public List<RawTemplateMinutia> minutiae = new ArrayList<>();

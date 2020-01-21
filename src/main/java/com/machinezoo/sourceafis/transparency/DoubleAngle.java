@@ -38,4 +38,8 @@ public class DoubleAngle {
 		double delta = Math.abs(first - second);
 		return delta <= Math.PI ? delta : PI2 - delta;
 	}
+	public static double difference(double first, double second) {
+		double angle = first - second;
+		return angle >= 0 ? angle : angle + PI2;
+	}
 }

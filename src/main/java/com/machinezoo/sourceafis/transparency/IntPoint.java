@@ -25,6 +25,18 @@ public class IntPoint implements Iterable<IntPoint> {
 	public int area() {
 		return x * y;
 	}
+	public int lengthSq() {
+		return x * x + y * y;
+	}
+	public IntPoint plus(IntPoint other) {
+		return new IntPoint(x + other.x, y + other.y);
+	}
+	public IntPoint minus(IntPoint other) {
+		return new IntPoint(x - other.x, y - other.y);
+	}
+	public IntPoint negate() {
+		return new IntPoint(-x, -y);
+	}
 	public DoublePoint toDouble() {
 		return new DoublePoint(x, y);
 	}
