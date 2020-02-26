@@ -1,11 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import java.lang.reflect.*;
-import org.junit.*;
+import org.junit.jupiter.api.*;
 import com.machinezoo.noexception.*;
 
 public class TransparencyArchiveTest {
@@ -15,7 +15,7 @@ public class TransparencyArchiveTest {
 		for (Method method : archive.getClass().getMethods()) {
 			if (method.getParameterCount() == 0 && method.getDeclaringClass() != Object.class && method.getReturnType() != Void.TYPE) {
 				++count;
-				assertNotNull(method.getName(), Exceptions.sneak().get(() -> method.invoke(archive)));
+				assertNotNull(Exceptions.sneak().get(() -> method.invoke(archive)), method.getName());
 			}
 		}
 		assertThat(count, greaterThan(20));

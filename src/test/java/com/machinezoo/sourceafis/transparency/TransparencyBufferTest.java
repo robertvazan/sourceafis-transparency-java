@@ -1,11 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import java.io.*;
 import java.util.function.*;
 import org.apache.commons.io.*;
-import org.junit.*;
+import org.junit.jupiter.api.*;
 import com.machinezoo.noexception.*;
 import com.machinezoo.sourceafis.*;
 
