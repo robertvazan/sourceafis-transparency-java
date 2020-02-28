@@ -23,13 +23,13 @@ public class IntRect implements Iterable<IntPoint> {
 	public int left() {
 		return x;
 	}
-	public int bottom() {
+	public int top() {
 		return y;
 	}
 	public int right() {
 		return x + width;
 	}
-	public int top() {
+	public int bottom() {
 		return y + height;
 	}
 	public DoublePoint center() {

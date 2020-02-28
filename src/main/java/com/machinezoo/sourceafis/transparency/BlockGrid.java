@@ -6,6 +6,17 @@ public class BlockGrid {
 	public IntPoint corners;
 	public int[] x;
 	public int[] y;
+	public BlockGrid() {
+	}
+	public BlockGrid(int width, int height) {
+		blocks = new IntPoint(width, height);
+		corners = new IntPoint(width + 1, height + 1);
+		x = new int[width + 1];
+		y = new int[height + 1];
+	}
+	public BlockGrid(IntPoint size) {
+		this(size.x, size.y);
+	}
 	public IntPoint point(int atX, int atY) {
 		return new IntPoint(x[atX], y[atY]);
 	}

@@ -31,6 +31,9 @@ public class DoublePoint {
 	public DoublePoint normalize() {
 		return multiply(1.0 / length());
 	}
+	public IntPoint round() {
+		return new IntPoint((int)Math.round(x), (int)Math.round(y));
+	}
 	public IntPoint floor() {
 		return new IntPoint((int)Math.floor(x), (int)Math.floor(y));
 	}

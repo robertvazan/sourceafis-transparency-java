@@ -16,6 +16,9 @@ public class HistogramCube {
 		this.depth = depth;
 		array = new int[width * height * depth];
 	}
+	public HistogramCube(IntPoint size, int depth) {
+		this(size.x, size.y, depth);
+	}
 	public static HistogramCube parse(Map<String, Supplier<byte[]>> bundle) {
 		TransparencyArrayInfo info = TransparencyArrayInfo.parse(bundle);
 		HistogramCube cube = new HistogramCube(info.dimensions[1], info.dimensions[0], info.dimensions[2]);
@@ -27,6 +30,12 @@ public class HistogramCube {
 	}
 	public int get(IntPoint at, int z) {
 		return get(at.x, at.y, z);
+	}
+	public void set(int x, int y, int z, int value) {
+		array[offset(x, y, z)] = value;
+	}
+	public void set(IntPoint at, int z, int value) {
+		set(at.x, at.y, z, value);
 	}
 	private int offset(int x, int y, int z) {
 		return (y * width + x) * depth + z;

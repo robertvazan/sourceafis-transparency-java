@@ -28,6 +28,9 @@ public class IntPoint implements Iterable<IntPoint> {
 	public int lengthSq() {
 		return x * x + y * y;
 	}
+	public boolean contains(IntPoint other) {
+		return other.x >= 0 && other.y >= 0 && other.x < x && other.y < y;
+	}
 	public IntPoint plus(IntPoint other) {
 		return new IntPoint(x + other.x, y + other.y);
 	}

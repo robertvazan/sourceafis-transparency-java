@@ -33,6 +33,12 @@ public class DoubleMatrix {
 	public double get(IntPoint at) {
 		return get(at.x, at.y);
 	}
+	public void set(int x, int y, double value) {
+		array[offset(x, y)] = value;
+	}
+	public void set(IntPoint at, double value) {
+		set(at.x, at.y, value);
+	}
 	private int offset(int x, int y) {
 		return y * width + x;
 	}

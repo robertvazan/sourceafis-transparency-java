@@ -3,6 +3,7 @@ package com.machinezoo.sourceafis.transparency;
 
 public class DoubleAngle {
 	public static final double PI2 = 2 * Math.PI;
+	private static final double invPI2 = 1.0 / PI2;
 	public static double add(double start, double delta) {
 		double angle = start + delta;
 		return angle < PI2 ? angle : angle - PI2;
@@ -24,8 +25,23 @@ public class DoubleAngle {
 	public static double degrees(double angle) {
 		return angle / (2 * Math.PI) * 360;
 	}
+	public static double toOrientation(double angle) {
+		return angle < Math.PI ? 2 * angle : 2 * (angle - Math.PI);
+	}
 	public static double fromOrientation(double angle) {
 		return 0.5 * angle;
+	}
+	public static double bucketCenter(int bucket, int resolution) {
+		return PI2 * (2 * bucket + 1) / (2 * resolution);
+	}
+	public static int quantize(double angle, int resolution) {
+		int result = (int)(angle * invPI2 * resolution);
+		if (result < 0)
+			return 0;
+		else if (result >= resolution)
+			return resolution - 1;
+		else
+			return result;
 	}
 	public static double normalize(double angle) {
 		while (angle >= PI2)
