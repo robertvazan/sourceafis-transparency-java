@@ -7,10 +7,10 @@ import java.util.function.*;
 public class Template {
 	public IntPoint size;
 	public TemplateMinutia[] minutiae;
-	private static Template parse(RawTemplate json) {
+	private static Template parse(RawTemplate raw) {
 		Template template = new Template();
-		template.size = new IntPoint(json.width, json.height);
-		template.minutiae = json.minutiae.stream()
+		template.size = new IntPoint(raw.width, raw.height);
+		template.minutiae = raw.minutiae.stream()
 			.map(m -> {
 				TemplateMinutia minutia = new TemplateMinutia();
 				minutia.x = m.x;

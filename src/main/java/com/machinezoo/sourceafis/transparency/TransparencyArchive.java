@@ -3,6 +3,11 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
 import java.util.function.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.dataformat.cbor.*;
+import com.machinezoo.noexception.*;
 
 public abstract class TransparencyArchive {
 	public abstract List<TransparencyPath> paths();
@@ -11,14 +16,19 @@ public abstract class TransparencyArchive {
 	private boolean exists(TransparencyPath path, int offset) {
 		return offset < count(path);
 	}
+	private static final ObjectMapper mapper = new ObjectMapper(new CBORFactory())
+		.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+	public static <T> T parse(byte[] data, Class<T> type) {
+		return Exceptions.wrap(IllegalArgumentException::new).get(() -> mapper.readValue(data, type));
+	}
 	private Map<String, Supplier<byte[]>> bundle(SkeletonType skeleton, String stage, int offset) {
-		TransparencyPath json = new TransparencyPath(skeleton, stage, ".json");
+		TransparencyPath cbor = new TransparencyPath(skeleton, stage, ".cbor");
 		TransparencyPath data = new TransparencyPath(skeleton, stage, ".dat");
-		if (!exists(json, offset) && !exists(data, offset))
+		if (!exists(cbor, offset) && !exists(data, offset))
 			return null;
 		Map<String, Supplier<byte[]>> map = new HashMap<>();
-		if (exists(json, offset))
-			map.put(".json", () -> read(json, offset));
+		if (exists(cbor, offset))
+			map.put(".cbor", () -> read(cbor, offset));
 		if (exists(data, offset))
 			map.put(".dat", () -> read(data, offset));
 		return map;
@@ -179,7 +189,7 @@ public abstract class TransparencyArchive {
 		return parse("root-pairs", RootPairs::parse);
 	}
 	public int pairingCount() {
-		return count(new TransparencyPath("pairing", ".json"));
+		return count(new TransparencyPath("pairing", ".cbor"));
 	}
 	public MatchPairing pairing(int offset) {
 		return parse(bundle("pairing", offset), MatchPairing::parse);

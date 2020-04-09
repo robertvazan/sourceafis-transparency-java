@@ -10,13 +10,13 @@ public class SkeletonGraph {
 	public List<SkeletonMinutia> minutiae = new ArrayList<>();
 	public List<SkeletonRidge> ridges = new ArrayList<>();
 	public static SkeletonGraph parse(Map<String, Supplier<byte[]>> bundle) {
-		RawSkeletonGraph json = RawSkeletonGraph.parse(bundle);
+		RawSkeletonGraph raw = RawSkeletonGraph.parse(bundle);
 		SkeletonGraph graph = new SkeletonGraph();
-		graph.size = new IntPoint(json.width, json.height);
-		for (IntPoint position : json.minutiae)
+		graph.size = new IntPoint(raw.width, raw.height);
+		for (IntPoint position : raw.minutiae)
 			graph.minutiae.add(new SkeletonMinutia(position));
 		ByteBuffer buffer = ByteBuffer.wrap(bundle.get(".dat").get());
-		for (RawSkeletonRidge jridge : json.ridges) {
+		for (RawSkeletonRidge jridge : raw.ridges) {
 			List<IntPoint> points = new ArrayList<>();
 			for (int i = 0; i < jridge.length; ++i)
 				points.add(new IntPoint(buffer.getInt(), buffer.getInt()));

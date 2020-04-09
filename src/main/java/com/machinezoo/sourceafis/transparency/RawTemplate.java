@@ -25,6 +25,6 @@ public class RawTemplate {
 		});
 	}
 	public static RawTemplate parse(Map<String, Supplier<byte[]>> bundle) {
-		return new Gson().fromJson(new String(bundle.get(".json").get(), StandardCharsets.UTF_8), RawTemplate.class);
+		return TransparencyArchive.parse(bundle.get(".cbor").get(), RawTemplate.class);
 	}
 }
