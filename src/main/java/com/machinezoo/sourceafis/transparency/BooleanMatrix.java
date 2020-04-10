@@ -7,31 +7,26 @@ import java.util.function.*;
 public class BooleanMatrix {
 	public final int width;
 	public final int height;
-	private final boolean[] array;
-	public BooleanMatrix() {
-		this(0, 0);
-	}
+	private final boolean[] cells;
 	public BooleanMatrix(int width, int height) {
 		this.width = width;
 		this.height = height;
-		array = new boolean[width * height];
+		cells = new boolean[width * height];
+	}
+	public BooleanMatrix() {
+		this(0, 0);
 	}
 	public BooleanMatrix(IntPoint size) {
 		this(size.x, size.y);
 	}
 	public static BooleanMatrix parse(Map<String, Supplier<byte[]>> bundle) {
-		TransparencyArrayInfo info = TransparencyArrayInfo.parse(bundle);
-		BooleanMatrix matrix = new BooleanMatrix(info.dimensions[1], info.dimensions[0]);
-		byte[] bytes = bundle.get(".dat").get();
-		for (int i = 0; i < bytes.length; ++i)
-			matrix.array[i] = bytes[i] != 0;
-		return matrix;
+		return TransparencyArchive.parse(bundle.get(".cbor").get(), BooleanMatrix.class);
 	}
 	public IntPoint size() {
 		return new IntPoint(width, height);
 	}
 	public boolean get(int x, int y) {
-		return array[offset(x, y)];
+		return cells[offset(x, y)];
 	}
 	public boolean get(IntPoint at) {
 		return get(at.x, at.y);
@@ -39,13 +34,13 @@ public class BooleanMatrix {
 	public boolean get(int x, int y, boolean fallback) {
 		if (x < 0 || x >= width || y < 0 || y >= height)
 			return fallback;
-		return array[offset(x, y)];
+		return cells[offset(x, y)];
 	}
 	public boolean get(IntPoint at, boolean fallback) {
 		return get(at.x, at.y, fallback);
 	}
 	public void set(int x, int y, boolean value) {
-		array[offset(x, y)] = value;
+		cells[offset(x, y)] = value;
 	}
 	public void set(IntPoint at, boolean value) {
 		set(at.x, at.y, value);

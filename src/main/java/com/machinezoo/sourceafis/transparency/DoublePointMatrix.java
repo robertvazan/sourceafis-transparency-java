@@ -1,7 +1,6 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import java.nio.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
@@ -9,44 +8,41 @@ import java.util.stream.*;
 public class DoublePointMatrix {
 	public final int width;
 	public final int height;
-	private final double[] array;
-	public DoublePointMatrix() {
-		this(0, 0);
-	}
+	private final double[] vectors;
 	public DoublePointMatrix(int width, int height) {
 		this.width = width;
 		this.height = height;
-		array = new double[2 * width * height];
+		vectors = new double[2 * width * height];
+	}
+	public DoublePointMatrix() {
+		this(0, 0);
 	}
 	public DoublePointMatrix(IntPoint size) {
 		this(size.x, size.y);
 	}
 	public static DoublePointMatrix parse(Map<String, Supplier<byte[]>> bundle) {
-		TransparencyArrayInfo info = TransparencyArrayInfo.parse(bundle);
-		DoublePointMatrix matrix = new DoublePointMatrix(info.dimensions[1], info.dimensions[0]);
-		ByteBuffer.wrap(bundle.get(".dat").get()).asDoubleBuffer().get(matrix.array);
-		return matrix;
+		return TransparencyArchive.parse(bundle.get(".cbor").get(), DoublePointMatrix.class);
 	}
 	public IntPoint size() {
 		return new IntPoint(width, height);
 	}
 	public DoublePoint get(int x, int y) {
 		int i = offset(x, y);
-		return new DoublePoint(array[i], array[i + 1]);
+		return new DoublePoint(vectors[i], vectors[i + 1]);
 	}
 	public DoublePoint get(IntPoint at) {
 		return get(at.x, at.y);
 	}
 	public void set(int x, int y, DoublePoint value) {
 		int i = offset(x, y);
-		array[i] = value.x;
-		array[i + 1] = value.y;
+		vectors[i] = value.x;
+		vectors[i + 1] = value.y;
 	}
 	public void set(IntPoint at, DoublePoint value) {
 		set(at.x, at.y, value);
 	}
 	public DoubleStream stream() {
-		return Arrays.stream(array);
+		return Arrays.stream(vectors);
 	}
 	private int offset(int x, int y) {
 		return 2 * (y * width + x);
