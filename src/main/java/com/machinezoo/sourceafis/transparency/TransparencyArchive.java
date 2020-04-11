@@ -12,40 +12,26 @@ import com.machinezoo.noexception.*;
 public abstract class TransparencyArchive {
 	public abstract List<TransparencyPath> paths();
 	public abstract int count(TransparencyPath path);
+	public abstract String mime(TransparencyPath path);
 	public abstract byte[] read(TransparencyPath path, int offset);
-	private boolean exists(TransparencyPath path, int offset) {
-		return offset < count(path);
-	}
 	private static final ObjectMapper mapper = new ObjectMapper(new CBORFactory())
 		.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-	public static <T> T parse(byte[] data, Class<T> type) {
+	static <T> T parse(byte[] data, Class<T> type) {
 		return Exceptions.wrap(IllegalArgumentException::new).get(() -> mapper.readValue(data, type));
 	}
-	private Map<String, Supplier<byte[]>> bundle(SkeletonType skeleton, String stage, int offset) {
-		TransparencyPath cbor = new TransparencyPath(skeleton, stage, ".cbor");
-		TransparencyPath data = new TransparencyPath(skeleton, stage, ".dat");
-		if (!exists(cbor, offset) && !exists(data, offset))
+	private static <T> T parse(byte[] data, Function<byte[], T> parser) {
+		if (data == null)
 			return null;
-		Map<String, Supplier<byte[]>> map = new HashMap<>();
-		if (exists(cbor, offset))
-			map.put(".cbor", () -> read(cbor, offset));
-		if (exists(data, offset))
-			map.put(".dat", () -> read(data, offset));
-		return map;
+		return parser.apply(data);
 	}
-	private Map<String, Supplier<byte[]>> bundle(String keyword, int offset) {
-		return bundle(null, keyword, offset);
+	private <T> T parse(String key, int offset, Function<byte[], T> parser) {
+		return parse(read(new TransparencyPath(key), offset), parser);
 	}
-	private static <T> T parse(Map<String, Supplier<byte[]>> bundle, Function<Map<String, Supplier<byte[]>>, T> parser) {
-		if (bundle == null)
-			return null;
-		return parser.apply(bundle);
+	private <T> T parse(String key, Function<byte[], T> parser) {
+		return parse(key, 0, parser);
 	}
-	private <T> T parse(String keyword, Function<Map<String, Supplier<byte[]>>, T> parser) {
-		return parse(bundle(keyword, 0), parser);
-	}
-	private <T> T parse(SkeletonType skeleton, String stage, Function<Map<String, Supplier<byte[]>>, T> parser) {
-		return parse(bundle(skeleton, stage, 0), parser);
+	private <T> T parse(SkeletonType skeleton, String keyword, Function<byte[], T> parser) {
+		return parse(read(new TransparencyPath(skeleton, keyword), 0), parser);
 	}
 	public String version() {
 		return Optional.ofNullable(parse("version", VersionInfo::parse)).map(v -> v.version).orElse(null);
@@ -189,16 +175,16 @@ public abstract class TransparencyArchive {
 		return parse("root-pairs", RootPairs::parse);
 	}
 	public int pairingCount() {
-		return count(new TransparencyPath("pairing", ".cbor"));
+		return count(new TransparencyPath("pairing"));
 	}
 	public MatchPairing pairing(int offset) {
-		return parse(bundle("pairing", offset), MatchPairing::parse);
+		return parse("pairing", offset, MatchPairing::parse);
 	}
 	public MatchPairing pairing() {
 		return pairing(bestMatch().orElse(0));
 	}
 	public MatchScoring score(int offset) {
-		return parse(bundle("score", offset), MatchScoring::parse);
+		return parse("score", offset, MatchScoring::parse);
 	}
 	public MatchScoring score() {
 		return score(bestMatch().orElse(0));

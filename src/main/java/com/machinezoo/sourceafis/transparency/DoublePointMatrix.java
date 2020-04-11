@@ -2,7 +2,6 @@
 package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
-import java.util.function.*;
 import java.util.stream.*;
 
 public class DoublePointMatrix {
@@ -20,8 +19,8 @@ public class DoublePointMatrix {
 	public DoublePointMatrix(IntPoint size) {
 		this(size.x, size.y);
 	}
-	public static DoublePointMatrix parse(Map<String, Supplier<byte[]>> bundle) {
-		return TransparencyArchive.parse(bundle.get(".cbor").get(), DoublePointMatrix.class);
+	public static DoublePointMatrix parse(byte[] data) {
+		return TransparencyArchive.parse(data, DoublePointMatrix.class);
 	}
 	public IntPoint size() {
 		return new IntPoint(width, height);

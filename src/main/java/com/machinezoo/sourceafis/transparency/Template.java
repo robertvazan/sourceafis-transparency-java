@@ -1,9 +1,6 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import java.util.*;
-import java.util.function.*;
-
 public class Template {
 	public IntPoint size;
 	public TemplateMinutia[] minutiae;
@@ -22,10 +19,10 @@ public class Template {
 			.toArray(n -> new TemplateMinutia[n]);
 		return template;
 	}
-	public static Template parse(byte[] serialized) {
-		return parse(RawTemplate.parse(serialized));
+	public static Template parseIO(byte[] serialized) {
+		return parse(RawTemplate.parseIO(serialized));
 	}
-	public static Template parse(Map<String, Supplier<byte[]>> bundle) {
-		return parse(RawTemplate.parse(bundle));
+	public static Template parse(byte[] data) {
+		return parse(RawTemplate.parse(data));
 	}
 }

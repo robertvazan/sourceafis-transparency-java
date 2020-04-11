@@ -2,14 +2,13 @@
 package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
-import java.util.function.*;
 
 public class RawSkeletonGraph {
 	public int width;
 	public int height;
 	public List<IntPoint> minutiae = new ArrayList<>();
 	public List<RawSkeletonRidge> ridges = new ArrayList<>();
-	public static RawSkeletonGraph parse(Map<String, Supplier<byte[]>> bundle) {
-		return TransparencyArchive.parse(bundle.get(".cbor").get(), RawSkeletonGraph.class);
+	public static RawSkeletonGraph parse(byte[] data) {
+		return TransparencyArchive.parse(data, RawSkeletonGraph.class);
 	}
 }

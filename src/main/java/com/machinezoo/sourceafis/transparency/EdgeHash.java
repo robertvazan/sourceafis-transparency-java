@@ -2,15 +2,14 @@
 package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
-import java.util.function.*;
 import java.util.stream.*;
 import it.unimi.dsi.fastutil.ints.*;
 
 public class EdgeHash {
 	public Int2ObjectMap<List<IndexedEdge>> table = new Int2ObjectOpenHashMap<>();
-	public static EdgeHash parse(Map<String, Supplier<byte[]>> bundle) {
+	public static EdgeHash parse(byte[] data) {
 		EdgeHash eh = new EdgeHash();
-		for (RawEdgeHashEntry entry : RawEdgeHashEntry.parseAll(bundle))
+		for (RawEdgeHashEntry entry : RawEdgeHashEntry.parseAll(data))
 			eh.table.put(entry.key, entry.edges);
 		return eh;
 	}

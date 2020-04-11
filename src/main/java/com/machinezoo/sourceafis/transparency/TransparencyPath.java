@@ -4,48 +4,45 @@ package com.machinezoo.sourceafis.transparency;
 import java.util.*;
 
 public class TransparencyPath {
-	private final String stage;
-	public String stage() {
-		return stage;
+	private final String keyword;
+	public String keyword() {
+		return keyword;
 	}
 	private final SkeletonType skeleton;
 	public SkeletonType skeleton() {
 		return skeleton;
 	}
-	public String keyword() {
+	public String key() {
 		if (skeleton != null)
-			return skeleton.prefix() + "-" + stage;
-		return stage;
-	}
-	private final String suffix;
-	public String suffix() {
-		return suffix;
+			return skeleton.prefix() + "-" + keyword;
+		return keyword;
 	}
 	@Override public boolean equals(Object obj) {
 		if (!(obj instanceof TransparencyPath))
 			return false;
 		TransparencyPath other = (TransparencyPath)obj;
-		return Objects.equals(stage, other.stage) && skeleton == other.skeleton && Objects.equals(suffix, other.suffix);
+		return Objects.equals(keyword, other.keyword) && skeleton == other.skeleton;
 	}
 	@Override public int hashCode() {
-		return Objects.hash(stage, skeleton, suffix);
+		return Objects.hash(keyword, skeleton);
 	}
-	public TransparencyPath(SkeletonType skeleton, String stage, String suffix) {
+	public TransparencyPath(SkeletonType skeleton, String keyword) {
 		this.skeleton = skeleton;
-		this.stage = stage;
-		this.suffix = suffix;
+		this.keyword = keyword;
 	}
-	public TransparencyPath(String keyword, String suffix) {
-		if (keyword.startsWith("ridges-")) {
+	public TransparencyPath(String key) {
+		if (key.startsWith("ridges-")) {
 			skeleton = SkeletonType.RIDGES;
-			stage = keyword.substring("ridges-".length());
-		} else if (keyword.startsWith("valleys-")) {
+			keyword = key.substring("ridges-".length());
+		} else if (key.startsWith("valleys-")) {
 			skeleton = SkeletonType.VALLEYS;
-			stage = keyword.substring("valleys-".length());
+			keyword = key.substring("valleys-".length());
 		} else {
 			skeleton = null;
-			stage = keyword;
+			keyword = key;
 		}
-		this.suffix = suffix;
+	}
+	@Override public String toString() {
+		return key();
 	}
 }

@@ -2,14 +2,13 @@
 package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
-import java.util.function.*;
 
 public class SkeletonGraph {
 	public IntPoint size = new IntPoint();
 	public List<SkeletonMinutia> minutiae = new ArrayList<>();
 	public List<SkeletonRidge> ridges = new ArrayList<>();
-	public static SkeletonGraph parse(Map<String, Supplier<byte[]>> bundle) {
-		RawSkeletonGraph raw = RawSkeletonGraph.parse(bundle);
+	public static SkeletonGraph parse(byte[] data) {
+		RawSkeletonGraph raw = RawSkeletonGraph.parse(data);
 		SkeletonGraph graph = new SkeletonGraph();
 		graph.size = new IntPoint(raw.width, raw.height);
 		for (IntPoint position : raw.minutiae)

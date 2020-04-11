@@ -1,9 +1,6 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import java.util.*;
-import java.util.function.*;
-
 public class MatchScoring {
 	public int minutiaCount;
 	public double minutiaScore;
@@ -26,7 +23,7 @@ public class MatchScoring {
 	public double angleAccuracyScore;
 	public double totalScore;
 	public double shapedScore;
-	public static MatchScoring parse(Map<String, Supplier<byte[]>> bundle) {
-		return TransparencyArchive.parse(bundle.get(".cbor").get(), MatchScoring.class);
+	public static MatchScoring parse(byte[] data) {
+		return TransparencyArchive.parse(data, MatchScoring.class);
 	}
 }

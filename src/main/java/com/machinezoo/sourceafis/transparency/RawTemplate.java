@@ -4,7 +4,6 @@ package com.machinezoo.sourceafis.transparency;
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
-import java.util.function.*;
 import java.util.zip.*;
 import org.apache.commons.io.*;
 import com.google.gson.*;
@@ -15,7 +14,7 @@ public class RawTemplate {
 	public int width;
 	public int height;
 	public List<RawTemplateMinutia> minutiae = new ArrayList<>();
-	public static RawTemplate parse(byte[] serialized) {
+	public static RawTemplate parseIO(byte[] serialized) {
 		return Exceptions.sneak().get(() -> {
 			try (GZIPInputStream gzip = new GZIPInputStream(new ByteArrayInputStream(serialized))) {
 				byte[] decompressed = IOUtils.toByteArray(gzip);
@@ -24,7 +23,7 @@ public class RawTemplate {
 			}
 		});
 	}
-	public static RawTemplate parse(Map<String, Supplier<byte[]>> bundle) {
-		return TransparencyArchive.parse(bundle.get(".cbor").get(), RawTemplate.class);
+	public static RawTemplate parse(byte[] data) {
+		return TransparencyArchive.parse(data, RawTemplate.class);
 	}
 }

@@ -1,9 +1,6 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
-import java.util.*;
-import java.util.function.*;
-
 public class BooleanMatrix {
 	public final int width;
 	public final int height;
@@ -19,8 +16,8 @@ public class BooleanMatrix {
 	public BooleanMatrix(IntPoint size) {
 		this(size.x, size.y);
 	}
-	public static BooleanMatrix parse(Map<String, Supplier<byte[]>> bundle) {
-		return TransparencyArchive.parse(bundle.get(".cbor").get(), BooleanMatrix.class);
+	public static BooleanMatrix parse(byte[] data) {
+		return TransparencyArchive.parse(data, BooleanMatrix.class);
 	}
 	public IntPoint size() {
 		return new IntPoint(width, height);

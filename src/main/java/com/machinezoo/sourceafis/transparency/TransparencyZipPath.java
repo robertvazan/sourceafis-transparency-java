@@ -13,17 +13,52 @@ public class TransparencyZipPath {
 	public TransparencyPath parsed() {
 		return parsed;
 	}
-	private TransparencyZipPath(String filename, TransparencyPath parsed) {
-		this.filename = filename;
-		this.parsed = parsed;
+	private final int sequence;
+	public int sequence() {
+		return sequence;
 	}
-	private static final Pattern filenameRe = Pattern.compile("^[0-9]+-([a-z-]+)(.[a-z]+)$");
-	public static TransparencyZipPath parse(String filename) {
+	private final String suffix;
+	public String suffix() {
+		return suffix;
+	}
+	public String mime() {
+		switch (suffix) {
+		case ".cbor":
+			return "application/cbor";
+		case ".txt":
+			return "text/plain";
+		case ".json":
+			return "application/json";
+		case ".xml":
+			return "application/xml";
+		case ".jpeg":
+			return "image/jpeg";
+		case ".png":
+			return "image/png";
+		case ".bmp":
+			return "image/bmp";
+		case ".tiff":
+			return "image/tiff";
+		case ".jp2":
+			return "image/jp2";
+		case ".wsq":
+			return "image/x-wsq";
+		default:
+			return "application/octet-stream";
+		}
+	}
+	private static final Pattern filenameRe = Pattern.compile("^([0-9]+)-([a-z-]+)(\\.[a-z]+)$");
+	public static boolean valid(String filename) {
+		return filenameRe.matcher(filename).matches();
+	}
+	public TransparencyZipPath(String filename) {
+		this.filename = filename;
 		Matcher matcher = filenameRe.matcher(filename);
 		if (!matcher.matches())
-			return null;
-		TransparencyPath parsed = new TransparencyPath(matcher.group(1), matcher.group(2));
-		return new TransparencyZipPath(filename, parsed);
+			throw new IllegalArgumentException();
+		parsed = new TransparencyPath(matcher.group(2));
+		sequence = Integer.parseInt(matcher.group(1));
+		suffix = matcher.group(3);
 	}
 	@Override public boolean equals(Object obj) {
 		return obj instanceof TransparencyZipPath && Objects.equals(filename, ((TransparencyZipPath)obj).filename);
