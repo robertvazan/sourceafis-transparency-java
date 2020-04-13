@@ -1,6 +1,7 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
+import java.nio.charset.*;
 import java.util.*;
 import java.util.function.*;
 import com.fasterxml.jackson.annotation.*;
@@ -34,7 +35,10 @@ public abstract class TransparencyArchive {
 		return parse(read(new TransparencyPath(skeleton, keyword), 0), parser);
 	}
 	public String version() {
-		return Optional.ofNullable(parse("version", VersionInfo::parse)).map(v -> v.version).orElse(null);
+		byte[] data = read(new TransparencyPath("version"), 0);
+		if (data == null)
+			return null;
+		return new String(data, StandardCharsets.UTF_8);
 	}
 	public DoubleMatrix decoded() {
 		return parse("decoded-image", DoubleMatrix::parse);
@@ -190,7 +194,10 @@ public abstract class TransparencyArchive {
 		return score(bestMatch().orElse(0));
 	}
 	public OptionalInt bestMatch() {
-		BestMatch best = parse("best-match", BestMatch::parse);
-		return best != null && best.offset >= 0 ? OptionalInt.of(best.offset) : OptionalInt.empty();
+		byte[] data = read(new TransparencyPath("best-match"), 0);
+		if (data == null)
+			return OptionalInt.empty();
+		int best = Integer.parseInt(new String(data, StandardCharsets.UTF_8));
+		return best >= 0 ? OptionalInt.of(best) : OptionalInt.empty();
 	}
 }
