@@ -47,7 +47,7 @@ public abstract class TransparencyArchive {
 		return parse("scaled-image", DoubleMatrix::parse);
 	}
 	public BlockMap blocks() {
-		return parse("block-map", BlockMap::parse);
+		return parse("blocks", BlockMap::parse);
 	}
 	public HistogramCube histogram() {
 		return parse("histogram", HistogramCube::parse);
@@ -56,7 +56,7 @@ public abstract class TransparencyArchive {
 		return parse("smoothed-histogram", HistogramCube::parse);
 	}
 	public DoubleMatrix contrast() {
-		return parse("clipped-contrast", DoubleMatrix::parse);
+		return parse("contrast", DoubleMatrix::parse);
 	}
 	public BooleanMatrix absoluteMask() {
 		return parse("absolute-contrast-mask", BooleanMatrix::parse);
@@ -82,10 +82,10 @@ public abstract class TransparencyArchive {
 	public DoublePointMatrix smoothedOrientation() {
 		return parse("smoothed-orientation", DoublePointMatrix::parse);
 	}
-	public DoubleMatrix parallelSmoothing() {
+	public DoubleMatrix parallel() {
 		return parse("parallel-smoothing", DoubleMatrix::parse);
 	}
-	public DoubleMatrix orthogonalSmoothing() {
+	public DoubleMatrix orthogonal() {
 		return parse("orthogonal-smoothing", DoubleMatrix::parse);
 	}
 	public BooleanMatrix binarized() {
@@ -124,35 +124,35 @@ public abstract class TransparencyArchive {
 	public SkeletonGraph traced() {
 		return pickSkeleton(this::traced);
 	}
-	public SkeletonGraph removedDots(SkeletonType skeleton) {
+	public SkeletonGraph dots(SkeletonType skeleton) {
 		return parse(skeleton, "removed-dots", SkeletonGraph::parse);
 	}
-	public SkeletonGraph removedDots() {
-		return pickSkeleton(this::removedDots);
+	public SkeletonGraph dots() {
+		return pickSkeleton(this::dots);
 	}
-	public SkeletonGraph removedPores(SkeletonType skeleton) {
+	public SkeletonGraph pores(SkeletonType skeleton) {
 		return parse(skeleton, "removed-pores", SkeletonGraph::parse);
 	}
-	public SkeletonGraph removedPores() {
-		return pickSkeleton(this::removedPores);
+	public SkeletonGraph pores() {
+		return pickSkeleton(this::pores);
 	}
-	public SkeletonGraph removedGaps(SkeletonType skeleton) {
+	public SkeletonGraph gaps(SkeletonType skeleton) {
 		return parse(skeleton, "removed-gaps", SkeletonGraph::parse);
 	}
-	public SkeletonGraph removedGaps() {
-		return pickSkeleton(this::removedGaps);
+	public SkeletonGraph gaps() {
+		return pickSkeleton(this::gaps);
 	}
-	public SkeletonGraph removedTails(SkeletonType skeleton) {
+	public SkeletonGraph tails(SkeletonType skeleton) {
 		return parse(skeleton, "removed-tails", SkeletonGraph::parse);
 	}
-	public SkeletonGraph removedTails() {
-		return pickSkeleton(this::removedTails);
+	public SkeletonGraph tails() {
+		return pickSkeleton(this::tails);
 	}
-	public SkeletonGraph removedFragments(SkeletonType skeleton) {
+	public SkeletonGraph fragments(SkeletonType skeleton) {
 		return parse(skeleton, "removed-fragments", SkeletonGraph::parse);
 	}
-	public SkeletonGraph removedFragments() {
-		return pickSkeleton(this::removedFragments);
+	public SkeletonGraph fragments() {
+		return pickSkeleton(this::fragments);
 	}
 	public Template skeletonMinutiae() {
 		return parse("skeleton-minutiae", Template::parse);
@@ -160,40 +160,40 @@ public abstract class TransparencyArchive {
 	public Template innerMinutiae() {
 		return parse("inner-minutiae", Template::parse);
 	}
-	public Template removedMinutiaClouds() {
+	public Template clouds() {
 		return parse("removed-minutia-clouds", Template::parse);
 	}
 	public Template topMinutiae() {
 		return parse("top-minutiae", Template::parse);
 	}
-	public Template shuffledMinutiae() {
+	public Template shuffled() {
 		return parse("shuffled-minutiae", Template::parse);
 	}
-	public EdgeTable edgeTable() {
+	public EdgeTable edges() {
 		return parse("edge-table", EdgeTable::parse);
 	}
-	public EdgeHash edgeHash() {
+	public EdgeHash hash() {
 		return parse("edge-hash", EdgeHash::parse);
 	}
-	public RootPairs rootPairs() {
-		return parse("root-pairs", RootPairs::parse);
+	public RootPairs roots() {
+		return parse("roots", RootPairs::parse);
 	}
-	public int pairingCount() {
+	public int pairings() {
 		return count(new TransparencyPath("pairing"));
 	}
 	public MatchPairing pairing(int offset) {
 		return parse("pairing", offset, MatchPairing::parse);
 	}
 	public MatchPairing pairing() {
-		return pairing(bestMatch().orElse(0));
+		return pairing(best().orElse(0));
 	}
 	public MatchScoring score(int offset) {
 		return parse("score", offset, MatchScoring::parse);
 	}
 	public MatchScoring score() {
-		return score(bestMatch().orElse(0));
+		return score(best().orElse(0));
 	}
-	public OptionalInt bestMatch() {
+	public OptionalInt best() {
 		byte[] data = read(new TransparencyPath("best-match"), 0);
 		if (data == null)
 			return OptionalInt.empty();
