@@ -154,20 +154,20 @@ public abstract class TransparencyArchive {
 	public SkeletonGraph fragments() {
 		return pickSkeleton(this::fragments);
 	}
-	public Template skeletonMinutiae() {
-		return parse("skeleton-minutiae", Template::parse);
+	public MutableTemplate skeletonMinutiae() {
+		return parse("skeleton-minutiae", MutableTemplate::parse);
 	}
-	public Template innerMinutiae() {
-		return parse("inner-minutiae", Template::parse);
+	public MutableTemplate innerMinutiae() {
+		return parse("inner-minutiae", MutableTemplate::parse);
 	}
-	public Template clouds() {
-		return parse("removed-minutia-clouds", Template::parse);
+	public MutableTemplate clouds() {
+		return parse("removed-minutia-clouds", MutableTemplate::parse);
 	}
-	public Template topMinutiae() {
-		return parse("top-minutiae", Template::parse);
+	public MutableTemplate topMinutiae() {
+		return parse("top-minutiae", MutableTemplate::parse);
 	}
-	public Template shuffled() {
-		return parse("shuffled-minutiae", Template::parse);
+	public MutableTemplate shuffled() {
+		return parse("shuffled-minutiae", MutableTemplate::parse);
 	}
 	public EdgeTable edges() {
 		return parse("edge-table", EdgeTable::parse);

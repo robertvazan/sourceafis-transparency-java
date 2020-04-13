@@ -11,12 +11,12 @@ public class PersistentTemplate {
 	public static PersistentTemplate parse(byte[] data) {
 		return TransparencyArchive.parse(data, PersistentTemplate.class);
 	}
-	public Template unpack() {
-		Template unpacked = new Template();
+	public MutableTemplate unpack() {
+		MutableTemplate unpacked = new MutableTemplate();
 		unpacked.size = new IntPoint(width, height);
-		unpacked.minutiae = new TemplateMinutia[types.length()];
+		unpacked.minutiae = new MutableMinutia[types.length()];
 		for (int i = 0; i < types.length(); ++i) {
-			TemplateMinutia minutia = new TemplateMinutia();
+			MutableMinutia minutia = new MutableMinutia();
 			minutia.position = new IntPoint(positionsX[i], positionsY[i]);
 			minutia.direction = directions[i];
 			minutia.type = types.charAt(i) == 'B' ? MinutiaType.BIFURCATION : MinutiaType.ENDING;
@@ -24,7 +24,7 @@ public class PersistentTemplate {
 		}
 		return unpacked;
 	}
-	public static Template unpack(byte[] data) {
+	public static MutableTemplate unpack(byte[] data) {
 		return parse(data).unpack();
 	}
 }
