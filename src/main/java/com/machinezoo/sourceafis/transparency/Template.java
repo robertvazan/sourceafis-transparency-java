@@ -2,27 +2,12 @@
 package com.machinezoo.sourceafis.transparency;
 
 public class Template {
-	public IntPoint size;
-	public TemplateMinutia[] minutiae;
-	private static Template parse(RawTemplate raw) {
-		Template template = new Template();
-		template.size = new IntPoint(raw.width, raw.height);
-		template.minutiae = raw.minutiae.stream()
-			.map(m -> {
-				TemplateMinutia minutia = new TemplateMinutia();
-				minutia.x = m.x;
-				minutia.y = m.y;
-				minutia.direction = m.direction;
-				minutia.type = m.type.equals("ending") ? MinutiaType.ENDING : MinutiaType.BIFURCATION;
-				return minutia;
-			})
-			.toArray(n -> new TemplateMinutia[n]);
-		return template;
-	}
-	public static Template parseIO(byte[] serialized) {
-		return parse(RawTemplate.parseIO(serialized));
-	}
+	public IntPoint size = new IntPoint();
+	/*
+	 * Use array instead of a list, because we will need to index into it often.
+	 */
+	public TemplateMinutia[] minutiae = new TemplateMinutia[0];
 	public static Template parse(byte[] data) {
-		return parse(RawTemplate.parse(data));
+		return TransparencyArchive.parse(data, Template.class);
 	}
 }
