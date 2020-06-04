@@ -1,5 +1,7 @@
 # SourceAFIS Transparency API for Java #
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.machinezoo.sourceafis/sourceafis-transparency)](https://search.maven.org/artifact/com.machinezoo.sourceafis/sourceafis-transparency)
+
 SourceAFIS Transparency API for Java provides convenient and strongly typed interface
 to [algorithm transparency](https://sourceafis.machinezoo.com/transparency/) data
 produced by [SourceAFIS](https://sourceafis.machinezoo.com/) fingerprint recognition engine.
