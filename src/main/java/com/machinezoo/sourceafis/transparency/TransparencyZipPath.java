@@ -60,10 +60,12 @@ public class TransparencyZipPath {
 		sequence = Integer.parseInt(matcher.group(1));
 		suffix = matcher.group(3);
 	}
-	@Override public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
 		return obj instanceof TransparencyZipPath && Objects.equals(filename, ((TransparencyZipPath)obj).filename);
 	}
-	@Override public int hashCode() {
+	@Override
+	public int hashCode() {
 		return filename.hashCode();
 	}
 }

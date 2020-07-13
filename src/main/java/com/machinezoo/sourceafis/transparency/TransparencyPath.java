@@ -17,13 +17,15 @@ public class TransparencyPath {
 			return skeleton.prefix() + "-" + keyword;
 		return keyword;
 	}
-	@Override public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
 		if (!(obj instanceof TransparencyPath))
 			return false;
 		TransparencyPath other = (TransparencyPath)obj;
 		return Objects.equals(keyword, other.keyword) && skeleton == other.skeleton;
 	}
-	@Override public int hashCode() {
+	@Override
+	public int hashCode() {
 		return Objects.hash(keyword, skeleton);
 	}
 	public TransparencyPath(SkeletonType skeleton, String keyword) {
@@ -42,7 +44,8 @@ public class TransparencyPath {
 			keyword = key;
 		}
 	}
-	@Override public String toString() {
+	@Override
+	public String toString() {
 		return key();
 	}
 }

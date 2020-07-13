@@ -13,13 +13,15 @@ public class IntPoint implements Iterable<IntPoint> {
 		this.x = x;
 		this.y = y;
 	}
-	@Override public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
 		if (!(obj instanceof IntPoint))
 			return false;
 		IntPoint other = (IntPoint)obj;
 		return x == other.x && y == other.y;
 	}
-	@Override public int hashCode() {
+	@Override
+	public int hashCode() {
 		return Objects.hash(x, y);
 	}
 	public int area() {
@@ -46,16 +48,19 @@ public class IntPoint implements Iterable<IntPoint> {
 	public DoublePoint center() {
 		return new DoublePoint(x + 0.5, y + 0.5);
 	}
-	@Override public Iterator<IntPoint> iterator() {
+	@Override
+	public Iterator<IntPoint> iterator() {
 		return new InteriorIterator();
 	}
 	private class InteriorIterator implements Iterator<IntPoint> {
 		int atX;
 		int atY;
-		@Override public boolean hasNext() {
+		@Override
+		public boolean hasNext() {
 			return atY < y && atX < x;
 		}
-		@Override public IntPoint next() {
+		@Override
+		public IntPoint next() {
 			if (!hasNext())
 				throw new NoSuchElementException();
 			IntPoint result = new IntPoint(atX, atY);
@@ -66,7 +71,8 @@ public class IntPoint implements Iterable<IntPoint> {
 			}
 			return result;
 		}
-		@Override public void remove() {
+		@Override
+		public void remove() {
 			throw new UnsupportedOperationException();
 		}
 	}

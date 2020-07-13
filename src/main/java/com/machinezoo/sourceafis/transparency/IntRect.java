@@ -44,16 +44,19 @@ public class IntRect implements Iterable<IntPoint> {
 	public static IntRect between(IntPoint start, IntPoint end) {
 		return between(start.x, start.y, end.x, end.y);
 	}
-	@Override public Iterator<IntPoint> iterator() {
+	@Override
+	public Iterator<IntPoint> iterator() {
 		return new InteriorIterator();
 	}
 	private class InteriorIterator implements Iterator<IntPoint> {
 		int atX;
 		int atY;
-		@Override public boolean hasNext() {
+		@Override
+		public boolean hasNext() {
 			return atY < height && atX < width;
 		}
-		@Override public IntPoint next() {
+		@Override
+		public IntPoint next() {
 			if (!hasNext())
 				throw new NoSuchElementException();
 			IntPoint result = new IntPoint(x + atX, y + atY);
@@ -64,7 +67,8 @@ public class IntRect implements Iterable<IntPoint> {
 			}
 			return result;
 		}
-		@Override public void remove() {
+		@Override
+		public void remove() {
 			throw new UnsupportedOperationException();
 		}
 	}

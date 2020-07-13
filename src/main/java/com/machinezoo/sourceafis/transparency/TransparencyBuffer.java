@@ -12,18 +12,22 @@ import com.machinezoo.sourceafis.*;
 public class TransparencyBuffer extends TransparencyArchive {
 	private final Map<TransparencyPath, List<byte[]>> map = new HashMap<>();
 	private final Map<TransparencyPath, String> mimes = new HashMap<>();
-	@Override public List<TransparencyPath> paths() {
+	@Override
+	public List<TransparencyPath> paths() {
 		return map.keySet().stream()
 			.sorted(Comparator.comparing(p -> p.key()))
 			.collect(toList());
 	}
-	@Override public int count(TransparencyPath path) {
+	@Override
+	public int count(TransparencyPath path) {
 		return map.getOrDefault(path, Collections.emptyList()).size();
 	}
-	@Override public String mime(TransparencyPath path) {
+	@Override
+	public String mime(TransparencyPath path) {
 		return mimes.getOrDefault(path, "application/octet-stream");
 	}
-	@Override public byte[] read(TransparencyPath path, int offset) {
+	@Override
+	public byte[] read(TransparencyPath path, int offset) {
 		List<byte[]> records = map.getOrDefault(path, Collections.emptyList());
 		return offset >= 0 && offset < records.size() ? records.get(offset) : null;
 	}
@@ -57,7 +61,8 @@ public class TransparencyBuffer extends TransparencyArchive {
 	}
 	public FingerprintTransparency capture() {
 		return new FingerprintTransparency() {
-			@Override public void take(String key, String mime, byte[] data) {
+			@Override
+			public void take(String key, String mime, byte[] data) {
 				add(new TransparencyPath(key), mime, data);
 			}
 		};

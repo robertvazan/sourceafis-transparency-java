@@ -41,7 +41,8 @@ public class TransparencyBufferTest {
 		buffer.unzip(new ByteArrayInputStream(stream.toByteArray()));
 		return buffer;
 	}
-	@Test public void equalCaptureMethods() {
+	@Test
+	public void equalCaptureMethods() {
 		TransparencyBuffer captured = capture();
 		TransparencyBuffer zipped = unzip();
 		assertEquals(captured.paths(), zipped.paths());

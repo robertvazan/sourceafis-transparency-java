@@ -9,7 +9,8 @@ import org.junit.jupiter.api.*;
 import com.machinezoo.noexception.*;
 
 public class TransparencyArchiveTest {
-	@Test public void getters() {
+	@Test
+	public void getters() {
 		TransparencyArchive archive = TransparencyBufferTest.capture();
 		int count = 0;
 		for (Method method : archive.getClass().getMethods()) {
