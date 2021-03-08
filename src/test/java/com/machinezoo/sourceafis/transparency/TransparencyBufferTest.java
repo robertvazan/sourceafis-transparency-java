@@ -19,13 +19,9 @@ public class TransparencyBufferTest {
 	}
 	public static void capture(Supplier<FingerprintTransparency> supplier) {
 		FingerprintTemplate candidate = new FingerprintTemplate(
-			new FingerprintImage()
-				.decode(load("candidate.png")));
+			new FingerprintImage(load("candidate.png")));
 		try (FingerprintTransparency transparency = supplier.get()) {
-			new FingerprintMatcher()
-				.index(new FingerprintTemplate(
-					new FingerprintImage()
-						.decode(load("probe.png"))))
+			new FingerprintMatcher(new FingerprintTemplate(new FingerprintImage(load("probe.png"))))
 				.match(candidate);
 		}
 	}
