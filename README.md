@@ -1,7 +1,7 @@
 # SourceAFIS Transparency API for Java #
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.machinezoo.sourceafis/sourceafis-transparency)](https://search.maven.org/artifact/com.machinezoo.sourceafis/sourceafis-transparency)
-[![Build Status](https://travis-ci.com/robertvazan/sourceafis-transparency-java.svg?branch=master)](https://travis-ci.com/robertvazan/sourceafis-transparency-java)
+[![Build Status](https://travis-ci.com/robertvazan/sourceafis-transparency-java.svg?branch=master)](https://app.travis-ci.com/github/robertvazan/sourceafis-transparency-java)
 [![Coverage Status](https://codecov.io/gh/robertvazan/sourceafis-transparency-java/branch/master/graph/badge.svg)](https://codecov.io/gh/robertvazan/sourceafis-transparency-java)
 
 SourceAFIS Transparency API for Java provides convenient and strongly typed interface
