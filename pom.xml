@@ -39,15 +39,14 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.release>11</maven.compiler.release>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.machinezoo.noexception</groupId>
-			<artifactId>noexception</artifactId>
-			<version>1.6.2</version>
+			<groupId>com.machinezoo.sourceafis</groupId>
+			<artifactId>sourceafis</artifactId>
+			<version>3.14.0</version>
 		</dependency>
 		<dependency>
 			<groupId>it.unimi.dsi</groupId>
@@ -63,11 +62,6 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.8.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.machinezoo.sourceafis</groupId>
-			<artifactId>sourceafis</artifactId>
-			<version>3.12.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -93,6 +87,12 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<!-- Needed for Java 11. -->
+					<!-- Contains fix for https://issues.apache.org/jira/browse/MCOMPILER-289 -->
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+				</plugin>
 				<plugin>
 					<!-- Older surefire versions did not support JUnit 5. -->
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -143,6 +143,9 @@
 				<version>3.2.0</version>
 				<configuration>
 					<notimestamp>true</notimestamp>
+					<bottom>
+						<![CDATA[<!-- No copyright message. -->]]>
+					</bottom>
 				</configuration>
 				<executions>
 					<execution>
