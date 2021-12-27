@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>com.machinezoo.sourceafis</groupId>
 			<artifactId>sourceafis</artifactId>
-			<version>3.14.0</version>
+			<version>3.14.2</version>
 		</dependency>
 		<dependency>
 			<groupId>it.unimi.dsi</groupId>
@@ -141,6 +141,11 @@
 					<bottom>
 						<![CDATA[<!-- No copyright message. -->]]>
 					</bottom>
+					<!-- Explicit link list, because detectLinks would cause every CI build to fail. -->
+					<!-- CI build is configured to fail on javadoc warnings and we want to keep that. -->
+					<links>
+						<link>https://sourceafis.machinezoo.com/javadoc/</link>
+					</links>
 				</configuration>
 				<executions>
 					<execution>
