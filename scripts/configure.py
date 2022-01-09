@@ -18,6 +18,7 @@ pom_description = lambda: 'Parsers for SourceAFIS algorithm transparency data.'
 inception_year = lambda: 2018
 homepage = lambda: website() + 'transparency/'
 jdk_version = lambda: 17
+stagean_annotations = lambda: True
 has_website = lambda: False
 has_javadoc = lambda: False
 project_status = lambda: experimental_status()
@@ -34,6 +35,7 @@ def documentation_links():
 def dependencies():
     use('com.machinezoo.sourceafis:sourceafis:3.14.3')
     use_fastutil()
+    use_commons_lang()
     use_commons_io()
     use_junit()
     use_hamcrest()
