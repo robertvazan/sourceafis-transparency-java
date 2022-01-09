@@ -6,6 +6,10 @@ module com.machinezoo.sourceafis.transparency {
 	 * Transitive, because we provide FingerprintTransparency implementation in the API.
 	 */
 	requires transitive com.machinezoo.sourceafis;
+	/*
+	 * Needed for setVisibility(PropertyAccessor.FIELD, Visibility.ANY).
+	 */
+	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.dataformat.cbor;
 	requires org.apache.commons.io;
