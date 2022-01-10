@@ -8,6 +8,7 @@ import com.machinezoo.stagean.*;
 module com.machinezoo.sourceafis.transparency {
 	exports com.machinezoo.sourceafis.transparency;
 	exports com.machinezoo.sourceafis.transparency.types;
+	exports com.machinezoo.sourceafis.transparency.keys;
 	requires com.machinezoo.stagean;
 	requires com.machinezoo.noexception;
 	/*
@@ -18,7 +19,6 @@ module com.machinezoo.sourceafis.transparency {
 	requires com.fasterxml.jackson.dataformat.cbor;
 	requires org.apache.commons.lang3;
 	requires org.apache.commons.io;
-	requires it.unimi.dsi.fastutil;
 	/*
 	 * Records should not need this, but there's some bug in Jackson:
 	 * https://github.com/FasterXML/jackson-databind/issues/3352

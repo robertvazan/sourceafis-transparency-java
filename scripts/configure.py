@@ -34,7 +34,6 @@ def documentation_links():
 
 def dependencies():
     use('com.machinezoo.sourceafis:sourceafis:3.14.3')
-    use_fastutil()
     use_commons_lang()
     use_commons_io()
     use_junit()
