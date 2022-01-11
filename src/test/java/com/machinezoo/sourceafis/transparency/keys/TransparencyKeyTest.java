@@ -19,21 +19,21 @@ public class TransparencyKeyTest {
 	}
 	@Test
 	public void presentInArchive() {
-		var archive = TestResources.buffer();
+		var archive = TestResources.archive();
 		for (var key : TransparencyKey.all())
 			if (!(key instanceof TransparencyContextKey))
-				assertThat(archive.count(key), greaterThanOrEqualTo(1));
+				assertTrue(archive.get(key).isPresent());
 	}
 	@Test
 	public void coveringWholeArchive() {
-		var archive = TestResources.buffer();
+		var archive = TestResources.archive();
 		for (var key : archive.keys())
 			assertThat(TransparencyKey.all(), hasItem(key));
 	}
 	@Test
 	public void deserializable() {
-		var archive = TestResources.buffer();
+		var archive = TestResources.archive();
 		for (var key : archive.keys())
-			assertNotNull(archive.deserialize(key).get());
+			assertNotNull(archive.get(key).get().deserialize());
 	}
 }

@@ -27,9 +27,9 @@ public class TestResources {
 			new FingerprintMatcher(new FingerprintTemplate(new FingerprintImage(probe()))).match(candidate);
 		}
 	}
-	public static TransparencyBuffer buffer() {
+	public static TransparencyArchive archive() {
 		var buffer = new TransparencyBuffer();
 		log(buffer::capture);
-		return buffer;
+		return buffer.toArchive();
 	}
 }

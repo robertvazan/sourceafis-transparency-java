@@ -5,22 +5,32 @@ import java.util.*;
 import com.machinezoo.sourceafis.transparency.keys.*;
 
 public interface TransparencyArchive {
+	/*
+	 * Canonical order corresponding to the usual logging order. Unknown keys are at the end, sorted alphabetically.
+	 */
 	List<TransparencyKey<?>> keys();
-	int count(TransparencyKey<?> key);
-	Optional<String> mime(TransparencyKey<?> key, int offset);
-	Optional<byte[]> read(TransparencyKey<?> key, int offset);
-	default <T> Optional<T> deserialize(TransparencyKey<T> key, int offset) {
-		if (offset < 0 || offset >= count(key))
+	<T> List<TransparencyRecord<T>> enumerate(TransparencyKey<T> key);
+	/*
+	 * Same order as keys(). Canonical serialization format.
+	 */
+	default List<TransparencyRecord<?>> toList() {
+		var dump = new ArrayList<TransparencyRecord<?>>();
+		for (var key : keys())
+			dump.addAll(enumerate(key));
+		return dump;
+	}
+	static TransparencyArchive fromList(List<TransparencyRecord<?>> list) {
+		return new TransparencyBuffer()
+			.append(list)
+			.toArchive();
+	}
+	default <T> Optional<TransparencyRecord<T>> get(TransparencyKey<T> key, int offset) {
+		var list = enumerate(key);
+		if (offset < 0 || offset >= list.size())
 			return Optional.empty();
-		return Optional.of(key.deserialize(mime(key, offset).get(), read(key, offset).get()));
+		return Optional.of(list.get(offset));
 	}
-	default Optional<String> mime(TransparencyKey<?> key) {
-		return mime(key, 0);
-	}
-	default Optional<byte[]> read(TransparencyKey<?> key) {
-		return read(key, 0);
-	}
-	default <T> Optional<T> deserialize(TransparencyKey<T> key) {
-		return deserialize(key, 0);
+	default <T> Optional<TransparencyRecord<T>> get(TransparencyKey<T> key) {
+		return get(key, 0);
 	}
 }

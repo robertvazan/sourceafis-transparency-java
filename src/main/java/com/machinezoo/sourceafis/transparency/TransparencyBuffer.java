@@ -6,51 +6,31 @@ import java.util.*;
 import java.util.regex.*;
 import java.util.zip.*;
 import org.apache.commons.io.*;
-import org.apache.commons.lang3.*;
-import org.apache.commons.lang3.tuple.*;
 import com.machinezoo.noexception.*;
 import com.machinezoo.sourceafis.*;
 import com.machinezoo.sourceafis.transparency.keys.*;
+import com.machinezoo.stagean.*;
 
-public class TransparencyBuffer implements TransparencyArchive {
-	private final Map<TransparencyKey<?>, List<Pair<String, byte[]>>> map = new HashMap<>();
-	private final List<TransparencyKey<?>> order = new ArrayList<>();
-	@Override
-	public List<TransparencyKey<?>> keys() {
-		return new ArrayList<>(order);
+public class TransparencyBuffer {
+	private final Map<TransparencyKey<?>, List<TransparencyRecord<?>>> map = new HashMap<>();
+	public TransparencyBuffer add(TransparencyRecord<?> record) {
+		Objects.requireNonNull(record);
+		map.computeIfAbsent(record.key(), k -> new ArrayList<>()).add(record);
+		return this;
 	}
-	@Override
-	public int count(TransparencyKey<?> key) {
-		Objects.requireNonNull(key);
-		return map.getOrDefault(key, Collections.emptyList()).size();
+	public TransparencyBuffer add(TransparencyKey<?> key, String mime, byte[] data) {
+		return add(new TransparencyRecord<>(key, mime, data));
 	}
-	private Optional<Pair<String, byte[]>> entry(TransparencyKey<?> key, int offset) {
-		Objects.requireNonNull(key);
-		var list = map.get(key);
-		if (list == null || offset < 0 || offset >= list.size())
-			return Optional.empty();
-		return Optional.of(list.get(offset));
+	public TransparencyBuffer add(String key, String mime, byte[] data) {
+		return add(TransparencyKey.parse(key), mime, data);
 	}
-	@Override
-	public Optional<String> mime(TransparencyKey<?> key, int offset) {
-		return entry(key, offset).map(e -> e.getLeft());
+	public TransparencyBuffer append(List<TransparencyRecord<?>> records) {
+		for (var record : records)
+			add(record);
+		return this;
 	}
-	@Override
-	public Optional<byte[]> read(TransparencyKey<?> key, int offset) {
-		return entry(key, offset).map(e -> e.getRight());
-	}
-	public void add(TransparencyKey<?> key, String mime, byte[] data) {
-		Objects.requireNonNull(key);
-		Validate.notBlank(mime);
-		Objects.requireNonNull(data);
-		if (!map.containsKey(key)) {
-			map.put(key, new ArrayList<>());
-			order.add(key);
-		}
-		map.get(key).add(Pair.of(mime, data));
-	}
-	public void add(String key, String mime, byte[] data) {
-		add(TransparencyKey.parse(key), mime, data);
+	public TransparencyBuffer append(TransparencyArchive archive) {
+		return append(archive.toList());
 	}
 	public FingerprintTransparency capture() {
 		return new FingerprintTransparency() {
@@ -76,7 +56,8 @@ public class TransparencyBuffer implements TransparencyArchive {
 			default -> "application/octet-stream";
 		};
 	}
-	public void unzip(InputStream stream) {
+	@DraftCode("Find better solution for checked exceptions.")
+	public TransparencyBuffer unzip(InputStream stream) {
 		Exceptions.wrap().run(() -> {
 			try (var zip = new ZipInputStream(stream)) {
 				while (true) {
@@ -93,5 +74,12 @@ public class TransparencyBuffer implements TransparencyArchive {
 				}
 			}
 		});
+		return this;
+	}
+	public TransparencyArchive toArchive() {
+		var immutable = new HashMap<TransparencyKey<?>, List<TransparencyRecord<?>>>();
+		for (var key : map.keySet())
+			immutable.put(key, Collections.unmodifiableList(new ArrayList<>(map.get(key))));
+		return new PlainTransparencyArchive(immutable);
 	}
 }
