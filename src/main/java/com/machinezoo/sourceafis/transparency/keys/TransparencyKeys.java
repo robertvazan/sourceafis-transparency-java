@@ -3,6 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import static java.util.stream.Collectors.*;
 import java.util.*;
+import com.machinezoo.sourceafis.transparency.context.*;
 
 class TransparencyKeys {
 	static final List<TransparencyKey<?>> ALL;
@@ -10,6 +11,8 @@ class TransparencyKeys {
 	static {
 		var all = new ArrayList<TransparencyKey<?>>();
 		all.addAll(List.of(
+			new InputImageKey(),
+			new InputGrayscaleKey(),
 			new VersionKey(),
 			new DecodedImageKey(),
 			new ScaledImageKey(),
@@ -49,11 +52,20 @@ class TransparencyKeys {
 			new TopMinutiaeKey(),
 			new ShuffledMinutiaeKey(),
 			new EdgeTableKey(),
+			new OutputTemplateKey(),
+			new InputTemplateKey(),
 			new EdgeHashKey(),
+			new ProbeImageKey(),
+			new ProbeGrayscaleKey(),
+			new ProbeTemplateKey(),
+			new CandidateImageKey(),
+			new CandidateGrayscaleKey(),
+			new CandidateTemplateKey(),
 			new RootsKey(),
 			new PairingKey(),
 			new ScoreKey(),
-			new BestMatchKey()));
+			new BestMatchKey(),
+			new OutputScoreKey()));
 		ALL = Collections.unmodifiableList(all);
 		BY_NAME = all.stream().collect(toMap(k -> k.name(), k -> k));
 	}

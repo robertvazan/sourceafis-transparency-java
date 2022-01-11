@@ -4,11 +4,13 @@ import com.machinezoo.stagean.*;
 @NoDocs
 @DraftTests("Reach 100% coverage.")
 @DraftApi
+@ApiIssue("Figure out how to provide compatibility over a range of recent SourceAFIS versions.")
 @DraftCode
 module com.machinezoo.sourceafis.transparency {
 	exports com.machinezoo.sourceafis.transparency;
 	exports com.machinezoo.sourceafis.transparency.types;
 	exports com.machinezoo.sourceafis.transparency.keys;
+	exports com.machinezoo.sourceafis.transparency.context;
 	requires com.machinezoo.stagean;
 	requires com.machinezoo.noexception;
 	/*

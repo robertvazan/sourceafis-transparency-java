@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import com.machinezoo.sourceafis.transparency.*;
+import com.machinezoo.sourceafis.transparency.context.*;
 
 public class TransparencyKeyTest {
 	@Test
@@ -17,13 +18,14 @@ public class TransparencyKeyTest {
 		assertEquals(TransparencyKey.all().size(), TransparencyKey.all().stream().map(k -> k.name()).distinct().count());
 	}
 	@Test
-	public void validNames() {
+	public void presentInArchive() {
 		var archive = TestResources.buffer();
 		for (var key : TransparencyKey.all())
-			assertThat(archive.count(key), greaterThanOrEqualTo(1));
+			if (!(key instanceof TransparencyContextKey))
+				assertThat(archive.count(key), greaterThanOrEqualTo(1));
 	}
 	@Test
-	public void completeSet() {
+	public void coveringWholeArchive() {
 		var archive = TestResources.buffer();
 		for (var key : archive.keys())
 			assertThat(TransparencyKey.all(), hasItem(key));
