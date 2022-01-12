@@ -15,4 +15,11 @@ public record BestMatchKey() implements TransparencyKey<Integer> {
 			default -> throw new IllegalArgumentException();
 		};
 	}
+	@Override
+	public byte[] serialize(String mime, Integer object) {
+		return switch (mime) {
+			case "text/plain" -> Integer.toString(object).getBytes(StandardCharsets.UTF_8);
+			default -> throw new IllegalArgumentException();
+		};
+	}
 }

@@ -24,6 +24,9 @@ public class TransparencyBuffer {
 	public TransparencyBuffer add(String key, String mime, byte[] data) {
 		return add(TransparencyKey.parse(key), mime, data);
 	}
+	public <T> TransparencyBuffer serialize(TransparencyKey<T> key, String mime, T object) {
+		return add(key, mime, key.serialize(mime, object));
+	}
 	public TransparencyBuffer append(List<TransparencyRecord<?>> records) {
 		for (var record : records)
 			add(record);

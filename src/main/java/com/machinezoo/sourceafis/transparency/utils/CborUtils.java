@@ -10,4 +10,7 @@ public class CborUtils {
 	public static <T> T deserialize(byte[] data, Class<T> clazz) {
 		return Exceptions.wrap(IllegalArgumentException::new).get(() -> mapper.readValue(data, clazz));
 	}
+	public static byte[] serialize(Object object) {
+		return Exceptions.wrap(IllegalArgumentException::new).get(() -> mapper.writeValueAsBytes(object));
+	}
 }

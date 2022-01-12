@@ -13,6 +13,9 @@ public record TransparencyRecord<T>(TransparencyKey<T> key, String mime, byte[] 
 		Validate.notBlank(mime);
 		Objects.requireNonNull(data);
 	}
+	public static <T> TransparencyRecord<T> serialize(TransparencyKey<T> key, String mime, T object) {
+		return new TransparencyRecord<>(key, mime, key.serialize(mime, object));
+	}
 	public T deserialize() {
 		return key.deserialize(mime, data);
 	}

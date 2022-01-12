@@ -15,4 +15,11 @@ public record VersionKey() implements TransparencyKey<String> {
 			default -> throw new IllegalArgumentException();
 		};
 	}
+	@Override
+	public byte[] serialize(String mime, String object) {
+		return switch (mime) {
+			case "text/plain" -> object.getBytes(StandardCharsets.UTF_8);
+			default -> throw new IllegalArgumentException();
+		};
+	}
 }

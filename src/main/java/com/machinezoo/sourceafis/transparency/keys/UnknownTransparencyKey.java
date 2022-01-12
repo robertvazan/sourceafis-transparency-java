@@ -6,4 +6,8 @@ public record UnknownTransparencyKey(String name) implements TransparencyKey<byt
 	public byte[] deserialize(String mime, byte[] data) {
 		return data;
 	}
+	@Override
+	public byte[] serialize(String mime, byte[] object) {
+		return object;
+	}
 }

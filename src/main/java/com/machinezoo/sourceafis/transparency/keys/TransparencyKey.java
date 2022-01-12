@@ -7,6 +7,7 @@ import org.apache.commons.lang3.*;
 public interface TransparencyKey<T> {
 	String name();
 	T deserialize(String mime, byte[] data);
+	byte[] serialize(String mime, T object);
 	static List<TransparencyKey<?>> all() {
 		return TransparencyKeys.ALL;
 	}
