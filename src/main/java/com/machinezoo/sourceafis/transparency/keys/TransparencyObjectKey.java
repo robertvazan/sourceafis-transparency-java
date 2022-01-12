@@ -19,7 +19,7 @@ public interface TransparencyObjectKey<T> extends TransparencyKey<T> {
 	@Override
 	default byte[] serialize(String mime, T object) {
 		return switch (mime) {
-			case "application/cbor" -> CborUtils.serialize(object);
+			case "application/cbor", "application/*", "*/*" -> CborUtils.serialize(object);
 			default -> throw new IllegalArgumentException();
 		};
 	}

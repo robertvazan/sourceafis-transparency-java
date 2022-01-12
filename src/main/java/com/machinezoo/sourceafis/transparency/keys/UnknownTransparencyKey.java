@@ -4,7 +4,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 public record UnknownTransparencyKey(String name) implements TransparencyKey<byte[]> {
 	@Override
 	public String mime() {
-		return "application/octet-stream";
+		return "*/*";
 	}
 	@Override
 	public byte[] deserialize(String mime, byte[] data) {

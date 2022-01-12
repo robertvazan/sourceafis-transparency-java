@@ -42,4 +42,13 @@ public class TransparencyKeyTest {
 		for (var key : archive.keys())
 			assertNotNull(archive.get(key).get().deserialize());
 	}
+	private <T> byte[] roundtrip(TransparencyKey<T> key, byte[] data) {
+		return key.serialize(key.deserialize(data));
+	}
+	@Test
+	public void serializable() {
+		var archive = TestResources.archive();
+		for (var key : archive.keys())
+			assertNotNull(roundtrip(key, archive.get(key).get().data()));
+	}
 }
