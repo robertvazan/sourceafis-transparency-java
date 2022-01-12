@@ -19,9 +19,9 @@ public interface TransparencyArchive {
 			dump.addAll(enumerate(key));
 		return dump;
 	}
-	static TransparencyArchive fromList(List<TransparencyRecord<?>> list) {
+	static TransparencyArchive from(Collection<TransparencyRecord<?>> collection) {
 		return new TransparencyBuffer()
-			.append(list)
+			.append(collection)
 			.toArchive();
 	}
 	default <T> Optional<TransparencyRecord<T>> get(TransparencyKey<T> key, int offset) {

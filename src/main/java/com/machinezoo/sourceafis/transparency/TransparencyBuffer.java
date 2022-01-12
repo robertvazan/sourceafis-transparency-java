@@ -13,9 +13,22 @@ import com.machinezoo.stagean.*;
 
 public class TransparencyBuffer {
 	private final Map<TransparencyKey<?>, List<TransparencyRecord<?>>> map = new HashMap<>();
+	private TransparencyFilter filter = TransparencyFilter.any();
+	/*
+	 * Intentionally applied only to future additions, leaving existing records unaffected,
+	 * so that different filters can be applied to different sources of transparency data.
+	 */
+	public TransparencyBuffer accept(TransparencyFilter filter) {
+		this.filter = filter != null ? filter : TransparencyFilter.any();
+		return this;
+	}
+	public boolean accepts(TransparencyKey<?> key) {
+		return filter.accepts(key);
+	}
 	public TransparencyBuffer add(TransparencyRecord<?> record) {
 		Objects.requireNonNull(record);
-		map.computeIfAbsent(record.key(), k -> new ArrayList<>()).add(record);
+		if (accepts(record.key()))
+			map.computeIfAbsent(record.key(), k -> new ArrayList<>()).add(record);
 		return this;
 	}
 	public TransparencyBuffer write(TransparencyKey<?> key, String mime, byte[] data) {
@@ -30,7 +43,7 @@ public class TransparencyBuffer {
 	public <T> TransparencyBuffer serialize(TransparencyKey<T> key, T object) {
 		return serialize(key, key.mime(), object);
 	}
-	public TransparencyBuffer append(List<TransparencyRecord<?>> records) {
+	public TransparencyBuffer append(Collection<TransparencyRecord<?>> records) {
 		for (var record : records)
 			add(record);
 		return this;
@@ -38,16 +51,14 @@ public class TransparencyBuffer {
 	public TransparencyBuffer append(TransparencyArchive archive) {
 		return append(archive.toList());
 	}
+	public boolean accepts(String key) {
+		return filter.accepts(key);
+	}
 	public TransparencyBuffer take(String key, String mime, byte[] data) {
 		return write(TransparencyKey.parse(key), mime, data);
 	}
 	public FingerprintTransparency capture() {
-		return new FingerprintTransparency() {
-			@Override
-			public void take(String key, String mime, byte[] data) {
-				TransparencyBuffer.this.take(key, mime, data);
-			}
-		};
+		return new TransparencyBufferLogger(this);
 	}
 	private static final Pattern FILENAME_RE = Pattern.compile("^[0-9]+-([a-z-]+)(\\.[a-z]+)$");
 	private static String mime(String suffix) {
