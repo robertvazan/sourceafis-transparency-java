@@ -5,6 +5,10 @@ import com.machinezoo.stagean.*;
 
 public interface ContextImageKey extends TransparencyContextKey<byte[]> {
 	@Override
+	default String mime() {
+		return "image/*";
+	}
+	@Override
 	@DraftCode("Support encoding into specific image formats based on supplied MIME type.")
 	default byte[] deserialize(String mime, byte[] data) {
 		return switch (mime) {

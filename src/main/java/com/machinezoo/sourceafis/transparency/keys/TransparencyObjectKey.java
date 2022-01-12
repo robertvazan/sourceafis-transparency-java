@@ -6,6 +6,10 @@ import com.machinezoo.sourceafis.transparency.utils.*;
 public interface TransparencyObjectKey<T> extends TransparencyKey<T> {
 	Class<T> type();
 	@Override
+	default String mime() {
+		return "application/cbor";
+	}
+	@Override
 	default T deserialize(String mime, byte[] data) {
 		return switch (mime) {
 			case "application/cbor" -> CborUtils.deserialize(data, type());

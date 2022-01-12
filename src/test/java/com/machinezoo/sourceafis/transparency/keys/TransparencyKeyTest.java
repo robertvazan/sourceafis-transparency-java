@@ -31,6 +31,12 @@ public class TransparencyKeyTest {
 			assertThat(TransparencyKey.all(), hasItem(key));
 	}
 	@Test
+	public void matchingMime() {
+		var archive = TestResources.archive();
+		for (var key : archive.keys())
+			assertEquals(archive.get(key).get().mime(), key.mime());
+	}
+	@Test
 	public void deserializable() {
 		var archive = TestResources.archive();
 		for (var key : archive.keys())

@@ -9,6 +9,10 @@ public record BestMatchKey() implements TransparencyKey<Integer> {
 		return "best-match";
 	}
 	@Override
+	public String mime() {
+		return "text/plain";
+	}
+	@Override
 	public Integer deserialize(String mime, byte[] data) {
 		return switch (mime) {
 			case "text/plain" -> Integer.parseInt(new String(data, StandardCharsets.UTF_8));

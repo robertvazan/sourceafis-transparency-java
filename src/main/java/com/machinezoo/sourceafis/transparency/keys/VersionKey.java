@@ -9,6 +9,10 @@ public record VersionKey() implements TransparencyKey<String> {
 		return "version";
 	}
 	@Override
+	public String mime() {
+		return "text/plain";
+	}
+	@Override
 	public String deserialize(String mime, byte[] data) {
 		return switch (mime) {
 			case "text/plain" -> new String(data, StandardCharsets.UTF_8);
