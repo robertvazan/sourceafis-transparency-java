@@ -57,8 +57,14 @@ public class TransparencyBuffer {
 	public TransparencyBuffer take(String key, String mime, byte[] data) {
 		return write(TransparencyKey.parse(key), mime, data);
 	}
-	public FingerprintTransparency capture() {
+	public FingerprintTransparency open() {
 		return new TransparencyBufferLogger(this);
+	}
+	public TransparencyBuffer capture(Runnable action) {
+		try (var transparency = open()) {
+			action.run();
+		}
+		return this;
 	}
 	private static final Pattern FILENAME_RE = Pattern.compile("^[0-9]+-([a-z-]+)(\\.[a-z]+)$");
 	private static String mime(String suffix) {

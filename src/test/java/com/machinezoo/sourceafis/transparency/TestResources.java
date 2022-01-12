@@ -29,7 +29,7 @@ public class TestResources {
 	}
 	public static TransparencyArchive archive() {
 		var buffer = new TransparencyBuffer();
-		log(buffer::capture);
+		log(buffer::open);
 		return buffer.toArchive();
 	}
 }
