@@ -5,6 +5,10 @@ import com.machinezoo.sourceafis.transparency.*;
 
 public interface EncodedImageKey extends TransparencyKey<byte[]> {
 	@Override
+	default Class<byte[]> type() {
+		return byte[].class;
+	}
+	@Override
 	default String mime() {
 		return "image/*";
 	}

@@ -10,6 +10,10 @@ public record BestMatchKey() implements TransparencyKey<Integer> {
 		return "best-match";
 	}
 	@Override
+	public Class<Integer> type() {
+		return Integer.class;
+	}
+	@Override
 	public String mime() {
 		return "text/plain";
 	}

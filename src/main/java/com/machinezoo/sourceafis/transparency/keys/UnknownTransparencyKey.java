@@ -5,6 +5,10 @@ import com.machinezoo.sourceafis.transparency.*;
 
 public record UnknownTransparencyKey(String name) implements TransparencyKey<byte[]> {
 	@Override
+	public Class<byte[]> type() {
+		return byte[].class;
+	}
+	@Override
 	public String mime() {
 		return "*/*";
 	}

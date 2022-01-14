@@ -10,6 +10,10 @@ public record VersionKey() implements TransparencyKey<String> {
 		return "version";
 	}
 	@Override
+	public Class<String> type() {
+		return String.class;
+	}
+	@Override
 	public String mime() {
 		return "text/plain";
 	}

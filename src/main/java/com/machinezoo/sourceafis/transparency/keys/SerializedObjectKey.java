@@ -5,7 +5,6 @@ import com.machinezoo.sourceafis.transparency.*;
 import com.machinezoo.sourceafis.transparency.utils.*;
 
 public interface SerializedObjectKey<T> extends TransparencyKey<T> {
-	Class<T> type();
 	@Override
 	default String mime() {
 		return "application/cbor";

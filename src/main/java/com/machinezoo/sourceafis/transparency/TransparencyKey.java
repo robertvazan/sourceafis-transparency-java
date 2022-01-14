@@ -7,6 +7,7 @@ import com.machinezoo.sourceafis.transparency.keys.*;
 
 public interface TransparencyKey<T> {
 	String name();
+	Class<T> type();
 	/*
 	 * MIME type. In case support for multiple data encodings is added in the future, this will be the preferred MIME type.
 	 * Wildcards are required for keys that do not fully understand their content,
