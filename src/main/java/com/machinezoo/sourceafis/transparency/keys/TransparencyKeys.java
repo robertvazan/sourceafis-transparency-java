@@ -64,6 +64,8 @@ class TransparencyKeys {
 			new RootsKey(),
 			new PairingKey(),
 			new ScoreKey(),
+			new BestPairingKey(),
+			new BestScoreKey(),
 			new BestMatchKey(),
 			new OutputScoreKey()));
 		ALL = Collections.unmodifiableList(all);
