@@ -1,5 +1,5 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
-package com.machinezoo.sourceafis.transparency.context;
+package com.machinezoo.sourceafis.transparency.keys;
 
 public record CandidateGrayscaleKey() implements ContextGrayscaleKey {
 	@Override

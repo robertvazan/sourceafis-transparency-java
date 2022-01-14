@@ -18,16 +18,10 @@ import com.machinezoo.stagean.*;
  * Unstable 0.x releases do not need to bother with compatibility. This can be delayed until release 1.0.
  */
 @ApiIssue("Figure out how to provide compatibility over a range of recent SourceAFIS versions.")
-@DraftCode
-/*
- * Workaround for JDK bug: https://bugs.openjdk.java.net/browse/JDK-8274470
- */
-@CodeIssue("Record hashCode ignores record type, which makes key hashing very inefficient. Supply custom hashCode() in all keys.")
 module com.machinezoo.sourceafis.transparency {
 	exports com.machinezoo.sourceafis.transparency;
 	exports com.machinezoo.sourceafis.transparency.types;
 	exports com.machinezoo.sourceafis.transparency.keys;
-	exports com.machinezoo.sourceafis.transparency.context;
 	requires com.machinezoo.stagean;
 	requires com.machinezoo.noexception;
 	/*

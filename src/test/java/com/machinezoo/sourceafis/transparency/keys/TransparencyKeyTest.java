@@ -6,7 +6,6 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import com.machinezoo.sourceafis.transparency.*;
-import com.machinezoo.sourceafis.transparency.context.*;
 
 public class TransparencyKeyTest {
 	@Test
