@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record CombinedMaskKey() implements TransparencyObjectKey<BooleanMatrix> {
+public record CombinedMaskKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
 	public String name() {
 		return "combined-mask";

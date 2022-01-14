@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record BlocksKey() implements TransparencyObjectKey<BlockMap> {
+public record BlocksKey() implements SerializedObjectKey<BlockMap> {
 	@Override
 	public String name() {
 		return "blocks";

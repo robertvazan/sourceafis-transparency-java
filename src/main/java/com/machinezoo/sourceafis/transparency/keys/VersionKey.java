@@ -2,6 +2,7 @@
 package com.machinezoo.sourceafis.transparency.keys;
 
 import java.nio.charset.*;
+import com.machinezoo.sourceafis.transparency.*;
 
 public record VersionKey() implements TransparencyKey<String> {
 	@Override

@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record SkeletonMinutiaeKey() implements TransparencyObjectKey<Template> {
+public record SkeletonMinutiaeKey() implements SerializedObjectKey<Template> {
 	@Override
 	public String name() {
 		return "skeleton-minutiae";

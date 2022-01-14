@@ -1,11 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
-package com.machinezoo.sourceafis.transparency.keys;
+package com.machinezoo.sourceafis.transparency;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
-import com.machinezoo.sourceafis.transparency.*;
+import com.machinezoo.sourceafis.transparency.keys.*;
 
 public class TransparencyKeyTest {
 	@Test
@@ -20,7 +20,7 @@ public class TransparencyKeyTest {
 	public void presentInArchive() {
 		var archive = TestResources.archive();
 		for (var key : TransparencyKey.all())
-			if (!(key instanceof TransparencyContextKey))
+			if (!(key instanceof ContextKey))
 				assertTrue(archive.get(key).isPresent());
 	}
 	@Test

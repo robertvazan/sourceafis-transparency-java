@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record EdgeTableKey() implements TransparencyObjectKey<NeighborEdge[][]> {
+public record EdgeTableKey() implements SerializedObjectKey<NeighborEdge[][]> {
 	@Override
 	public String name() {
 		return "edge-table";

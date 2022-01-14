@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record FilteredMaskKey() implements TransparencyObjectKey<BooleanMatrix> {
+public record FilteredMaskKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
 	public String name() {
 		return "filtered-mask";

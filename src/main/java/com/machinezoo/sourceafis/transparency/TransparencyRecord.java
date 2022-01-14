@@ -3,7 +3,6 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
 import org.apache.commons.lang3.*;
-import com.machinezoo.sourceafis.transparency.keys.*;
 import com.machinezoo.stagean.*;
 
 @DraftCode("Nicer toString().")

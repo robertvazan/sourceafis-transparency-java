@@ -1,7 +1,9 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
-public interface ContextImageKey extends TransparencyContextKey<byte[]> {
+import com.machinezoo.sourceafis.transparency.*;
+
+public interface EncodedImageKey extends TransparencyKey<byte[]> {
 	@Override
 	default String mime() {
 		return "image/*";

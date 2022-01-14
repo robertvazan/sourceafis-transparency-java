@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record ShuffledMinutiaeKey() implements TransparencyObjectKey<Template> {
+public record ShuffledMinutiaeKey() implements SerializedObjectKey<Template> {
 	@Override
 	public String name() {
 		return "shuffled-minutiae";

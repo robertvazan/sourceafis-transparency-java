@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record RootsKey() implements TransparencyObjectKey<MinutiaPair[]> {
+public record RootsKey() implements SerializedObjectKey<MinutiaPair[]> {
 	@Override
 	public String name() {
 		return "roots";

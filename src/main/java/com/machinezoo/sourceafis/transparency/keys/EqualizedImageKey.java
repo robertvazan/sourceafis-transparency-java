@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record EqualizedImageKey() implements TransparencyObjectKey<DoubleMatrix> {
+public record EqualizedImageKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
 	public String name() {
 		return "equalized-image";

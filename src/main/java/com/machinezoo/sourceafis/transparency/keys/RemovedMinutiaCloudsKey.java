@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record RemovedMinutiaCloudsKey() implements TransparencyObjectKey<Template> {
+public record RemovedMinutiaCloudsKey() implements SerializedObjectKey<Template> {
 	@Override
 	public String name() {
 		return "removed-minutia-clouds";

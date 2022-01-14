@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record HistogramKey() implements TransparencyObjectKey<HistogramCube> {
+public record HistogramKey() implements SerializedObjectKey<HistogramCube> {
 	@Override
 	public String name() {
 		return "histogram";

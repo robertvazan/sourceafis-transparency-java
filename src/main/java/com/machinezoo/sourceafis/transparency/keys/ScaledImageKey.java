@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record ScaledImageKey() implements TransparencyObjectKey<DoubleMatrix> {
+public record ScaledImageKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
 	public String name() {
 		return "scaled-image";

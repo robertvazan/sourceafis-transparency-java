@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record RelativeContrastMaskKey() implements TransparencyObjectKey<BooleanMatrix> {
+public record RelativeContrastMaskKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
 	public String name() {
 		return "relative-contrast-mask";

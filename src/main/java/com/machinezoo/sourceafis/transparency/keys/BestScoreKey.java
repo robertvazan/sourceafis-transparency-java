@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record BestScoreKey() implements TransparencyObjectKey<ScoreBreakdown> {
+public record BestScoreKey() implements SerializedObjectKey<ScoreBreakdown> {
 	@Override
 	public String name() {
 		return "best-score";

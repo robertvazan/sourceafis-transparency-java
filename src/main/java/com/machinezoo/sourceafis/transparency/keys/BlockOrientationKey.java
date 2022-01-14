@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record BlockOrientationKey() implements TransparencyObjectKey<DoublePointMatrix> {
+public record BlockOrientationKey() implements SerializedObjectKey<DoublePointMatrix> {
 	@Override
 	public String name() {
 		return "block-orientation";

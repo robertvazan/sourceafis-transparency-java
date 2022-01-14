@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record FilteredBinaryImageKey() implements TransparencyObjectKey<BooleanMatrix> {
+public record FilteredBinaryImageKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
 	public String name() {
 		return "filtered-binary-image";

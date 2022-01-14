@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record ContrastKey() implements TransparencyObjectKey<DoubleMatrix> {
+public record ContrastKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
 	public String name() {
 		return "contrast";

@@ -3,7 +3,6 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
 import java.util.function.*;
-import com.machinezoo.sourceafis.transparency.keys.*;
 
 public interface TransparencyFilter {
 	boolean accepts(TransparencyKey<?> key);

@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record PixelMaskKey() implements TransparencyObjectKey<BooleanMatrix> {
+public record PixelMaskKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
 	public String name() {
 		return "pixel-mask";

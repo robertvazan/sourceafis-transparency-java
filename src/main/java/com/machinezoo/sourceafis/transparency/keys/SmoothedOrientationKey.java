@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record SmoothedOrientationKey() implements TransparencyObjectKey<DoublePointMatrix> {
+public record SmoothedOrientationKey() implements SerializedObjectKey<DoublePointMatrix> {
 	@Override
 	public String name() {
 		return "smoothed-orientation";

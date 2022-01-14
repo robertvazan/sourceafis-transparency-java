@@ -8,7 +8,6 @@ import java.util.zip.*;
 import org.apache.commons.io.*;
 import com.machinezoo.noexception.*;
 import com.machinezoo.sourceafis.*;
-import com.machinezoo.sourceafis.transparency.keys.*;
 import com.machinezoo.stagean.*;
 
 public class TransparencyBuffer {

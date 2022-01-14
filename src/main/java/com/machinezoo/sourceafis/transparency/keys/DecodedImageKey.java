@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record DecodedImageKey() implements TransparencyObjectKey<DoubleMatrix> {
+public record DecodedImageKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
 	public String name() {
 		return "decoded-image";

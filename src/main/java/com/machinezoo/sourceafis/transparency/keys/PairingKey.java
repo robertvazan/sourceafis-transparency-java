@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record PairingKey() implements TransparencyObjectKey<PairingGraph> {
+public record PairingKey() implements SerializedObjectKey<PairingGraph> {
 	@Override
 	public String name() {
 		return "pairing";

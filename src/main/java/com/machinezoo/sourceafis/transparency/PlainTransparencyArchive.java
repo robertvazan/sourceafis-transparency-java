@@ -2,7 +2,6 @@
 package com.machinezoo.sourceafis.transparency;
 
 import java.util.*;
-import com.machinezoo.sourceafis.transparency.keys.*;
 import com.machinezoo.stagean.*;
 
 /*

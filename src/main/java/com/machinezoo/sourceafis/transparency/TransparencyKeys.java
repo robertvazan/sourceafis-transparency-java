@@ -1,8 +1,9 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
-package com.machinezoo.sourceafis.transparency.keys;
+package com.machinezoo.sourceafis.transparency;
 
 import static java.util.stream.Collectors.*;
 import java.util.*;
+import com.machinezoo.sourceafis.transparency.keys.*;
 
 class TransparencyKeys {
 	static final List<TransparencyKey<?>> ALL;

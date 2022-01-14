@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record EdgeHashKey() implements TransparencyObjectKey<EdgeHashEntry[]> {
+public record EdgeHashKey() implements SerializedObjectKey<EdgeHashEntry[]> {
 	@Override
 	public String name() {
 		return "edge-hash";

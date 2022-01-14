@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record ParallelSmoothingKey() implements TransparencyObjectKey<DoubleMatrix> {
+public record ParallelSmoothingKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
 	public String name() {
 		return "parallel-smoothing";

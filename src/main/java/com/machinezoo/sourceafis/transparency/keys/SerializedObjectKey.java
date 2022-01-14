@@ -1,9 +1,10 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
+import com.machinezoo.sourceafis.transparency.*;
 import com.machinezoo.sourceafis.transparency.utils.*;
 
-public interface TransparencyObjectKey<T> extends TransparencyKey<T> {
+public interface SerializedObjectKey<T> extends TransparencyKey<T> {
 	Class<T> type();
 	@Override
 	default String mime() {

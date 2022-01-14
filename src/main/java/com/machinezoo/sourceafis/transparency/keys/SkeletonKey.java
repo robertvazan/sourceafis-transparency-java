@@ -1,7 +1,7 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
-public interface SkeletonKey<T> extends TransparencyObjectKey<T> {
+public interface SkeletonKey<T> extends SerializedObjectKey<T> {
 	String keyword();
 	SkeletonType skeleton();
 	@Override
