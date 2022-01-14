@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record OrthogonalSmoothingKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "orthogonal-smoothing";
 	}
 	@Override

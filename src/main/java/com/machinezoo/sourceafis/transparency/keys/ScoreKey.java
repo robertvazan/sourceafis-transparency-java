@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record ScoreKey() implements SerializedObjectKey<ScoreBreakdown> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "score";
 	}
 	@Override

@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record TopMinutiaeKey() implements SerializedObjectKey<Template> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "top-minutiae";
 	}
 	@Override

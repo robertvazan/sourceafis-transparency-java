@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record BlocksKey() implements SerializedObjectKey<BlockMap> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "blocks";
 	}
 	@Override

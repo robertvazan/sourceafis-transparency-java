@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record BinarizedSkeletonKey(SkeletonType skeleton) implements SkeletonKey<BooleanMatrix> {
 	@Override
-	public String keyword() {
+	public String stem() {
 		return "binarized-skeleton";
 	}
 	@Override

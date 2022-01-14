@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record ScaledImageKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "scaled-image";
 	}
 	@Override

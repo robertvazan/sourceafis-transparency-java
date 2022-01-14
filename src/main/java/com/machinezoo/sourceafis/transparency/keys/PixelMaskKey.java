@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record PixelMaskKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "pixel-mask";
 	}
 	@Override

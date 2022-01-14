@@ -6,7 +6,7 @@ import com.machinezoo.sourceafis.transparency.*;
 
 public record BestMatchKey() implements TransparencyKey<Integer> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "best-match";
 	}
 	@Override

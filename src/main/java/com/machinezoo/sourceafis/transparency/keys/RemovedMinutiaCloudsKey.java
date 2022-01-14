@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record RemovedMinutiaCloudsKey() implements SerializedObjectKey<Template> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "removed-minutia-clouds";
 	}
 	@Override

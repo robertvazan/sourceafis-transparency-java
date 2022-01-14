@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record PairingKey() implements SerializedObjectKey<PairingGraph> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "pairing";
 	}
 	@Override

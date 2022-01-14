@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record InnerMaskKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "inner-mask";
 	}
 	@Override

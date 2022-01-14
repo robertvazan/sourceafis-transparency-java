@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record CombinedMaskKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "combined-mask";
 	}
 	@Override

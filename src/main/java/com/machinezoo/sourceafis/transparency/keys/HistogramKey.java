@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record HistogramKey() implements SerializedObjectKey<HistogramCube> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "histogram";
 	}
 	@Override

@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record FilteredBinaryImageKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "filtered-binary-image";
 	}
 	@Override

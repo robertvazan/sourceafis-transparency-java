@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 public record OutputScoreKey() implements SerializedObjectKey<Double>, ContextKey<Double> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "output-score";
 	}
 	@Override

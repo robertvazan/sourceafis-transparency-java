@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record DecodedImageKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "decoded-image";
 	}
 	@Override

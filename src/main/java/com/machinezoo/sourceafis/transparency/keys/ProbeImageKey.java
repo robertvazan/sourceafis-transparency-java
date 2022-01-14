@@ -3,7 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 public record ProbeImageKey() implements EncodedImageKey, ContextKey<byte[]> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "probe-image";
 	}
 }

@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record EqualizedImageKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "equalized-image";
 	}
 	@Override

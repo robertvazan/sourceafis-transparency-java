@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record ProbeGrayscaleKey() implements SerializedObjectKey<GrayscaleImage>, ContextKey<GrayscaleImage> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "probe-grayscale";
 	}
 	@Override

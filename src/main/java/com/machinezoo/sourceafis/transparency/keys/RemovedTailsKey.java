@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record RemovedTailsKey(SkeletonType skeleton) implements SkeletonKey<SkeletonGraph> {
 	@Override
-	public String keyword() {
+	public String stem() {
 		return "removed-tails";
 	}
 	@Override

@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record SmoothedOrientationKey() implements SerializedObjectKey<DoublePointMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "smoothed-orientation";
 	}
 	@Override

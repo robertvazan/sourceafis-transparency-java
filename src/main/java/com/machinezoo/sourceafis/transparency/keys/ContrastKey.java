@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record ContrastKey() implements SerializedObjectKey<DoubleMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "contrast";
 	}
 	@Override

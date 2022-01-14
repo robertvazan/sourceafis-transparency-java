@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record EdgeTableKey() implements SerializedObjectKey<NeighborEdge[][]> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "edge-table";
 	}
 	@Override

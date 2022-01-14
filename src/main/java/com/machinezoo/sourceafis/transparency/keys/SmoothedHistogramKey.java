@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record SmoothedHistogramKey() implements SerializedObjectKey<HistogramCube> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "smoothed-histogram";
 	}
 	@Override

@@ -2,10 +2,9 @@
 package com.machinezoo.sourceafis.transparency.keys;
 
 public interface SkeletonKey<T> extends SerializedObjectKey<T> {
-	String keyword();
 	SkeletonType skeleton();
 	@Override
 	default String name() {
-		return skeleton().name().toLowerCase() + "-" + keyword();
+		return skeleton().name().toLowerCase() + "-" + stem();
 	}
 }

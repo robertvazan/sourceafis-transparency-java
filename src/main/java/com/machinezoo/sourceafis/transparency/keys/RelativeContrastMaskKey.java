@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record RelativeContrastMaskKey() implements SerializedObjectKey<BooleanMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "relative-contrast-mask";
 	}
 	@Override

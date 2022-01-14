@@ -6,7 +6,7 @@ import com.machinezoo.sourceafis.transparency.*;
 
 public record VersionKey() implements TransparencyKey<String> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "version";
 	}
 	@Override

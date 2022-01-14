@@ -5,6 +5,10 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record BestScoreKey() implements SerializedObjectKey<ScoreBreakdown> {
 	@Override
+	public String stem() {
+		return "score";
+	}
+	@Override
 	public String name() {
 		return "best-score";
 	}

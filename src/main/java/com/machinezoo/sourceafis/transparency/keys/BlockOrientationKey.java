@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record BlockOrientationKey() implements SerializedObjectKey<DoublePointMatrix> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "block-orientation";
 	}
 	@Override

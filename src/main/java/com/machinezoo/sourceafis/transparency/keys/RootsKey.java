@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record RootsKey() implements SerializedObjectKey<MinutiaPair[]> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "roots";
 	}
 	@Override

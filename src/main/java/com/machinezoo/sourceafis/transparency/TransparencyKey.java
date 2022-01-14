@@ -7,7 +7,15 @@ import org.apache.commons.lang3.*;
 import com.machinezoo.sourceafis.transparency.keys.*;
 
 public interface TransparencyKey<T> extends Serializable {
-	String name();
+	/*
+	 * Represents a group of keys that are variants of each other.
+	 * For example, skeleton keys have stem that omits the "ridges-" or "valleys-" prefix.
+	 * Stem does not necessarily correspond to key class.
+	 */
+	String stem();
+	default String name() {
+		return stem();
+	}
 	Class<T> type();
 	/*
 	 * MIME type. In case support for multiple data encodings is added in the future, this will be the preferred MIME type.

@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record EdgeHashKey() implements SerializedObjectKey<EdgeHashEntry[]> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "edge-hash";
 	}
 	@Override

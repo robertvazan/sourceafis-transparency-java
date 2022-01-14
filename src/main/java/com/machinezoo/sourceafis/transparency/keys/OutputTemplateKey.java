@@ -5,7 +5,7 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record OutputTemplateKey() implements SerializedObjectKey<PersistentTemplate>, ContextKey<PersistentTemplate> {
 	@Override
-	public String name() {
+	public String stem() {
 		return "output-template";
 	}
 	@Override

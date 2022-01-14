@@ -5,6 +5,10 @@ import com.machinezoo.sourceafis.transparency.types.*;
 
 public record BestPairingKey() implements SerializedObjectKey<PairingGraph> {
 	@Override
+	public String stem() {
+		return "pairing";
+	}
+	@Override
 	public String name() {
 		return "best-pairing";
 	}
