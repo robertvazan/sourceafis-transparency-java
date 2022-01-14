@@ -1,10 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.types;
 
+import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 
-public record HistogramCube(int width, int height, int bins, int[] counts) {
+public record HistogramCube(int width, int height, int bins, int[] counts) implements Serializable {
 	public HistogramCube {
 		Validate.isTrue(width >= 0 && height >= 0 && bins >= 0, "Cube dimensions must be non-negative.");
 		Objects.requireNonNull(counts, "Missing cube array.");

@@ -1,10 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.types;
 
+import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 
-public record SkeletonGraph(int width, int height, IntPoint[] minutiae, SkeletonRidge[] ridges) {
+public record SkeletonGraph(int width, int height, IntPoint[] minutiae, SkeletonRidge[] ridges) implements Serializable {
 	public SkeletonGraph {
 		Validate.isTrue(width >= 0 && height >= 0, "Skeleton dimensions must be non-negative.");
 		Objects.requireNonNull(minutiae, "Missing list of skeleton minutiae.");

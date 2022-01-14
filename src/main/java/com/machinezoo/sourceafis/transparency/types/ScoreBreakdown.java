@@ -1,6 +1,8 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.types;
 
+import java.io.*;
+
 public record ScoreBreakdown(
 	int minutiaCount,
 	double minutiaScore,
@@ -22,5 +24,5 @@ public record ScoreBreakdown(
 	double angleAccuracySum,
 	double angleAccuracyScore,
 	double totalScore,
-	double shapedScore) {
+	double shapedScore) implements Serializable {
 }

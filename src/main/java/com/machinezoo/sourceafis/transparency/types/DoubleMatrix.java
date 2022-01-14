@@ -1,10 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.types;
 
+import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 
-public record DoubleMatrix(int width, int height, double[] cells) {
+public record DoubleMatrix(int width, int height, double[] cells) implements Serializable {
 	public DoubleMatrix {
 		Validate.isTrue(width >= 0 && height >= 0, "Matrix dimensions must be non-negative.");
 		Objects.requireNonNull(cells, "Matrix cells must be non-null.");

@@ -1,12 +1,13 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
+import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 import com.machinezoo.stagean.*;
 
 @DraftCode("Nicer toString().")
-public record TransparencyRecord<T>(TransparencyKey<T> key, String mime, byte[] data) {
+public record TransparencyRecord<T>(TransparencyKey<T> key, String mime, byte[] data) implements Serializable {
 	public TransparencyRecord {
 		Objects.requireNonNull(key);
 		Validate.notBlank(mime);

@@ -1,10 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.types;
 
+import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 
-public record BlockGrid(IntPoint blocks, IntPoint corners, int[] x, int[] y) {
+public record BlockGrid(IntPoint blocks, IntPoint corners, int[] x, int[] y) implements Serializable {
 	public BlockGrid {
 		Validate.isTrue(blocks.x() >= 0 && blocks.y() >= 0, "Block count must be non-negative.");
 		Validate.isTrue(corners.x() == blocks.x() + 1 && corners.y() == blocks.y() + 1, "Corner count must be one higher than block count.");

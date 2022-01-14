@@ -1,9 +1,10 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.types;
 
+import java.io.*;
 import java.util.*;
 
-public record PairingGraph(MinutiaPair root, EdgePair[] tree, EdgePair[] support) {
+public record PairingGraph(MinutiaPair root, EdgePair[] tree, EdgePair[] support) implements Serializable {
 	public PairingGraph {
 		Objects.requireNonNull(root, "Pairing graph is missing root.");
 		Objects.requireNonNull(tree, "Pairing graph is missing pairing tree.");

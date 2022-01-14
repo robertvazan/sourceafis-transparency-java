@@ -1,6 +1,7 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.types;
 
+import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 
@@ -11,7 +12,7 @@ public record PersistentTemplate(
 	int[] positionsX,
 	int[] positionsY,
 	@Angle double[] directions,
-	String types) {
+	String types) implements Serializable {
 	public PersistentTemplate {
 		Objects.requireNonNull(version, "Persistent template is missing version information.");
 		Validate.isTrue(width >= 0 && height >= 0, "Template dimensions must be non-negative.");

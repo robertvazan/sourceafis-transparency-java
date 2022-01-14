@@ -1,7 +1,9 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.types;
 
-public record IntRect(int x, int y, int width, int height) {
+import java.io.*;
+
+public record IntRect(int x, int y, int width, int height) implements Serializable {
 	/*
 	 * Width/height may be negative, in which case the rect is empty.
 	 */

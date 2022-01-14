@@ -1,11 +1,12 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency;
 
+import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 import com.machinezoo.sourceafis.transparency.keys.*;
 
-public interface TransparencyKey<T> {
+public interface TransparencyKey<T> extends Serializable {
 	String name();
 	Class<T> type();
 	/*
