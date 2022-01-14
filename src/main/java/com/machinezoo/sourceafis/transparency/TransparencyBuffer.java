@@ -53,6 +53,7 @@ public class TransparencyBuffer {
 	public boolean accepts(String key) {
 		return filter.accepts(key);
 	}
+	@DraftCode("Support for multiple versions of SourceAFIS and multiple MIME types will require smarter key parsing.")
 	public TransparencyBuffer take(String key, String mime, byte[] data) {
 		return write(TransparencyKey.parse(key), mime, data);
 	}

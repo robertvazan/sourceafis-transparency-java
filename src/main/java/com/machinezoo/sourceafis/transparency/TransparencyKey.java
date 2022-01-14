@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 import com.machinezoo.sourceafis.transparency.keys.*;
+import com.machinezoo.stagean.*;
 
 public interface TransparencyKey<T> extends Serializable {
 	/*
@@ -56,6 +57,14 @@ public interface TransparencyKey<T> extends Serializable {
 	static List<TransparencyKey<?>> all() {
 		return TransparencyKeys.ALL;
 	}
+	@DraftApi
+	/*
+	 * Custom transparency keys can be defined by applications and it mostly works except this one method.
+	 * Custom keys will not be recognized when parsing string keys.
+	 * This could be addressed with ServiceLoader, but that seems to be an overkill at the moment.
+	 */
+	@ApiIssue("Cannot parse custom keys.")
+	@ApiIssue("When multiple SourceAFIS versions are supported, key parsing will have to be more complicated.")
 	static TransparencyKey<?> parse(String name) {
 		Validate.notBlank(name);
 		var known = TransparencyKeys.BY_NAME.get(name);
