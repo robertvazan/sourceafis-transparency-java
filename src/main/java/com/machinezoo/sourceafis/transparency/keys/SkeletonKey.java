@@ -3,6 +3,7 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import java.util.*;
 import com.machinezoo.sourceafis.transparency.*;
+import com.machinezoo.sourceafis.transparency.types.*;
 
 public interface SkeletonKey<T> extends SerializedObjectKey<T> {
 	SkeletonType skeleton();

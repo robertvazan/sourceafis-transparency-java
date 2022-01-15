@@ -4,6 +4,7 @@ package com.machinezoo.sourceafis.transparency;
 import static java.util.stream.Collectors.*;
 import java.util.*;
 import com.machinezoo.sourceafis.transparency.keys.*;
+import com.machinezoo.sourceafis.transparency.types.*;
 
 class TransparencyKeys {
 	static final List<TransparencyKey<?>> ALL;
