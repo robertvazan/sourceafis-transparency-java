@@ -3,6 +3,7 @@ package com.machinezoo.sourceafis.transparency;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.*;
 import java.util.regex.*;
 import java.util.zip.*;
 import org.apache.commons.io.*;
@@ -22,6 +23,7 @@ public class TransparencyBuffer {
 		return this;
 	}
 	public boolean accepts(TransparencyKey<?> key) {
+		Objects.requireNonNull(key);
 		return filter.accepts(key);
 	}
 	public TransparencyBuffer add(TransparencyRecord<?> record) {
@@ -36,11 +38,27 @@ public class TransparencyBuffer {
 	public TransparencyBuffer write(TransparencyKey<?> key, byte[] data) {
 		return write(key, key.mime(), data);
 	}
+	public TransparencyBuffer writeLazy(TransparencyKey<?> key, String mime, Supplier<byte[]> supplier) {
+		if (accepts(key))
+			write(key, mime, supplier.get());
+		return this;
+	}
+	public TransparencyBuffer writeLazy(TransparencyKey<?> key, Supplier<byte[]> supplier) {
+		return writeLazy(key, key.mime(), supplier);
+	}
 	public <T> TransparencyBuffer serialize(TransparencyKey<T> key, String mime, T object) {
 		return write(key, mime, key.serialize(mime, object));
 	}
 	public <T> TransparencyBuffer serialize(TransparencyKey<T> key, T object) {
 		return serialize(key, key.mime(), object);
+	}
+	public <T> TransparencyBuffer serializeLazy(TransparencyKey<T> key, String mime, Supplier<T> supplier) {
+		if (accepts(key))
+			serialize(key, mime, supplier.get());
+		return this;
+	}
+	public <T> TransparencyBuffer serializeLazy(TransparencyKey<T> key, Supplier<T> supplier) {
+		return serializeLazy(key, key.mime(), supplier);
 	}
 	public TransparencyBuffer append(Collection<TransparencyRecord<?>> records) {
 		for (var record : records)
