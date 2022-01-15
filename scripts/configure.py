@@ -36,6 +36,7 @@ def dependencies():
     use('com.machinezoo.sourceafis:sourceafis:3.15.0')
     use_commons_lang()
     use_commons_io()
+    use_jackson_cbor()
     use_junit()
     use_hamcrest()
     use_slf4j_test()
