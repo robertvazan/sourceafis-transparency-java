@@ -1,21 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
-import java.util.*;
-import com.machinezoo.sourceafis.transparency.*;
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public record CandidateTemplateKey() implements SerializedObjectKey<PersistentTemplate>, ContextKey<PersistentTemplate> {
+public record CandidateTemplateKey() implements SideTemplateKey {
 	@Override
-	public String stem() {
-		return "candidate-template";
-	}
-	@Override
-	public Class<PersistentTemplate> type() {
-		return PersistentTemplate.class;
-	}
-	@Override
-	public List<TransparentOperation> operations() {
-		return List.of(TransparentOperation.COMPARE_CANDIDATE);
+	public MatchSide side() {
+		return MatchSide.CANDIDATE;
 	}
 }

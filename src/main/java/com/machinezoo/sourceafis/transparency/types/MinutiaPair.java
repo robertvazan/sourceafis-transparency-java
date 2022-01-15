@@ -8,4 +8,10 @@ public record MinutiaPair(int probe, int candidate) implements Serializable {
 	public MinutiaPair {
 		Validate.isTrue(probe >= 0 && candidate >= 0, "Probe and candidate minutia offsets must be non-negative.");
 	}
+	public int side(MatchSide side) {
+		return switch (side) {
+			case PROBE -> probe;
+			case CANDIDATE -> candidate;
+		};
+	}
 }
