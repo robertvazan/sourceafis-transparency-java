@@ -32,4 +32,22 @@ public interface TransparencyArchive {
 	default <T> Optional<TransparencyRecord<T>> get(TransparencyKey<T> key) {
 		return get(key, 0);
 	}
+	default int count(TransparencyKey<?> key) {
+		return enumerate(key).size();
+	}
+	default boolean contains(TransparencyKey<?> key) {
+		return !enumerate(key).isEmpty();
+	}
+	default Optional<byte[]> read(TransparencyKey<?> key, int offset) {
+		return get(key, offset).map(r -> r.data());
+	}
+	default Optional<byte[]> read(TransparencyKey<?> key) {
+		return read(key, 0);
+	}
+	default <T> Optional<T> deserialize(TransparencyKey<T> key, int offset) {
+		return get(key, offset).map(r -> r.deserialize());
+	}
+	default <T> Optional<T> deserialize(TransparencyKey<T> key) {
+		return deserialize(key, 0);
+	}
 }
