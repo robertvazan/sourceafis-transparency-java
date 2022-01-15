@@ -2,6 +2,7 @@
 package com.machinezoo.sourceafis.transparency.keys;
 
 import java.nio.charset.*;
+import java.util.*;
 import com.machinezoo.sourceafis.transparency.*;
 
 public record BestMatchKey() implements TransparencyKey<Integer> {
@@ -12,6 +13,10 @@ public record BestMatchKey() implements TransparencyKey<Integer> {
 	@Override
 	public Class<Integer> type() {
 		return Integer.class;
+	}
+	@Override
+	public List<TransparentOperation> operations() {
+		return List.of(TransparentOperation.COMPARE_CANDIDATE);
 	}
 	@Override
 	public String mime() {

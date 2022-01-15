@@ -1,6 +1,8 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
+import java.util.*;
+import com.machinezoo.sourceafis.transparency.*;
 import com.machinezoo.sourceafis.transparency.types.*;
 
 public record InputTemplateKey() implements SerializedObjectKey<PersistentTemplate>, ContextKey<PersistentTemplate> {
@@ -11,5 +13,9 @@ public record InputTemplateKey() implements SerializedObjectKey<PersistentTempla
 	@Override
 	public Class<PersistentTemplate> type() {
 		return PersistentTemplate.class;
+	}
+	@Override
+	public List<TransparentOperation> operations() {
+		return List.of(TransparentOperation.PREPARE_PROBE);
 	}
 }

@@ -1,6 +1,7 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
+import java.util.*;
 import com.machinezoo.sourceafis.transparency.*;
 
 public record UnknownTransparencyKey(String name) implements TransparencyKey<byte[]> {
@@ -11,6 +12,10 @@ public record UnknownTransparencyKey(String name) implements TransparencyKey<byt
 	@Override
 	public Class<byte[]> type() {
 		return byte[].class;
+	}
+	@Override
+	public List<TransparentOperation> operations() {
+		return List.of(TransparentOperation.values());
 	}
 	@Override
 	public String mime() {

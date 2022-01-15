@@ -25,9 +25,15 @@ public class TransparencyKeyTest {
 	}
 	@Test
 	public void coveringWholeArchive() {
-		var archive = TestResources.archive();
-		for (var key : archive.keys())
+		for (var key : TestResources.archive().keys())
 			assertThat(TransparencyKey.all(), hasItem(key));
+	}
+	@Test
+	public void mentionsOperation() {
+		for (var operation : TransparentOperation.values()) {
+			for (var key : TestResources.archive(operation).keys())
+				assertThat(key.operations(), hasItem(operation));
+		}
 	}
 	@Test
 	public void matchingMime() {

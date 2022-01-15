@@ -1,6 +1,8 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
+import java.util.*;
+import com.machinezoo.sourceafis.transparency.*;
 import com.machinezoo.sourceafis.transparency.types.*;
 
 public record PairingKey() implements SerializedObjectKey<PairingGraph> {
@@ -11,5 +13,9 @@ public record PairingKey() implements SerializedObjectKey<PairingGraph> {
 	@Override
 	public Class<PairingGraph> type() {
 		return PairingGraph.class;
+	}
+	@Override
+	public List<TransparentOperation> operations() {
+		return List.of(TransparentOperation.COMPARE_CANDIDATE);
 	}
 }

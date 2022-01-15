@@ -32,4 +32,30 @@ public class TestResources {
 		log(buffer::open);
 		return buffer.toArchive();
 	}
+	public static TransparencyArchive archive(TransparentOperation operation) {
+		return switch (operation) {
+			case EXTRACT_FEATURES -> new TransparencyBuffer()
+				.capture(() -> new FingerprintTemplate(new FingerprintImage(probe())))
+				.toArchive();
+			case PREPARE_PROBE -> {
+				var template = new FingerprintTemplate(new FingerprintImage(probe()));
+				yield new TransparencyBuffer()
+					.capture(() -> new FingerprintMatcher(template))
+					.toArchive();
+			}
+			case COMPARE_CANDIDATE -> {
+				var matcher = new FingerprintMatcher(new FingerprintTemplate(new FingerprintImage(probe())));
+				var candidate = new FingerprintTemplate(new FingerprintImage(candidate()));
+				yield new TransparencyBuffer()
+					.capture(() -> matcher.match(candidate))
+					.toArchive();
+			}
+			case DESERIALIZE_TEMPLATE -> {
+				var template = new FingerprintTemplate(new FingerprintImage(probe())).toByteArray();
+				yield new TransparencyBuffer()
+					.capture(() -> new FingerprintTemplate(template))
+					.toArchive();
+			}
+		};
+	}
 }

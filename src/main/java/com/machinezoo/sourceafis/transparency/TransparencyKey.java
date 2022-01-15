@@ -19,6 +19,16 @@ public interface TransparencyKey<T> extends Serializable {
 	}
 	Class<T> type();
 	/*
+	 * In order of preference. If it is not known whether operation applies, it should be included in the list.
+	 */
+	List<TransparentOperation> operations();
+	/*
+	 * Preferred operation to run to obtain data for this key.
+	 */
+	default TransparentOperation operation() {
+		return operations().get(0);
+	}
+	/*
 	 * MIME type. In case support for multiple data encodings is added in the future, this will be the preferred MIME type.
 	 * Wildcards are required for keys that do not fully understand their content,
 	 * e.g. image/* for encoded image keys and * / * for unknown keys.
