@@ -1,25 +1,20 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
-import java.util.*;
-import com.machinezoo.sourceafis.transparency.*;
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public interface SideGrayscaleKey extends SerializedObjectKey<GrayscaleImage>, ContextKey<GrayscaleImage> {
-	MatchSide side();
+public interface SideGrayscaleKey extends SerializedObjectKey<GrayscaleImage>, SideKey<GrayscaleImage> {
 	@Override
 	default String stem() {
-		return side().toString().toLowerCase() + "-grayscale";
+		return "grayscale";
 	}
 	@Override
 	default Class<GrayscaleImage> type() {
 		return GrayscaleImage.class;
 	}
-	@Override
-	default List<TransparentOperation> operations() {
-		return List.of(TransparentOperation.COMPARE_CANDIDATE);
-	}
 	static SideGrayscaleKey of(MatchSide side) {
+		if (side == null)
+			return new InputGrayscaleKey();
 		return switch (side) {
 			case PROBE -> new ProbeGrayscaleKey();
 			case CANDIDATE -> new CandidateGrayscaleKey();

@@ -1,16 +1,11 @@
 // Part of SourceAFIS Transparency API: https://sourceafis.machinezoo.com/transparency/
 package com.machinezoo.sourceafis.transparency.keys;
 
-import java.util.*;
-import com.machinezoo.sourceafis.transparency.*;
+import com.machinezoo.sourceafis.transparency.types.*;
 
-public record InputImageKey() implements EncodedImageKey, ContextKey<byte[]> {
+public record InputImageKey() implements SideImageKey {
 	@Override
-	public String stem() {
-		return "input-image";
-	}
-	@Override
-	public List<TransparentOperation> operations() {
-		return List.of(TransparentOperation.EXTRACT_FEATURES, TransparentOperation.PREPARE_PROBE);
+	public MatchSide side() {
+		return null;
 	}
 }
