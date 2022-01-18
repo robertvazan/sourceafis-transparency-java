@@ -7,7 +7,7 @@ import org.apache.commons.lang3.*;
 
 public record HistogramCube(int width, int height, int bins, int[] counts) implements Serializable {
 	public HistogramCube {
-		Validate.isTrue(width >= 0 && height >= 0 && bins >= 0, "Cube dimensions must be non-negative.");
+		Validate.isTrue(width > 0 && height > 0 && bins > 0, "Cube dimensions must be positive.");
 		Objects.requireNonNull(counts, "Missing cube array.");
 		Validate.isTrue(counts.length == width * height * bins, "Cube array length must match cube dimensions.");
 	}

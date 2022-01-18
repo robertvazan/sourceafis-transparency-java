@@ -4,6 +4,7 @@ package com.machinezoo.sourceafis.transparency.types;
 import java.io.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
+import com.machinezoo.stagean.*;
 
 public record PersistentTemplate(
 	String version,
@@ -13,9 +14,10 @@ public record PersistentTemplate(
 	int[] positionsY,
 	@Angle double[] directions,
 	String types) implements Serializable {
+	@DraftCode("Implement full validation.")
 	public PersistentTemplate {
 		Objects.requireNonNull(version, "Persistent template is missing version information.");
-		Validate.isTrue(width >= 0 && height >= 0, "Template dimensions must be non-negative.");
+		Validate.isTrue(width > 0 && height > 0, "Template dimensions must be positive.");
 		Objects.requireNonNull(positionsX, "X position array is null.");
 		Objects.requireNonNull(positionsY, "Y position array is null.");
 		Objects.requireNonNull(directions, "Direction array is null.");

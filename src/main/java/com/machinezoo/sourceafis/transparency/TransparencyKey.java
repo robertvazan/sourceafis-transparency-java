@@ -7,6 +7,7 @@ import org.apache.commons.lang3.*;
 import com.machinezoo.sourceafis.transparency.keys.*;
 import com.machinezoo.stagean.*;
 
+@ApiIssue("Add validation method, which is useful when type is an array.")
 public interface TransparencyKey<T> extends Serializable {
 	/*
 	 * Represents a group of keys that are variants of each other.

@@ -7,7 +7,7 @@ import org.apache.commons.lang3.*;
 
 public record BooleanMatrix(int width, int height, boolean[] cells) implements Serializable {
 	public BooleanMatrix {
-		Validate.isTrue(width >= 0 && height >= 0, "Matrix dimensions must be non-negative.");
+		Validate.isTrue(width > 0 && height > 0, "Matrix dimensions must be positive.");
 		Objects.requireNonNull(cells, "Matrix cells must be non-null.");
 		Validate.isTrue(cells.length == width * height, "Matrix array length does not match matrix dimensions.");
 	}

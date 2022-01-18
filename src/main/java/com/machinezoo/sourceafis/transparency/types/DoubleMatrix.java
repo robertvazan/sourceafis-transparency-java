@@ -7,7 +7,7 @@ import org.apache.commons.lang3.*;
 
 public record DoubleMatrix(int width, int height, double[] cells) implements Serializable {
 	public DoubleMatrix {
-		Validate.isTrue(width >= 0 && height >= 0, "Matrix dimensions must be non-negative.");
+		Validate.isTrue(width > 0 && height > 0, "Matrix dimensions must be positive.");
 		Objects.requireNonNull(cells, "Matrix cells must be non-null.");
 		Validate.isTrue(cells.length == width * height, "Matrix array length does not match matrix dimensions.");
 	}
