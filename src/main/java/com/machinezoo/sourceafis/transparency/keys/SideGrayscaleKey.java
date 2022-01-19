@@ -3,14 +3,14 @@ package com.machinezoo.sourceafis.transparency.keys;
 
 import com.machinezoo.sourceafis.transparency.types.*;
 
-public interface SideGrayscaleKey extends SerializedObjectKey<GrayscaleImage>, SideKey<GrayscaleImage> {
+public interface SideGrayscaleKey extends SerializedObjectKey<ByteMatrix>, SideKey<ByteMatrix> {
 	@Override
 	default String stem() {
 		return "grayscale";
 	}
 	@Override
-	default Class<GrayscaleImage> type() {
-		return GrayscaleImage.class;
+	default Class<ByteMatrix> type() {
+		return ByteMatrix.class;
 	}
 	static SideGrayscaleKey of(MatchSide side) {
 		if (side == null)
