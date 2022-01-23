@@ -11,13 +11,13 @@ import com.machinezoo.sourceafis.*;
 public class TransparencyBufferTest {
 	@Test
 	public void capture() {
-		assertThat(TestResources.archive().keys().size(), greaterThanOrEqualTo(20));
+		assertThat(TestArchives.universal().keys().size(), greaterThanOrEqualTo(20));
 	}
 	@Test
 	public void unzip() {
-		var direct = TestResources.archive();
+		var direct = TestArchives.universal();
 		var zip = new ByteArrayOutputStream();
-		TestResources.log(() -> FingerprintTransparency.zip(zip));
+		TestArchives.log(() -> FingerprintTransparency.zip(zip));
 		var unzipped = new TransparencyBuffer()
 			.unzip(new ByteArrayInputStream(zip.toByteArray()))
 			.toArchive();

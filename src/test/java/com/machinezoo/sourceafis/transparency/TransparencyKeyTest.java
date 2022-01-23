@@ -18,42 +18,49 @@ public class TransparencyKeyTest {
 	}
 	@Test
 	public void presentInArchive() {
-		var archive = TestResources.archive();
+		var archive = TestArchives.universal();
 		for (var key : TransparencyKey.all())
 			if (!(key instanceof ContextKey))
-				assertTrue(archive.get(key).isPresent());
+				assertTrue(archive.contains(key));
 	}
 	@Test
 	public void coveringWholeArchive() {
-		for (var key : TestResources.archive().keys())
+		for (var key : TestArchives.universal().keys())
 			assertThat(TransparencyKey.all(), hasItem(key));
 	}
 	@Test
 	public void mentionsOperation() {
 		for (var operation : TransparentOperation.values()) {
-			for (var key : TestResources.archive(operation).keys())
+			for (var key : TestArchives.full(operation).keys())
 				assertThat(key.operations(), hasItem(operation));
 		}
 	}
 	@Test
+	public void generatedByOperation() {
+		for (var key : TransparencyKey.all())
+			if (!(key instanceof ContextKey))
+				for (var operation : key.operations())
+					assertThat(TestArchives.full(operation).keys(), hasItem(key));
+	}
+	@Test
 	public void matchingMime() {
-		var archive = TestResources.archive();
+		var archive = TestArchives.universal();
 		for (var key : archive.keys())
 			assertEquals(archive.get(key).get().mime(), key.mime());
 	}
 	@Test
 	public void deserializable() {
-		var archive = TestResources.archive();
+		var archive = TestArchives.universal();
 		for (var key : archive.keys())
-			assertNotNull(archive.get(key).get().deserialize());
+			assertNotNull(archive.deserialize(key).get());
 	}
 	private <T> byte[] roundtrip(TransparencyKey<T> key, byte[] data) {
 		return key.serialize(key.deserialize(data));
 	}
 	@Test
 	public void serializable() {
-		var archive = TestResources.archive();
+		var archive = TestArchives.universal();
 		for (var key : archive.keys())
-			assertNotNull(roundtrip(key, archive.get(key).get().data()));
+			assertNotNull(roundtrip(key, archive.read(key).get()));
 	}
 }
