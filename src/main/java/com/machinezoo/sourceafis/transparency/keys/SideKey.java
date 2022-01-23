@@ -19,7 +19,7 @@ public interface SideKey<T> extends ContextKey<T> {
 	@Override
 	default List<TransparentOperation> operations() {
 		if (side() == null)
-			return List.of(TransparentOperation.EXTRACT_FEATURES, TransparentOperation.PREPARE_PROBE);
+			return List.of(TransparentOperation.EXTRACT_FEATURES, TransparentOperation.PREPARE_PROBE, TransparentOperation.DESERIALIZE_TEMPLATE);
 		return List.of(TransparentOperation.COMPARE_CANDIDATE);
 	}
 }
