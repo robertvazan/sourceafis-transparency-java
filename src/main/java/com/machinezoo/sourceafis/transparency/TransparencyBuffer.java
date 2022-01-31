@@ -78,6 +78,7 @@ public class TransparencyBuffer {
 	public FingerprintTransparency open() {
 		return new TransparencyBufferLogger(this);
 	}
+	@DraftApi("Prevents capture of outputs. Complement with method taking Consumer<TransparencyBuffer> or implement other means to capture operation output.")
 	public TransparencyBuffer capture(Runnable action) {
 		try (var transparency = open()) {
 			action.run();
@@ -85,6 +86,7 @@ public class TransparencyBuffer {
 		return this;
 	}
 	private static final Pattern FILENAME_RE = Pattern.compile("^[0-9]+-([a-z-]+)(\\.[a-z]+)$");
+	@DraftCode("Use proper MIME library.")
 	private static String mime(String suffix) {
 		return switch (suffix) {
 			case ".cbor" -> "application/cbor";
@@ -101,6 +103,7 @@ public class TransparencyBuffer {
 		};
 	}
 	@DraftCode("Find better solution for checked exceptions.")
+	@DraftApi("Support ZipFile, which is more efficient when filters are applied.")
 	public TransparencyBuffer unzip(InputStream stream) {
 		Exceptions.wrap().run(() -> {
 			try (var zip = new ZipInputStream(stream)) {
@@ -119,6 +122,7 @@ public class TransparencyBuffer {
 		});
 		return this;
 	}
+	@DraftApi("Poor naming. Choose single word name, ideally a verb.")
 	public TransparencyArchive toArchive() {
 		var immutable = new HashMap<TransparencyKey<?>, List<TransparencyRecord<?>>>();
 		for (var key : map.keySet())
