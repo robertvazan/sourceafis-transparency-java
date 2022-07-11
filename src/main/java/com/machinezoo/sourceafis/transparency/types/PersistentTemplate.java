@@ -8,11 +8,11 @@ import com.machinezoo.stagean.*;
 
 public record PersistentTemplate(
 	String version,
-	int width,
-	int height,
-	int[] positionsX,
-	int[] positionsY,
-	@Angle double[] directions,
+	short width,
+	short height,
+	short[] positionsX,
+	short[] positionsY,
+	@Angle float[] directions,
 	String types) implements Serializable {
 	@DraftCode("Implement full validation.")
 	public PersistentTemplate {
