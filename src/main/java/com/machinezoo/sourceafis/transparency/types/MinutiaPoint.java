@@ -4,10 +4,10 @@ package com.machinezoo.sourceafis.transparency.types;
 import java.io.*;
 import java.util.*;
 
-public record MinutiaPoint(IntPoint position, @Angle double direction, MinutiaType type) implements Serializable {
+public record MinutiaPoint(IntPoint position, @Angle float direction, MinutiaType type) implements Serializable {
 	public MinutiaPoint {
 		Objects.requireNonNull(position, "Minutia has null position.");
-		DoubleAngles.validate(direction);
+		FloatAngles.validate(direction);
 		Objects.requireNonNull(type, "Minutia has null type.");
 	}
 }

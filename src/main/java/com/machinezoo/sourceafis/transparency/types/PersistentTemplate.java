@@ -23,8 +23,8 @@ public record PersistentTemplate(
 		Objects.requireNonNull(directions, "Direction array is null.");
 		Objects.requireNonNull(types, "Type string is null.");
 		Validate.isTrue(positionsX.length == types.length() && positionsY.length == types.length() && directions.length == types.length(), "Inconsistent array lengths.");
-		for (double angle : directions)
-			DoubleAngles.validate(angle);
+		for (float angle : directions)
+			FloatAngles.validate(angle);
 		for (int i = 0; i < types.length(); ++i)
 			Validate.isTrue(types.charAt(i) == 'E' || types.charAt(i) == 'B', "Minutia type must be ending or bifurcation.");
 	}

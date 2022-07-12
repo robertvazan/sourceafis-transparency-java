@@ -3,11 +3,11 @@ package com.machinezoo.sourceafis.transparency.types;
 
 import org.apache.commons.lang3.*;
 
-public record NeighborEdge(int length, @Angle double referenceAngle, @Angle double neighborAngle, int neighbor) implements EdgeShape {
+public record NeighborEdge(short length, @Angle float referenceAngle, @Angle float neighborAngle, short neighbor) implements EdgeShape {
 	public NeighborEdge {
 		Validate.isTrue(length >= 0, "Edge length must be non-negative.");
-		DoubleAngles.validate(referenceAngle);
-		DoubleAngles.validate(neighborAngle);
+		FloatAngles.validate(referenceAngle);
+		FloatAngles.validate(neighborAngle);
 		Validate.isTrue(neighbor >= 0, "Neighbor minutia offset must be non-negative.");
 	}
 }

@@ -3,11 +3,11 @@ package com.machinezoo.sourceafis.transparency.types;
 
 import org.apache.commons.lang3.*;
 
-public record IndexedEdge(int length, @Angle double referenceAngle, @Angle double neighborAngle, int reference, int neighbor) implements EdgeShape {
+public record IndexedEdge(short length, @Angle float referenceAngle, @Angle float neighborAngle, short reference, short neighbor) implements EdgeShape {
 	public IndexedEdge {
 		Validate.isTrue(length >= 0, "Edge length must be non-negative.");
-		DoubleAngles.validate(referenceAngle);
-		DoubleAngles.validate(neighborAngle);
+		FloatAngles.validate(referenceAngle);
+		FloatAngles.validate(neighborAngle);
 		Validate.isTrue(reference >= 0 && neighbor >= 0, "Reference and neighbor minutia offsets must be non-negative.");
 	}
 }
