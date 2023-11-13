@@ -27,9 +27,10 @@ class Project(scaffold.Java):
     
     def dependencies(self):
         yield from super().dependencies()
-        yield self.use('com.machinezoo.sourceafis:sourceafis:3.17.1')
+        yield self.use('com.machinezoo.sourceafis:sourceafis:3.18.1')
         yield self.use_commons_lang()
         yield self.use_commons_io()
+        yield self.use_guava('test')
         yield from self.use_jackson_cbor()
         yield self.use_junit()
         yield self.use_hamcrest()

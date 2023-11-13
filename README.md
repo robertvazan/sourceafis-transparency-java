@@ -3,7 +3,7 @@
 
 # SourceAFIS Transparency for Java
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.machinezoo.sourceafis/sourceafis-transparency)](https://search.maven.org/artifact/com.machinezoo.sourceafis/sourceafis-transparency)
+[![Maven Central](https://img.shields.io/maven-central/v/com.machinezoo.sourceafis/sourceafis-transparency)](https://central.sonatype.com/artifact/com.machinezoo.sourceafis/sourceafis-transparency)
 [![Build status](https://github.com/robertvazan/sourceafis-transparency-java/workflows/build/badge.svg)](https://github.com/robertvazan/sourceafis-transparency-java/actions/workflows/build.yml)
 [![Test coverage](https://codecov.io/gh/robertvazan/sourceafis-transparency-java/branch/master/graph/badge.svg)](https://codecov.io/gh/robertvazan/sourceafis-transparency-java)
 
